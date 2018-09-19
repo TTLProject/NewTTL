@@ -251,7 +251,7 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
                 <h3><%=subject %></h3><br>
-                <h5>From: <%=rs.getString("empname")%>
+                <h5>From: <%=rs.getString("executive")%>
                   
               </div>
               <!-- /.mailbox-read-info -->
@@ -297,7 +297,7 @@
            </div><br>
               
 
-                <p >Regards,   <%=rs.getString("empname")%></p>
+                <p >Regards,   <%=rs.getString("executive")%></p>
               </div>
               <!-- /.mailbox-read-message -->
             </div>

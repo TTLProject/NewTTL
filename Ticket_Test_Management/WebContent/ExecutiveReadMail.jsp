@@ -163,19 +163,18 @@
             <!-- /.box-header -->
            <%
           
-           String assignby=request.getParameter("assignby");
+          /*  String assignby=request.getParameter("assignby");
            String assignto=request.getParameter("assignto");
           
-           String tid=request.getParameter("ticketid");
-           
+           String tid=request.getParameter("ticketid"); */
+           int nid=Integer.parseInt(request.getParameter("nid"));
            
            
            ConnectionSteps steps = new ConnectionSteps();
   			Connection conn=steps.connection();
-			PreparedStatement pstmt = conn.prepareStatement("select * from notifications where assignedby=? and assignedto=? and ticketid=?");
-           pstmt.setString(1, assignby);
-           pstmt.setString(2, assignto);
-           pstmt.setString(3, tid);
+			PreparedStatement pstmt = conn.prepareStatement("select * from notifications where id=?");
+           pstmt.setInt(1, nid);
+         
            ResultSet rs = pstmt.executeQuery();
            
            if(rs.next()){
@@ -200,7 +199,7 @@
               <div class="mailbox-read-message">
                 <p>Hello <%=user.getUsername() %>,</p>
 
-                <p style=color:navy><%=rs.getString("empname") %> issued ticket to <%=assignto %></p>
+                <p style=color:navy><%=rs.getString("empname") %> issued ticket to <%=rs.getString("assignedto") %></p>
           
            <div id="table"  class="table-editable">
              <table  class="table" border="3">
@@ -224,8 +223,8 @@
 		<%}else{ %>
 		<td><%=rs.getString("requirementname") %></td>
 		<%} %>
-		<td><%=assignby%></td>
-		<td><%=assignto%></td>
+		<td><%=rs.getString("assignedby")%></td>
+		<td><%=rs.getString("assignedto")%></td>
 		<td><%=rs.getString("dateofissue")%></td>
 		
 		</tr>
@@ -235,15 +234,16 @@
            </table>
            </div><br>
                <form action="ApproveNotifications.jsp" method="post" id="form1">
-           
-               <input type="hidden" name="assignto" value=<%=assignto %>>
-               <input type="hidden" name="assignby" value=<%=assignby %>>
+            <input type="hidden" name="ename" value=<%=rs.getString("empname") %>>
+                <input type="hidden" name="assignto" value=<%=rs.getString("assignedto") %>>
+               <input type="hidden" name="assignby" value=<%=rs.getString("assignedby") %>>
                 <input type="hidden" name="ticketid" value=<%=rs.getString("ticketid") %>>
-             
+             <input type="hidden" name="nid" value=<%=nid %>>
+            
                  </form>
                   <form action="DeclineNotifications.jsp" method="post" id="form2"> 
-               <input type="hidden" name="assignto" value=<%=assignto %>>
-               <input type="hidden" name="assignby" value=<%=assignby %>>
+               <input type="hidden" name="assignto" value=<%=rs.getString("assignedto") %>>
+               <input type="hidden" name="assignby" value=<%=rs.getString("assignedby") %>>
                 <input type="hidden" name="ticketid" value=<%=rs.getString("ticketid") %>>
                
                  </form>

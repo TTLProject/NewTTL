@@ -177,17 +177,17 @@
                    	
                    <td><%=i%></td>
 				   <td class="mailbox-name"><b><%=rs.getString("empname")%><b></td>
-                    <td class="mailbox-subject"><a href="ExecutiveReadMail.jsp?assignby=<%=rs.getString("assignedby") %>&assignto=<%=rs.getString("assignedto") %>&ticketid=<%=rs.getString("ticketid") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
+                    <td class="mailbox-subject"><a href="ExecutiveReadMail.jsp?nid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
                     </td>
                     <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>
 					
         </tr>
                   
                 <%}} 
-    			else if(rs.getString("status").equals("testissued"))
+    			else if(rs.getString("status").equals("testissued")){
     			%>
                  
-             <%else if((rs.getString("subject").equals("TestCases"))&&(rs.getString("assignedto").equals("assignedby")))
+             <%if((rs.getString("subject").equals("TestCases"))&&(rs.getString("assignedto").equals("assignedby")))
              {
             		 
              %>
@@ -206,7 +206,7 @@
              </tr>
                   
                 
-                  <%}} %>
+                  <%}}} %>
                      
                   </tbody>
                 </table>

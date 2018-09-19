@@ -20,17 +20,22 @@
 String assignby=request.getParameter("assignby");
 String assignto = request.getParameter("assignto");
 String ticketid= request.getParameter("ticketid");
-
+String empname= request.getParameter("ename");
+int nid=Integer.parseInt(request.getParameter("nid"));
 ConnectionSteps steps = new ConnectionSteps();
 		Connection conn = steps.connection();
-			PreparedStatement pstmt = conn.prepareStatement("update notifications set status=?, executive=? ,subject=? where assignedby=? and assignedto=? and ticketid=?");
+			PreparedStatement pstmt = conn.prepareStatement("update notifications set status=?, executive=? ,subject=? where id=?");
 			pstmt.setString(1, "approved");
 			pstmt.setString(2, user.getUsername());
 			pstmt.setString(3, "TicketApproved");
-			pstmt.setString(4, assignby);
-			pstmt.setString(5, assignto);
-			pstmt.setString(6, ticketid);
+			pstmt.setInt(4, nid);
 			
+			
+			PreparedStatement pstmt1 = conn.prepareStatement("update tickettable set editstatus=? where ticketid=? and username=?");
+			pstmt1.setString(1, "approved");
+			pstmt1.setString(2, ticketid);
+			pstmt1.setString(3, empname);
+			int n= pstmt1.executeUpdate();
 		int i= pstmt.executeUpdate();
 		if(i>0){
 			System.out.println("success");

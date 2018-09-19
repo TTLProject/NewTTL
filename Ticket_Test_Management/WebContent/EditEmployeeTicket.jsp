@@ -179,10 +179,11 @@ url('scss/style.css')
 							<%
 								ConnectionSteps steps = new ConnectionSteps();
 								Connection conn = steps.connection();
-								PreparedStatement pstmt = conn.prepareStatement("select * from tickettable where username=? order by id");
-								pstmt.setString(1, user.getUsername());
+								PreparedStatement pstmt = conn.prepareStatement("select * from tickettable order by id");
+								//pstmt.setString(1, user.getUsername());
 								ResultSet rs = pstmt.executeQuery();
 								while (rs.next()) {
+									if((rs.getString("username").equals(rs.getString("assignedto").equals(rs.getString("assignedby").equals(user.getUsername()))))&&rs.getString("editstatus").equals("approved")){
 							%>
 							<tr>
 								<td><div class="update" data-id=<%=rs.getString("id")%>
@@ -457,9 +458,565 @@ url('scss/style.css')
 
 								<!-- This is our clonable table line -->
 							</tr>
+							
+							
+							<%}else if((rs.getString("username").equals(rs.getString("assignedby").equals(user.getUsername())))&&rs.getString("editstatus").equals("approved")){ %>
 							<!-- This is our clonable table line -->
+							
+							
+							<tr>
+								<td><div class="update" data-id=<%=rs.getString("id")%>
+										data-column="ticketid">
+										<%=rs.getString("ticketid")%></div></td>
+								<td><div contenteditable class="update"
+										data-id=<%=rs.getString("id")%>
+										data-column="ticketdescription"><%=rs.getString("ticketdescription")%></div></td>
+								<td><div contenteditable class="update"
+										data-id=<%=rs.getString("id")%> data-column="projectname"><%=rs.getString("projectname")%></div></td>
+								<td><div contenteditable class="update"
+										data-id=<%=rs.getString("id")%> data-column="modulename"><%=rs.getString("modulename")%></div></td>
+
+								<%
+									String reqname = rs.getString("requirementname");
+										if (reqname == null) {
+								%>
+
+								<td><div contenteditable class="update"
+										data-id=<%=rs.getString("id")%> data-column="requirementname"></div></td>
+
+								<%
+									} else {
+								%>
+								<td><div contenteditable class="update"
+										data-id=<%=rs.getString("id")%> data-column="requirementname"><%=rs.getString("requirementname")%></div></td>
+								<%
+									}
+								%>
+								<td class='unselectable'>
+									<div><%=rs.getString("assignedby")%></div>
+
+								</td>
+								<td class='unselectable'><div><%=rs.getString("assignedto")%></div>
+
+
+								</td>
+								<td class='unselectable'><div><%=rs.getString("dateofissue")%></div></td>
+								<%
+									String date = rs.getString("dateofcompletion");
+								%>
+								<%--  <td  ><div calss="update" data-id=<%=rs.getString("id")%> data-column="dateofcompletion"><div class="styled-input" >
+							<input class="date"  name="Text" type="text"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'MM/DD/YYYY';}" required="">
+						</div></div>
+			 
+			 --%>
+								<%
+									String status = rs.getString("status");
+										if (status.equals("Completed")) {
+								%>
+
+
+								<td>
+									<%
+										String doc = rs.getString("dateofcompletion");
+												if (doc == null) {
+									%>
+
+									<div class="styled-input">
+										<div>
+											<input class="datepicker date" name="Text" type="text"
+												data-id=<%=rs.getString("id")%>
+												data-column="dateofcompletion">
+										</div>
+									</div> <%
+ 	} else {
+ %>
+									<div class="styled-input" contenteditable="false">
+										<div>
+											<input class="datepicker date" name="Text" type="text"
+												data-id=<%=rs.getString("id")%>
+												data-column="dateofcompletion"
+												value=<%=rs.getString("dateofcompletion")%>>
+										</div>
+									</div> <%
+ 	}
+ %>
+
+								</td>
+								<%
+									} else {
+								%>
+
+								<td class='unselectable'><div contenteditable="false">
+										MM/DD/YYYY</div></td>
+
+								<%
+									}
+							
+									if ( status.equals("Assign")) {
+								%>
+
+
+								<td ><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign">Assign</option>
+										<option value="Design">Design</option>
+
+										<option value="Development">Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("Design")) {
+								%>
+								<td><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design">Design</option>
+
+										<option value="Development">Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("Development")) {
+								%>
+								<td><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development">Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("Review")) {
+								%>
+								<td><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development" disabled>Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("UnitTest")) {
+								%>
+								<td><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development" disabled>Development</option>
+
+										<option value="Review" disabled>Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("FunctionalityTesting")) {
+								%>
+								<td colour="red"><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development" disabled>Development</option>
+
+										<option value="Review" disabled>Review</option>
+										<option value="UnitTest" disabled>UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("Deploy")) {
+								%>
+								<td colour="red"><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development" disabled>Development</option>
+
+										<option value="Review" disabled>Review</option>
+										<option value="UnitTest" disabled>UnitTest</option>
+										<option value="FunctionalityTesting" disabled>Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("Completed")) {
+								%>
+								<td colour="green"><select>
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development" disabled>Development</option>
+
+										<option value="Review" disabled>Review</option>
+										<option value="UnitTest" disabled>UnitTest</option>
+										<option value="FunctionalityTesting" disabled>Functionality
+											Testing</option>
+										<option value="Deploy" disabled>Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else {
+								%>
+								<td><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign">Assign</option>
+										<option value="Design">Design</option>
+
+										<option value="Development">Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									}
+								%>
+								<%
+									String s = rs.getString("status");
+										System.out.println(s);
+										if (s.equals("empty") || s.equals("Assign") || s.equals("Design") || s.equals("Development")
+												|| s.equals("Review") || s.equals("UnitTest")) {
+								%>
+								<td class='unselectable'></td>
+								<%
+									} else {
+								%>
+								<td>
+									<div data-id=<%=rs.getString("id")%>
+										data-column="testassignedto">xcvnvv</div>
+								</td>
+								<%
+									}
+								%>
+
+								<!-- This is our clonable table line -->
+							</tr>
+							
+							
+							
+							<%}else if((rs.getString("assignedto").equals(user.getUsername()))&&rs.getString("editstatus").equals("approved")){ %>
+							
+							<tr>
+								<td><div class="update" data-id=<%=rs.getString("id")%>
+										data-column="ticketid">
+										<%=rs.getString("ticketid")%></div></td>
+								<td><div contenteditable class="update"
+										data-id=<%=rs.getString("id")%>
+										data-column="ticketdescription"><%=rs.getString("ticketdescription")%></div></td>
+								<td><div contenteditable class="update"
+										data-id=<%=rs.getString("id")%> data-column="projectname"><%=rs.getString("projectname")%></div></td>
+								<td><div contenteditable class="update"
+										data-id=<%=rs.getString("id")%> data-column="modulename"><%=rs.getString("modulename")%></div></td>
+
+								<%
+									String reqname = rs.getString("requirementname");
+										if (reqname == null) {
+								%>
+
+								<td><div contenteditable class="update"
+										data-id=<%=rs.getString("id")%> data-column="requirementname"></div></td>
+
+								<%
+									} else {
+								%>
+								<td><div contenteditable class="update"
+										data-id=<%=rs.getString("id")%> data-column="requirementname"><%=rs.getString("requirementname")%></div></td>
+								<%
+									}
+								%>
+								<td class='unselectable'>
+									<div><%=rs.getString("assignedby")%></div>
+
+								</td>
+								<td class='unselectable'><div><%=rs.getString("assignedto")%></div>
+
+
+								</td>
+								<td class='unselectable'><div><%=rs.getString("dateofissue")%></div></td>
+								<%
+									String date = rs.getString("dateofcompletion");
+								%>
+								<%--  <td  ><div calss="update" data-id=<%=rs.getString("id")%> data-column="dateofcompletion"><div class="styled-input" >
+							<input class="date"  name="Text" type="text"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'MM/DD/YYYY';}" required="">
+						</div></div>
+			 
+			 --%>
+								<%
+									String status = rs.getString("status");
+										if (status.equals("Completed")) {
+								%>
+
+
+								<td>
+									<%
+										String doc = rs.getString("dateofcompletion");
+												if (doc == null) {
+									%>
+
+									<div class="styled-input">
+										<div>
+											<input class="datepicker date" name="Text" type="text"
+												data-id=<%=rs.getString("id")%>
+												data-column="dateofcompletion">
+										</div>
+									</div> <%
+ 	} else {
+ %>
+									<div class="styled-input" contenteditable="false">
+										<div>
+											<input class="datepicker date" name="Text" type="text"
+												data-id=<%=rs.getString("id")%>
+												data-column="dateofcompletion"
+												value=<%=rs.getString("dateofcompletion")%>>
+										</div>
+									</div> <%
+ 	}
+ %>
+
+								</td>
+								<%
+									} else {
+								%>
+
+								<td class='unselectable'><div contenteditable="false">
+										MM/DD/YYYY</div></td>
+
+								<%
+									}
+							
+									if ( status.equals("Assign")) {
+								%>
+
+
+								<td ><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign">Assign</option>
+										<option value="Design">Design</option>
+
+										<option value="Development">Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("Design")) {
+								%>
+								<td><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design">Design</option>
+
+										<option value="Development">Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("Development")) {
+								%>
+								<td><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development">Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("Review")) {
+								%>
+								<td><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development" disabled>Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("UnitTest")) {
+								%>
+								<td><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development" disabled>Development</option>
+
+										<option value="Review" disabled>Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("FunctionalityTesting")) {
+								%>
+								<td colour="red"><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development" disabled>Development</option>
+
+										<option value="Review" disabled>Review</option>
+										<option value="UnitTest" disabled>UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("Deploy")) {
+								%>
+								<td colour="red"><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development" disabled>Development</option>
+
+										<option value="Review" disabled>Review</option>
+										<option value="UnitTest" disabled>UnitTest</option>
+										<option value="FunctionalityTesting" disabled>Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else if (status.equals("Completed")) {
+								%>
+								<td colour="green"><select>
+
+										<option value="Assign" disabled>Assign</option>
+										<option value="Design" disabled>Design</option>
+
+										<option value="Development" disabled>Development</option>
+
+										<option value="Review" disabled>Review</option>
+										<option value="UnitTest" disabled>UnitTest</option>
+										<option value="FunctionalityTesting" disabled>Functionality
+											Testing</option>
+										<option value="Deploy" disabled>Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									} else {
+								%>
+								<td><select class="update5" data-id=<%=rs.getString("id")%>
+									data-column="status">
+
+										<option value="Assign">Assign</option>
+										<option value="Design">Design</option>
+
+										<option value="Development">Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+								</select></td>
+								<%
+									}
+								%>
+								<%
+									String s = rs.getString("status");
+										System.out.println(s);
+										if (s.equals("empty") || s.equals("Assign") || s.equals("Design") || s.equals("Development")
+												|| s.equals("Review") || s.equals("UnitTest")) {
+								%>
+								<td class='unselectable'></td>
+								<%
+									} else {
+								%>
+								<td>
+									<div data-id=<%=rs.getString("id")%>
+										data-column="testassignedto">xcvnvv</div>
+								</td>
+								<%
+									}
+								%>
+
+								<!-- This is our clonable table line -->
+							</tr>
 							<%
-								}
+							}	}
 							%>
 						</table>
 						<div id="alert_message" align="center"></div>
@@ -837,7 +1394,7 @@ url('scss/style.css')
 					update_data(id, column_name, value);
 				});
 
-				$(document).on('blur', '.update5', function() {
+				$(document).on('change', '.update5', function() {
 					var tr = $(this).closest("tr");
 					var id = $(this).data("id");
 					var column_name = $(this).data("column");

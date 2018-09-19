@@ -787,7 +787,7 @@ if(status.equals("Assign")){
 	   update_data(id, column_name, value);
 	  });
  
-  $(document).on('blur', '.update5', function(){
+  $(document).on('change', '.update5', function(){
 	  var tr = $(this).closest("tr");
 	   var id = $(this).data("id");
 	   var column_name = $(this).data("column");
