@@ -235,7 +235,7 @@
                     	if(rs.getString("assignedby").equals(rs.getString("empname"))){
                     
                     %>
-                     <%}else{ %>
+                   
           <td><%=i%></td>
                     <td class="mailbox-name"><b><%=rs.getString("executive") %><b></td>
                     <td class="mailbox-subject"><a href="EmployeeReadMail.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>

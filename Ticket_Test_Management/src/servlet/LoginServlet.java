@@ -44,9 +44,9 @@ public class LoginServlet extends HttpServlet {
 				user.setPassword(password);
 				EmployeeLoginDao.insert(user);
 				
-				user1.setProjectName("empty");
-				user1.setRequirementName("empty");
-				user1.setModuleName("empty");
+				user1.setProjectName("none");
+				user1.setRequirementName("none");
+				user1.setModuleName("none");
 				user1.setTestcaseid("empty");
 				user1.setUsername(username);
 				

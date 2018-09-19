@@ -183,7 +183,8 @@ url('scss/style.css')
 								//pstmt.setString(1, user.getUsername());
 								ResultSet rs = pstmt.executeQuery();
 								while (rs.next()) {
-									if((rs.getString("username").equals(rs.getString("assignedto").equals(rs.getString("assignedby").equals(user.getUsername()))))&&rs.getString("editstatus").equals("approved")){
+								
+									if(rs.getString("username").equals(user.getUsername())&&rs.getString("assignedby").equals(user.getUsername())&&rs.getString("assignedto").equals(user.getUsername())&&rs.getString("editstatus").equals("approved")){
 							%>
 							<tr>
 								<td><div class="update" data-id=<%=rs.getString("id")%>
@@ -448,19 +449,58 @@ url('scss/style.css')
 								<%
 									} else {
 								%>
-								<td>
-									<div data-id=<%=rs.getString("id")%>
-										data-column="testassignedto">xcvnvv</div>
-								</td>
+								 <td ><select class="update2" data-id=<%=rs.getString("id")%> data-column="testassignedto" >
+								 <%if(rs.getString("testassignedto").equals("0")){ %>
+             <option >select</option>
+                  <%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
+                 pstmt1.setString(1, "executivequalityanalyst");
+                 ResultSet rs1 = pstmt1.executeQuery();
+                 while(rs1.next()){
+                  %>
+                 <option value=<%=rs.getString("username") %> ><%=rs.getString("username") %></option> 
+                 <%} %>
+                
+                 </select></td>
+                 <%}else{ %>
+                 
+              						 <td ><select class="update2" data-id=<%=rs.getString("id")%> data-column="testassignedto" >
+								 <%if(rs.getString("testassignedto").equals("0")){ %>
+             <option >select</option>
+                  <%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
+ 
+           pstmt1.setString(1, "qualityanalyst");
+                 ResultSet rs1 = pstmt1.executeQuery();
+                 while(rs1.next()){
+                  %>
+                 <option value=<%=rs1.getString("username") %> ><%=rs1.getString("username") %></option> 
+                 <%}
+                  %>
+                 </select></td>
+                 <%}else{ %>
+                 
+                 <option><%=rs.getString("testassignedto") %></option>
+                 <%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
+ 
+           pstmt1.setString(1, "executivequalityanalyst");
+                 ResultSet rs1 = pstmt1.executeQuery();
+                 while(rs1.next()){
+                  %>
+                 <option value=<%=rs1.getString("username") %> ><%=rs1.getString("username") %></option> 
+                 <%}
+                 %>
+                
+                 </select></td>
 								<%
-									}
+									}}
 								%>
 
 								<!-- This is our clonable table line -->
 							</tr>
 							
 							
-							<%}else if((rs.getString("username").equals(rs.getString("assignedby").equals(user.getUsername())))&&rs.getString("editstatus").equals("approved")){ %>
+							<%
+							
+							}}else if(rs.getString("username").equals(user.getUsername())&&rs.getString("assignedby").equals(user.getUsername())&&rs.getString("editstatus").equals("approved")){ %>
 							<!-- This is our clonable table line -->
 							
 							
@@ -727,12 +767,35 @@ url('scss/style.css')
 								<%
 									} else {
 								%>
-								<td>
-									<div data-id=<%=rs.getString("id")%>
-										data-column="testassignedto">xcvnvv</div>
-								</td>
+								 <td ><select class="update2" data-id=<%=rs.getString("id")%> data-column="testassignedto" >
+								 <%if(rs.getString("testassignedto").equals("0")){ %>
+             <option >select</option>
+                  <%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
+ 
+           pstmt1.setString(1, "executivequalityanalyst");
+                 ResultSet rs1 = pstmt1.executeQuery();
+                 while(rs1.next()){
+                  %>
+                 <option value=<%=rs1.getString("username") %> ><%=rs1.getString("username") %></option> 
+                 <%}
+                %>
+                 </select></td>
+                 <%}else{ %>
+                 
+                 <option><%=rs.getString("testassignedto") %></option>
+                 <%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
+ 
+           pstmt1.setString(1, "executivequalityanalyst");
+                 ResultSet rs1 = pstmt1.executeQuery();
+                 while(rs1.next()){
+                  %>
+                 <option value=<%=rs1.getString("username") %> ><%=rs1.getString("username") %></option> 
+                 <%}
+                  %>
+                
+                 </select></td>
 								<%
-									}
+									}}
 								%>
 
 								<!-- This is our clonable table line -->
@@ -1004,13 +1067,38 @@ url('scss/style.css')
 								<td class='unselectable'></td>
 								<%
 									} else {
+									
+									
 								%>
-								<td>
-									<div data-id=<%=rs.getString("id")%>
-										data-column="testassignedto">xcvnvv</div>
-								</td>
+								 						 <td ><select class="update2" data-id=<%=rs.getString("id")%> data-column="testassignedto" >
+								 <%if(rs.getString("testassignedto").equals("0")){ %>
+             <option >select</option>
+                  <%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
+ 
+           pstmt1.setString(1, "executivequalityanalyst");
+                 ResultSet rs1 = pstmt1.executeQuery();
+                 while(rs1.next()){
+                  %>
+                 <option value=<%=rs1.getString("username") %> ><%=rs1.getString("username") %></option> 
+                 <%}
+                 %>
+                 </select></td>
+                 <%}else{ %>
+                 
+                 <option><%=rs.getString("testassignedto") %></option>
+                 <%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
+ 
+           pstmt1.setString(1, "executivequalityanalyst");
+                 ResultSet rs1 = pstmt1.executeQuery();
+                 while(rs1.next()){
+                  %>
+                 <option value=<%=rs1.getString("username") %> ><%=rs1.getString("username") %></option> 
+                 <%}
+                 %>
+                
+                 </select></td>
 								<%
-									}
+									}}
 								%>
 
 								<!-- This is our clonable table line -->
@@ -1401,6 +1489,14 @@ url('scss/style.css')
 					var value = tr.find('.update5').val();
 					update_data1(id, column_name, value);
 				});
+				$(document).on('change', '.update2', function(){
+	  var tr = $(this).closest("tr");
+	   var id = $(this).data("id");
+	   var column_name = $(this).data("column");
+	   var value = tr.find('.update2').val();
+	   update_data1(id, column_name, value);
+	  });
+  
 
 			});
 </script>

@@ -91,7 +91,7 @@ if(mname==null){
 	mname="none";
 }
 	%>
-	%>
+
 <section id="container" >
 <!--header start-->
 <header class="header fixed-top clearfix">

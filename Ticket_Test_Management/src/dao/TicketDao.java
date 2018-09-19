@@ -14,7 +14,7 @@ public class TicketDao {
 		try {
 			ConnectionSteps steps = new ConnectionSteps();
 			Connection conn=steps.connection();
-			PreparedStatement pstmt = conn.prepareStatement("insert into tickettable(ticketid,ticketdescription,projectname,modulename,requirementname,assignedto,assignedby,dateofissue,status,username,empname,editstatus) values(?,?,?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement pstmt = conn.prepareStatement("insert into tickettable(ticketid,ticketdescription,projectname,modulename,requirementname,assignedto,assignedby,dateofissue,status,username,empname,editstatus,testassignedto) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			pstmt.setString(1, user.getTicketId());
 			pstmt.setString(2, user.getTicketDescription());
 			pstmt.setString(3, user.getProjectName());
@@ -27,6 +27,7 @@ public class TicketDao {
 			pstmt.setString(10, user.getUsername());
 			pstmt.setString(11, user.getEmpname());
 			pstmt.setString(12, "pending");
+			pstmt.setString(13, "0");
 			int i=pstmt.executeUpdate();
 			if(i>0) {
 				{

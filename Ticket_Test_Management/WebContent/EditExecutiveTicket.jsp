@@ -394,8 +394,15 @@ if(status.equals("Assign")){
                 <%} else{
                 
                 %>
-                 <td >
-                 <div   data-id=<%=rs.getString("id")%> data-column="testassignedto"> xcvnvv</div>
+                 <td ><select class="update2" data-id=<%=rs.getString("id")%> data-column="testassignedto" >
+                 <option >select</option>
+                 <%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
+                 pstmt1.setString(1, "executivequalityanalyst");
+                 ResultSet rs1 = pstmt1.executeQuery();
+                 while(rs1.next()){
+                  %>
+                 <option value="Assign">Assign</option>
+                 <%} %>
                  </td>
                  <%} %>
                  
@@ -795,7 +802,14 @@ if(status.equals("Assign")){
 	   update_data1(id, column_name, value);
 	  });
   
-
+$(document).on('change', '.update2', function(){
+	  var tr = $(this).closest("tr");
+	   var id = $(this).data("id");
+	   var column_name = $(this).data("column");
+	   var value = tr.find('.update2').val();
+	   update_data1(id, column_name, value);
+	  });
+  
   
 
   

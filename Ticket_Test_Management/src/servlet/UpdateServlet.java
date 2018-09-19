@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.EditTicketDao;
+import dao.FunctionalityNotification;
 import userbean.Userbean;
 
 /**
@@ -28,6 +29,9 @@ public class UpdateServlet extends HttpServlet {
 		user.setColumn_name(column_name);
 		user.setValue(value);
 		EditTicketDao.update(user);
+		if(column_name.equals("testassignedto")) {
+			FunctionalityNotification.notify(user);
+		}
 		boolean status = user.isValid();
 		if(status) {
 			String greetings = "Update success";
