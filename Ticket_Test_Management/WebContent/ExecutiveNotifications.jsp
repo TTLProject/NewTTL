@@ -165,8 +165,11 @@
     			ResultSet rs = pstmt.executeQuery();
     			
     			int i=0;
+    			
+    			System.out.println("rs.next>>>>"+rs.next());
     			while(rs.next()){
-    		
+    			System.out.println(rs.getString("status"));
+    		System.out.println(rs.getString("status").equals("funtionality"));
     			if(rs.getString("status").equals("approval")){
     			%>
                    
@@ -205,6 +208,22 @@
                     
              </tr>
                   
+                
+                  <%}}
+                  
+                  else if(rs.getString("status").equals("funtionality")){
+                  
+                  
+                        if((rs.getString("subject").equals("FunctionalityTesting"))&&(rs.getString("assignedto").equals(user.getUsername()))){
+                  i++;
+                  %>
+                <td><%=i%></td>
+				   <td class="mailbox-name"><b><%=rs.getString("assignedby") %><b></td>
+                    <td class="mailbox-subject"><a href="ExecutiveReadMail.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
+                    <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>
+                    </td>
+                 
+                
                 
                   <%}}} %>
                      

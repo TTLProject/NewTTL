@@ -167,7 +167,7 @@
            String assignto=request.getParameter("assignto");
           
            String tid=request.getParameter("ticketid"); */
-           int nid=Integer.parseInt(request.getParameter("nid"));
+           int nid=Integer.parseInt(request.getParameter("notificationid"));
            
            
            ConnectionSteps steps = new ConnectionSteps();
@@ -258,6 +258,79 @@
               </div>
               <!-- /.mailbox-read-message -->
             </div>
+            <%}else if(subject.equals("FunctionalityTesting")){ %>
+            
+             <div class="box-body no-padding">
+              <div class="mailbox-read-info">
+                <h3>Asking for FuctionalityTesting</h3><br>
+                <h5>From: <%=rs.getString("assignedby") %>
+                  
+              </div>
+              <!-- /.mailbox-read-info -->
+             <br><hr>
+              <!-- /.mailbox-controls -->
+              <div class="mailbox-read-message">
+                <p>Hello <%=user.getUsername() %>,</p>
+
+                <p style=color:navy><%=rs.getString("assignedby") %> sent project for FunctionalityTesting</p>
+          
+           <div id="table"  class="table-editable">
+             <table  class="table" border="3">
+           <tr>
+         
+        <th>Ticket Description</th>
+		<th>Project Name</th>
+		<th>Module Name</th>
+		<th>Requirement Name</th>
+		<th>Assigned By</th>
+		<th>Assigned To</th>
+		<th>Date of Issue</th>
+		</tr>
+		<tr>
+		
+		<td><%=rs.getString("ticketdescription") %></td>
+		<td><%=rs.getString("projectname") %></td>
+		<td><%=rs.getString("modulename") %></td>
+		<%if(rs.getString("requirementname")==null){ %>
+		<td></td>
+		<%}else{ %>
+		<td><%=rs.getString("requirementname") %></td>
+		<%} %>
+		<td><%=rs.getString("assignedby")%></td>
+		<td><%=rs.getString("assignedto")%></td>
+		<td><%=rs.getString("dateofissue")%></td>
+		
+		</tr>
+           
+           
+           
+           </table>
+           </div><br>
+             <p >Choose ..............................</p> 
+             
+    Select Employee:::<select style="width:200px; overflow:hidden">
+    <%PreparedStatement pstmt1 =conn.prepareStatement("select * from registrationtable where designation=?");
+    pstmt1.setString(1, "qualityanalyst");
+    
+    ResultSet rs1 = pstmt1.executeQuery();
+    while(rs1.next()){
+     %>
+<option value=<%=rs1.getString("username") %>><%=rs1.getString("username") %></option>
+<%} %>
+    </select>
+                <br><br>
+        
+
+
+                <p >Regards,    <%=rs.getString("assignedby") %></p>
+              </div>
+              <!-- /.mailbox-read-message -->
+            </div>
+            
+            
+            
+            
+            
             
             <%}else{ %>
             
