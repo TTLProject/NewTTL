@@ -414,65 +414,7 @@ body {
 				</div>
 				<br>
 				
-				<%-- 
-					<form action="TestReport1.jsp" method="post">
-						<div class="card-header">
-
-							Project Name:&emsp;&emsp;&nbsp;&emsp;&nbsp;
-							<select id="projectname" name="projectname">
-								<option>Select</option>
-								<%
-								HashSet<String> projName = new HashSet<String>();
-								HashSet<String> reqName = new HashSet<String>();
-								HashSet<String> modName = new HashSet<String>();
-									ConnectionSteps steps = new ConnectionSteps();
-									Connection conn = steps.connection();
-									PreparedStatement pstmt = conn.prepareStatement("select * from tickettable where assignedto=?");
-									pstmt.setString(1, user.getUsername());
-									ResultSet rs = pstmt.executeQuery();
-									while (rs.next()) {
-							
-								
-									projName.add(rs.getString("projectname"));
-										modName.add(rs.getString("modulename"));
-										reqName.add(rs.getString("requirementname"));
-								
-									}
-								%>
-								
-
-								<%
-									for (String projectName : projName) {
-								%>
-								<option value=<%=projectName%>><%=projectName%></option>
-								<%
-									}
-								%>
-
-
-							</select> <br> <br> 
-							
-							Module Name:&emsp;&emsp;&emsp;&nbsp; <select
-								id="modulename" name="modulename">
-								<option>Select</option>
-							</select> <br> <br>
-							
-							 Requirement Name:&nbsp;&nbsp;&nbsp; <select
-								id="requirementname" name="requirementname">
-								<option>Select</option>
-								<input type="hidden" value=<%=user.getUsername()%>
-								name="username" />
-
-
-							</select> &emsp;&emsp;&emsp;&nbsp; <input type="submit" name="submit"
-								value="Submit" /><br> <br>
-
-						</div>
-
-					</form>
-
-
- --%>
+				
 
 					<br />
 					<%
@@ -498,7 +440,7 @@ body {
 							&emsp;&emsp;&emsp;<b>RequirementName:::</b>
 							<%=user1.getRequirementName()%> --%>
 
-							<br> <br>
+							<br>
 
 							<table class="table table-bordered" id="item_table">
 								<tr>
