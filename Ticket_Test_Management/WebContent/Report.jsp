@@ -18,6 +18,7 @@ user.setUname(user1.getUname());
 user.setRequirementName("none");
 user.setModuleName("none");
 user.setTable("none");
+user.setUsername(user1.getUsername());
 session.setAttribute("testsession", user);
 %>
 </body>

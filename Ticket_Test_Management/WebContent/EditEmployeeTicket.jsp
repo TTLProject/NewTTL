@@ -122,18 +122,27 @@ span.item {
 							</ul></li>
 
 
-						<li class="sub-menu"><a href="javascript:;"> <i
-								class="fa fa-check-square-o"></i> <span>Test Management</span>
-						</a>
-							<ul class="sub">
-								<li><a href="TestReport.jsp">Prepare TestReport</a></li>
-								<li><a href="TestData.jsp">Prepare TestData </a></li>
-								<li><a href="BugReport.jsp">Prepare BugReport</a></li>
-								<li><a href="ViewTestReport.jsp">ViewTestReport</a></li>
-								<li><a href="ModifyTestReport.jsp">ModifyTestReport</a></li>
-
-							</ul></li>
-
+						 <%
+                String desig=user.getDesignation();
+				if((desig.equals("qualityanalyst"))) {
+					%>
+					  <li class="sub-menu">
+	                    <a href="javascript:;">
+	                        <i class="fa fa-check-square-o"></i>
+	                        <span>Test Management</span>
+	                    </a>
+	                    <ul class="sub">
+	                        <li><a href="TestReport.jsp">Prepare TestReport</a></li>
+	                        <li><a href="TestData.jsp">Prepare TestData </a></li>
+	                        <li><a href="BugReport.jsp">Prepare BugReport</a></li>
+	                        <li><a href="ViewTestReport.jsp">ViewTestReport</a></li>
+							 <li><a href="ModifyTestReport.jsp">ModifyTestReport</a></li>
+							
+	                    </ul>
+	                </li>
+				<% }
+				
+                %>
 						<li><a href="EmployeeNotifications.jsp"> <i
 								class="fa fa-bell-o"></i> <span>Notifications </span>
 						</a></li>

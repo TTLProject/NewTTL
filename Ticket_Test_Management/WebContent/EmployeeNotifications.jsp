@@ -359,18 +359,7 @@
                     </div>
                 </div>
             </div>
-            <div class="prog-row side-mini-stat">
-                <div class="side-graph-info">
-                    <h4>delivery pending</h4>
-                    <p>
-                        44%, Deadline 12 june 13
-                    </p>
-                </div>
-                <div class="side-mini-graph">
-                    <div class="d-pending">
-                    </div>
-                </div>
-            </div>
+          
             <div class="prog-row side-mini-stat">
                 <div class="col-md-12">
                     <h4>total progress</h4>

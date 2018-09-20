@@ -51,6 +51,7 @@ public class ExecutiveModifyNotification {
 			pstmt.setString(8,user.getDomain());
 			pstmt.setString(9, user.getData());
 			pstmt.setString(10, user.getUsername());
+		
 			
 			int i = pstmt.executeUpdate();
 			if(i>0) {

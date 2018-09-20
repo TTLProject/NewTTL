@@ -257,7 +257,7 @@ body {
 							<option>---Select---</option>
 							<table>
 								<%
-									PreparedStatement pstmt2 = conn.prepareStatement("select * from tickettable where testassignedto=?");
+									PreparedStatement pstmt2 = conn.prepareStatement("select * from testreporttable1 where assignedto=?");
 									pstmt2.setString(1, user.getUsername());
 									ResultSet rs2 = pstmt2.executeQuery();
 									HashSet<String> hs1 = new HashSet();
@@ -295,7 +295,7 @@ body {
 							<table>
 								<%
 									PreparedStatement pstmt3 = conn
-											.prepareStatement("select * from tickettable where testassignedto=? and projectname=?");
+											.prepareStatement("select * from testreporttable1 where assignedto=? and projectname=?");
 									pstmt3.setString(1, user.getUsername());
 
 									// System.out.print(user2.getProjectName());
@@ -347,7 +347,7 @@ body {
 							<option>--Select--</option>
 							<%
 								PreparedStatement pstmt4 = conn.prepareStatement(
-										"select * from tickettable where testassignedto=? and projectname=? and modulename=? ");
+										"select * from testreporttable1 where assignedto=? and projectname=? and modulename=? ");
 								pstmt4.setString(1, user.getUsername());
 								if (user1 == null) {
 									pstmt4.setString(2, projectname);
@@ -517,8 +517,8 @@ body {
 									PreparedStatement pstmt1 = conn.prepareStatement(
 												"select * from testreporttable where projectname=? and requirementname=? and modulename=?  order by testcaseid");
 										pstmt1.setString(1, user1.getProjectName());
-										pstmt1.setString(2, user1.getModuleName());
-										pstmt1.setString(3, user1.getRequirementName());
+										pstmt1.setString(2, user1.getRequirementName());
+										pstmt1.setString(3,user1.getModuleName() );
 									
 										ResultSet rs1 = pstmt1.executeQuery();
 										while (rs1.next()) {

@@ -38,7 +38,7 @@ public class ExecutiveModifyNotification1 {
 			LocalDate date=java.time.LocalDate.now();
 			System.out.println(date);
 			Connection conn= steps.connection();
-			PreparedStatement pstmt=conn.prepareStatement("Insert into notifications(subject,assignedto,projectname,requirementname,modulename,assignedby,status,domain,dateofissue) values(?,?,?,?,?,?,?,?,?) ");
+			PreparedStatement pstmt=conn.prepareStatement("Insert into notifications(subject,assignedto,projectname,requirementname,modulename,assignedby,status,domain,dateofissue,empname) values(?,?,?,?,?,?,?,?,?,?) ");
 			pstmt.setString(1, "ApprovedReport");
 			pstmt.setString(2, user.getEmpname());		
 			pstmt.setString(3, user.getProjectName());	
@@ -48,6 +48,7 @@ public class ExecutiveModifyNotification1 {
 			pstmt.setString(7,"issued");
 			pstmt.setString(8,user.getDomain());
 			pstmt.setString(9, user.getData());
+			pstmt.setString(10, user.getEmpname());
 			
 			int i = pstmt.executeUpdate();
 			if(i>0) {

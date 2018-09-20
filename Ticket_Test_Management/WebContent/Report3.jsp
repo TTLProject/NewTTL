@@ -18,6 +18,7 @@ user.setProjectName(user2.getProjectName());
 user.setModuleName(modname);
 user.setRequirementName("none");
 user.setTable("none");
+user.setUsername(user2.getUsername());
 session.setAttribute("testsession", user);
 
 %>

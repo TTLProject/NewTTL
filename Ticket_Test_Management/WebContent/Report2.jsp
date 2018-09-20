@@ -9,13 +9,14 @@
 </head>
 <body>
 <% 
-
+Userbean user1 = (Userbean) session.getAttribute("testsession");
 String proname=request.getParameter("value1");
 Userbean user =  new Userbean();
 user.setProjectName(proname);
 user.setRequirementName("none");
 user.setModuleName("none");
 user.setTable("none");
+user.setUsername(user1.getUsername());
 session.setAttribute("testsession", user);
 %>
 </body>

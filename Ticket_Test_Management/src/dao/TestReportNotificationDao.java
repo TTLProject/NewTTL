@@ -42,7 +42,7 @@ public class TestReportNotificationDao {
 			PreparedStatement pstmt=conn.prepareStatement("Insert into notifications(subject,assignedto,projectname,requirementname,modulename,assignedby,status,domain,dateofissue,ticketdescription,empname) values(?,?,?,?,?,?,?,?,?,?,?)");
 			{
 				
-				PreparedStatement pstmt1=conn.prepareStatement("select * from tickettable where projectname=? and requirementname=? and modulename=?");
+				PreparedStatement pstmt1=conn.prepareStatement("select * from testreporttable1 where projectname=? and requirementname=? and modulename=?");
 		     	pstmt1.setString(1, user2.getProjectName());	
 		     	pstmt1.setString(2, user2.getRequirementName());		
 		     	pstmt1.setString(3, user2.getModuleName());

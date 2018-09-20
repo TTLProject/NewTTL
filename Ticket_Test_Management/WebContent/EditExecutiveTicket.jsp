@@ -121,20 +121,27 @@
                 </li>
                 
                 
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-check-square-o"></i>
-                        <span>Test Management</span>
-                    </a>
-                    <ul class="sub">
-                     <li ><a href="ExecutiveTestReport.jsp">Prepare TestReport</a></li>
-                        <li><a href="ExecutiveTestData.jsp">Prepare TestData </a></li>
-                        <li><a href="ExecutiveBugReport.jsp">Prepare BugReport</a></li>
-                        <li><a href="ViewExecutiveTestReport.jsp">ViewTestReport</a></li>
-						 <li><a href="ModifyExecutiveTestReport.jsp">ModifyTestReport</a></li>
-						
-                    </ul>
-                </li>
+                 <%
+                String desig=user.getDesignation();
+				if((desig.equals("executivequalityanalyst"))) {
+					%>
+					  <li class="sub-menu">
+	                    <a href="javascript:;">
+	                        <i class="fa fa-check-square-o"></i>
+	                        <span>Test Management</span>
+	                    </a>
+	                    <ul class="sub">
+	                       <li><a href="ExecutiveTestReport.jsp">Prepare TestReport</a></li>
+	                        <li><a href="ExecutiveTestData.jsp">Prepare TestData </a></li>
+	                        <li><a href="ExecutiveBugReport.jsp">Prepare BugReport</a></li>
+	                        <li><a href="ViewExecutiveTestReport.jsp">ViewTestReport</a></li>
+							 <li><a href="ModifyExecutiveTestReport.jsp">ModifyTestReport</a></li>
+							
+	                    </ul>
+	                </li>
+				<% }
+				
+                %>
                 
                <li>
                     <a href="ExecutiveNotifications.jsp">

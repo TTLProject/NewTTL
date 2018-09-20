@@ -259,7 +259,7 @@
               <!-- /.mailbox-read-message -->
             </div>
             <%}else if(subject.equals("FunctionalityTesting")){ %>
-            
+            <div id="alert_message"></div>
              <div class="box-body no-padding">
               <div class="mailbox-read-info">
                 <h3>Asking for FuctionalityTesting</h3><br>
@@ -307,8 +307,8 @@
            </table>
            </div><br>
              <p >Choose ..............................</p> 
-             
-    Select Employee:::<select style="width:200px; overflow:hidden">
+          
+    Select Employee:::<select style="width:200px; overflow:hidden" name="empname" id="empname">
     <%PreparedStatement pstmt1 =conn.prepareStatement("select * from registrationtable where designation=?");
     pstmt1.setString(1, "qualityanalyst");
     
@@ -318,8 +318,13 @@
 <option value=<%=rs1.getString("username") %>><%=rs1.getString("username") %></option>
 <%} %>
     </select>
+    
+    <input type="hidden" name="nid" value=<%=nid %> id="nid">
+    
+    
+    <button type="button" name="save" id="save" class="btn btn-info" >Submit</button>
                 <br><br>
-        
+ 
 
 
                 <p >Regards,    <%=rs.getString("assignedby") %></p>
@@ -660,3 +665,35 @@
 
 </body>
 </html>
+<script type="text/javascript" language="javascript">
+	$(document).ready(function() {
+	
+	$('#save').click(function(){
+	/* var nid;
+	var empname;
+		 $('.nid').each(function(){
+				  nid.push($(this).value());
+			  });
+	     $('.empname').each(function(){
+				  empname.push($(this).value());
+			  }); */
+			  var nid= document.getElementById("nid").value;
+			  var empname= document.getElementById("empname").value;
+			   $.ajax({
+				   url:"FunctionalityTestingServlet",
+				   method:"POST",
+				   
+				   data:{nid:nid, empname:empname},
+				   success:function(data){
+					   $('#alert_message').html('<div class="alert alert-success" align="center">'+data+'</div>');
+					   
+				  
+				   }
+				  });
+			  setInterval(function(){
+				     $('#alert_message').html('');
+				    }, 5000);
+				 });
+	
+		});
+</script>

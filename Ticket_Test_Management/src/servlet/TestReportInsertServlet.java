@@ -78,7 +78,7 @@ public class TestReportInsertServlet extends HttpServlet {
 		/*String actualresult[]=request.getParameterValues("actualresult[]");
 		String status[]=request.getParameterValues("status[]");
 		String comment[]=request.getParameterValues("comment[]");*/
-		HttpSession session= request.getSession(false);
+		HttpSession session= request.getSession();
 		Userbean user1=(Userbean) session.getAttribute("testsession");
 		
 		

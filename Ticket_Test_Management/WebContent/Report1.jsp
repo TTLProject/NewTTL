@@ -10,7 +10,7 @@
 <body>
 <%
 String uname=request.getParameter("value");
-
+Userbean user1 = (Userbean) session.getAttribute("testsession");
 
 Userbean user =  new Userbean();
 if(uname==null){
@@ -25,6 +25,7 @@ user.setProjectName("none");
 user.setRequirementName("none");
 user.setModuleName("none");
 user.setTable("none");
+user.setUsername(user1.getUsername());
 session.setAttribute("testsession", user);
 %>
 </body>

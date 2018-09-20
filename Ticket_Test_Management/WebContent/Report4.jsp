@@ -17,7 +17,7 @@ user.setUname(user3.getUname());
 user.setProjectName(user3.getProjectName());
 user.setModuleName(user3.getModuleName());
 user.setRequirementName(reqname);
-
+user.setUsername(user3.getUsername());
 session.setAttribute("testsession", user);
 %>
 </body>

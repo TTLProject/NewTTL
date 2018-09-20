@@ -111,6 +111,7 @@ public class ModifyTestReportServlet extends HttpServlet {
 					user.setProjectName(rs.getString("projectname"));
 					user.setRequirementName(rs.getString("requirementname"));
 					user.setModuleName(rs.getString("modulename"));
+				
 				}
 				HttpSession session = request.getSession();
 				Userbean user1 = (Userbean) session.getAttribute("session2");
