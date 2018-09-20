@@ -28,7 +28,12 @@ public class UpdateServlet extends HttpServlet {
 		user.setId(id);
 		user.setColumn_name(column_name);
 		user.setValue(value);
+		
+		if(user.getValue().equals("--select--")) {
+			
+		}else {
 		EditTicketDao.update(user);
+		}
 		if(column_name.equals("testassignedto")) {
 			FunctionalityNotification.notify(user);
 		}

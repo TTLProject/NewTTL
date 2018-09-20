@@ -223,11 +223,24 @@
                     
                     <td class="mailbox-subject"><a href="EmployeeReadMail1.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
                     </td>
+                    
+                    <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>
+                  
+      <%}else if((rs.getString("empname").equals(user.getUsername()))&&(rs.getString("status").equals("approved"))){ 
+        if((rs.getString("assignedby").equals(user.getUsername()))){
+        	
+        }else{
+        check="true";%>
+        <td><%=i%></td>
+				   <td class="mailbox-name"><b><%=rs.getString("executive") %><b></td>
+                    
+                    <td class="mailbox-subject"><a href="EmployeeReadMail1.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
+                    </td>
                   
                     <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>
                   
                  
-         <%}else if((rs.getString("assignedby").equals(user.getUsername()))&&(rs.getString("status").equals("approved"))){ 
+         <%}}else if((rs.getString("assignedby").equals(user.getUsername()))&&(rs.getString("status").equals("approved"))){ 
          
          check="true";%>
         

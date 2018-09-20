@@ -165,11 +165,12 @@
     			ResultSet rs = pstmt.executeQuery();
     			
     			int i=0;
-    			
+    			/* 
     			System.out.println("rs.next>>>>"+rs.next());
-    			while(rs.next()){
     			System.out.println(rs.getString("status"));
-    		System.out.println(rs.getString("status").equals("funtionality"));
+        		System.out.println(rs.getString("status").equals("approval")); */
+    			while(rs.next()){
+    			
     			if(rs.getString("status").equals("approval")){
     			%>
                    
@@ -180,7 +181,7 @@
                    	
                    <td><%=i%></td>
 				   <td class="mailbox-name"><b><%=rs.getString("empname")%><b></td>
-                    <td class="mailbox-subject"><a href="ExecutiveReadMail.jsp?nid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
+                    <td class="mailbox-subject"><a href="ExecutiveReadMail.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
                     </td>
                     <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>
 					

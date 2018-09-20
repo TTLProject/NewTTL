@@ -53,13 +53,11 @@ public class EmployeeTicketServlet extends HttpServlet {
 				if((user.getDesignation().equals("softwaretrainee"))||(user.getDesignation().equals("hrdepartment"))||(user.getDesignation().equals("qualityanalyst"))||(user.getDesignation().equals("softwaredeveloper"))) {
 					
 					EmployeeNotification.insert(user);
-					HttpSession session = request.getSession(true);
-					session.setAttribute("session1", user);
+					
 			response.sendRedirect("AddEmployeeTicketSuccess.jsp");
 				}
 				else {
-					HttpSession session = request.getSession(true);
-					session.setAttribute("session1", user);
+					
 					response.sendRedirect("AddEmployeeTicketSuccess.jsp");
 				}
 			}else {
