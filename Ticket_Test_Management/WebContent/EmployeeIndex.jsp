@@ -116,7 +116,7 @@ ex.printStackTrace();
 								class="fa fa-laptop"></i> <span>Ticket Management</span>
 						</a>
 							<ul class="sub">
-								<li><a href="AddEmployeeTicket">Add Ticket</a></li>
+								<li><a href="AddEmployeeTicket.jsp">Add Ticket</a></li>
 								<li><a href="EditEmployeeTicket.jsp">Edit Ticket</a></li>
 								<li><a href="ViewEmployeeTicket.jsp">View Ticket</a></li>
 							</ul></li>

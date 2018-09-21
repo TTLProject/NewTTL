@@ -489,15 +489,9 @@ body {
 
 					<form method="post" id="insert_form">
 						<div class="table-repsonsive">
-						
-						<%-- 	<input type="submit" name="Delete" class="btn btn-info"
+						 	<input type="submit" name="Delete" class="btn btn-info"
 								value="DeleteRecord" form="insert_form" />&emsp;&emsp; <br>
-							<br> <b>ProjectName:::</b>
-							<%=user1.getProjectName()%>
-							&emsp; &emsp;&emsp;&emsp;<b>ModuleName:::</b>
-							<%=user1.getModuleName()%>
-							&emsp;&emsp;&emsp;<b>RequirementName:::</b>
-							<%=user1.getRequirementName()%> --%>
+							
 
 							<br>
 
