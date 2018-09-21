@@ -133,7 +133,7 @@ public class TestReportInsertServlet extends HttpServlet {
 				ResultSet rs = pstmt2.executeQuery();
 				if(rs.next())
 				{
-				PreparedStatement pstmt1 = conn.prepareStatement("insert into duplicatetable(projectname,modulename,requirementname,username,testcaseid,id ) values(?,?,?,?,?,?)");
+				PreparedStatement pstmt1 = conn.prepareStatement("insert into duplicatetable(projectname,modulename,requirementname,username,testcaseid,id,testdescription,precondition,testdesign,expectedresult ) values(?,?,?,?,?,?,?,?,?,?)");
 				
 				pstmt1.setString(1, user1.getProjectName());
 				
@@ -141,8 +141,13 @@ public class TestReportInsertServlet extends HttpServlet {
 				pstmt1.setString(3, user1.getRequirementName());
 				
 				pstmt1.setString(4, user1.getUsername());
+				
 				pstmt1.setString(5, testcaseid[i]); 
 				pstmt1.setInt(6, rs.getInt("id"));
+				pstmt1.setString(7,"white");
+				pstmt1.setString(8,"white");
+				pstmt1.setString(9,"white");
+				pstmt1.setString(10,"white");
 				int n1=pstmt1.executeUpdate();
 				
 			}}

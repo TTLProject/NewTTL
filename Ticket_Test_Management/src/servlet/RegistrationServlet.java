@@ -40,7 +40,7 @@ public class RegistrationServlet extends HttpServlet{
                 if(!fileSaveDir.exists()){
                     fileSaveDir.mkdir();
                 }*/
-        
+        ConnectionSteps steps = new ConnectionSteps();
 		String name = request.getParameter("name");
 		String domain=request.getParameter("domain");
 		String id =request.getParameter("id");
@@ -90,7 +90,7 @@ public class RegistrationServlet extends HttpServlet{
 			String webmail=user.getWebmail();
 			*/
 			
-			ConnectionSteps steps = new ConnectionSteps();
+			
 			Connection conn=steps.connection();
 			PreparedStatement pstmt1 =conn.prepareStatement("select * from registrationtable");
 			ResultSet rs = pstmt1.executeQuery();
@@ -164,34 +164,7 @@ public class RegistrationServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 
-/*try {
-	ConnectionSteps steps = new ConnectionSteps();
-	Connection conn=steps.connection();
-	PreparedStatement pstmt = conn.prepareStatement("insert into registrationtable(photo) values(?)");
-	System.out.println("enter into photo");
-	
 
-		if (inputStream != null) {
-            
-            System.out.println("blob");
-            pstmt.setBinaryStream(1, inputStream,(int) filePart.getSize());
-        }
-        int i=pstmt.executeUpdate();
-        System.out.println("error");
-        if(i==1) {
-        	
-        System.out.println("photo upload");	
-        //response.sendRedirect("Login.jsp");
-       
-        }else {
-        	System.out.println("photo not uploaded");
-        }
-        }
-	catch(Exception ex) {
-        out.println( "Error --> " + ex.getMessage());
-        System.out.println(ex);
-        ex.printStackTrace();
-    }*/
 		if(password.equals(confirmpassword)) {
 		
 		boolean status = user.isValid();
@@ -225,18 +198,6 @@ public class RegistrationServlet extends HttpServlet{
 		}
      	}
 
-	/*private String extractFileName(Part part) {
-		String contentDisp = part.getHeader("content-disposition");
-        String[] items = contentDisp.split(";");
-        for (String s : items) {
-            if (s.trim().startsWith("filename")) {
-                return s.substring(s.indexOf("=") + 2, s.length()-1);
-            }
-            
-        }
-		
-		
-		return "";
-	}*/
+
 	}
 	
