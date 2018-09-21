@@ -195,7 +195,7 @@
    <ul class="nav pull-right top-menu">
         <li class="dropdown">
             <a data-toggle="dropdown" class=" dropdown-toggle" href="#">
-                <span class="item"><%= user1.getUsername() %></span>
+                <span class="item"><%= user.getUsername() %></span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
@@ -461,16 +461,7 @@
 					} else {
 				%> --%>
 			
-		<%-- 	
-			<br> <b>ProjectName:::</b>
-							<%=user2.getProjectName()%>
-							&emsp;&emsp;
-							<b>ModuleName:::</b>
-							<%=user2.getModuleName()%>
-							&emsp;&emsp;
-							<b>RequirementName:::</b>
-							<%=user2.getRequirementName()%> --%>
-							
+		
 							<br> <br>
 
 				<form action="BugReport2.jsp" method="post">
@@ -482,7 +473,7 @@
 					%>
 					
 
-					TC-ID: <select id="hosting-plan" name="testcaseid">
+					TC-ID :   <select id="hosting-plan" name="testcaseid">
 						<option>----select-----</option>
 						<%
 							while (rs1.next()) {
@@ -493,8 +484,9 @@
 						%>
 					</select>
 					 &emsp; <input type="submit" name="submit" value="Submit" />
+					 <input type="hidden" name="table" value="ok">
 
-					</div>
+					
 				</form>
 
 

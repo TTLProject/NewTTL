@@ -13,9 +13,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
+<%-- <%
 		Userbean user1 = (Userbean) session.getAttribute("testsession");
-	%>
+
+	%> --%>
 <%
 
 String testcaseid=request.getParameter("testcaseid");
@@ -30,12 +31,13 @@ System.out.println(requirementName);
 System.out.println(moduleName);
 
 
+Userbean user1=new Userbean();
 
  user1.setProjectName(user1.getProjectName());
  user1.setRequirementName(user1.getRequirementName());
  user1.setModuleName(user1.getModuleName());
  user1.setTestcaseid(testcaseid);
-
+ user1.setTable("ok");
  
 	
  
