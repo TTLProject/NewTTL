@@ -63,7 +63,7 @@
 <!--logo end-->
 
 <h3 style="color:#fff;" align="center"><b>EditProfile</b></h3>
-<h6 align="right"><a style="color:white;" href="Login.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h6>
+<h6 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h6>
 </header>
 <!--header end-->
 <aside>

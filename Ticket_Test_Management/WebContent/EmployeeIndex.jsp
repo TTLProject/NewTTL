@@ -56,7 +56,7 @@
 	
 </div>
 <!--logo end-->
-<!-- <h5 align="right"><a style="color:white;" href="Login.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
+<!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
@@ -93,7 +93,7 @@ ex.printStackTrace();
             <ul class="dropdown-menu extended logout">
                 <!-- <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li> -->
-                <li><a href="Login.jsp"><i class="fa fa-key"></i> Log Out</a></li>
+                <li><a href="Logout.jsp"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -105,28 +105,24 @@ ex.printStackTrace();
 </header>
 <!--header end-->
 <aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->
-        <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-                <li>
-                    <a class="active" href="EditProfile.jsp">
-                        <i class="fa fa-pencil"></i>
-                        <span>EditProfile</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-laptop"></i>
-                        <span>Ticket Management</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="AddTicket.jsp">Add Ticket</a></li>
-                        <li><a href="EditTicket.jsp">Edit Ticket</a></li>
-                        <li><a href="ViewTicket.jsp">View Ticket</a></li>
-                    </ul>
-                </li>
-                <%
+			<div id="sidebar" class="nav-collapse">
+				<!-- sidebar menu start-->
+				<div class="leftside-navigation">
+					<ul class="sidebar-menu" id="nav-accordion">
+						<li><a class="active" href="EditProfile.jsp"> <i
+								class="fa fa-pencil"></i> <span>EditProfile</span>
+						</a></li>
+						<li class="sub-menu"><a href="javascript:;"> <i
+								class="fa fa-laptop"></i> <span>Ticket Management</span>
+						</a>
+							<ul class="sub">
+								<li><a href="#">Add Ticket</a></li>
+								<li><a href="EditEmployeeTicket.jsp">Edit Ticket</a></li>
+								<li><a href="ViewEmployeeTicket.jsp">View Ticket</a></li>
+							</ul></li>
+
+
+							<%
                 String desig=user.getDesignation();
 				if((desig.equals("qualityanalyst"))) {
 					%>
@@ -147,36 +143,19 @@ ex.printStackTrace();
 				<% }
 				
                 %>
-                
-               <!--  <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-check-square-o"></i>
-                        <span>Test Management</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="TestReport.jsp">Prepare TestReport</a></li>
-                        <li><a href="TestData.jsp">Prepare TestData </a></li>
-                        <li><a href="BugReport.jsp">Prepare BugReport</a></li>
-                        <li><a href="ViewTestReport.jsp">ViewTestReport</a></li>
-						 <li><a href="ModifyTestReport.jsp">ModifyTestReport</a></li>
-						
-                    </ul>
-                </li> -->
-                
-               <li>
-                    <a href="Notifications.jsp">
-                        <i class="fa fa-bell-o"></i>
-                        <span>Notifications </span>
-                    </a>
-                </li>
-               
-               
-                
-                
-            </ul>            </div>
-        <!-- sidebar menu end-->
-    </div>
-</aside>
+
+						<li><a href="EmployeeNotifications.jsp"> <i
+								class="fa fa-bell-o"></i> <span>Notifications </span>
+						</a></li>
+
+
+
+
+					</ul>
+				</div>
+				<!-- sidebar menu end-->
+			</div>
+		</aside>
 <!--sidebar end-->
     <!--main content start-->
     <section id="main-content">

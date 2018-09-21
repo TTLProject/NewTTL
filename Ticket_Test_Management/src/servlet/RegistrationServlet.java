@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.ConnectionSteps;
-import dao.RegistrationDao;
+
 import userbean.Userbean;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB

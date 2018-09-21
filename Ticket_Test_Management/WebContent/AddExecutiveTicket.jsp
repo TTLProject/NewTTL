@@ -70,7 +70,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="Login.jsp"><i class="fa fa-key"></i> Log Out</a></li>
+                <li><a href="Logout.jsp"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
     </ul>
