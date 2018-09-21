@@ -360,6 +360,69 @@
             </div>
         	  
         	  
+        	    	   <%}else if(subject.equals("EmployeeFunctionalityTesting")){
+        	   
+        	   %>
+        	   
+           
+            
+            <div class="box-body no-padding">
+              <div class="mailbox-read-info">
+                <h3>Project Sent for Functionality Testing</h3><br>
+                <h5>From: <%=rs.getString("assignedby")%>
+                  
+              </div>
+              <!-- /.mailbox-read-info -->
+             <br><hr color="red">
+              <!-- /.mailbox-controls -->
+              <div class="mailbox-read-message">
+                <p>Hello <%=user.getUsername() %>,</p>
+
+                <p style=color:navy><%=rs.getString("assignedby") %> Sent for Functionality Testing regarding project....</p>
+          <br>
+         
+           <div id="table"  class="table-editable">
+             <table  class="table" border="3">
+           <tr>
+         
+    
+		<th>Project Name</th>
+		<th>Module Name</th>
+		<th>Requirement Name</th>
+		
+		<th>Date of Issue</th>
+		</tr>
+		<tr>
+		
+		
+		<td><%=rs.getString("projectname") %></td>
+		<td><%=rs.getString("modulename") %></td>
+		<%if(rs.getString("requirementname")==null){ %>
+		<td></td>
+		<%}else{ %>
+		<td><%=rs.getString("requirementname") %></td>
+		<%} %>
+		
+		<td><%=rs.getString("dateofissue")%></td>
+		
+		</tr>
+           
+           
+           
+           </table>
+           </div>
+             
+      <br><br>
+
+                <p >Regards,   <%=rs.getString("assignedby") %></p>
+              </div>
+              <!-- /.mailbox-read-message -->
+            </div>
+        	  
+        	  
+        	  
+        	  
+        	  
         	  
         	   <%}else if(subject.equals("ModifyReport")){
         	   

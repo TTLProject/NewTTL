@@ -221,26 +221,24 @@
         <td><%=i%></td>
 				   <td class="mailbox-name"><b><%=rs.getString("executive") %><b></td>
                     
-                    <td class="mailbox-subject"><a href="EmployeeReadMail1.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
+                    <td class="mailbox-subject"><a href="EmployeeReadMail1.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b>TicketAssigned <b></a>
                     </td>
                     
                     <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>
                   
-      <%}else if((rs.getString("empname").equals(user.getUsername()))&&(rs.getString("status").equals("approved"))){ 
-        if((rs.getString("assignedby").equals(user.getUsername()))){
-        	
-        }else{
+  
+                 <%}else if((rs.getString("assignedto").equals(user.getUsername()))&&(rs.getString("status").equals("empfunctionality"))){ 
+        
         check="true";%>
         <td><%=i%></td>
-				   <td class="mailbox-name"><b><%=rs.getString("executive") %><b></td>
+				   <td class="mailbox-name"><b><%=rs.getString("assignedby") %><b></td>
                     
-                    <td class="mailbox-subject"><a href="EmployeeReadMail1.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
+                    <td class="mailbox-subject"><a href="EmployeeReadMail.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b>ForFunctionalityTesting<b></a>
                     </td>
-                  
+                    
                     <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>
                   
-                 
-         <%}}else if((rs.getString("assignedby").equals(user.getUsername()))&&(rs.getString("status").equals("approved"))){ 
+         <%}else if((rs.getString("empname").equals(user.getUsername())||rs.getString("assignedby").equals(user.getUsername()))&&(rs.getString("status").equals("approved"))){ 
          
          check="true";%>
         
@@ -254,12 +252,17 @@
                     <td class="mailbox-subject"><a href="EmployeeReadMail.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
                     </td>
                     <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>
-                    <%}}else{ %>
-                  <td><%=i%></td>
-                    <td class="mailbox-name"><b><%=rs.getString("empname") %><b></td>
-                    <td class="mailbox-subject"><a href="EmployeeReadMail1.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b>Ticket Assigned...<b></a>
+                    <%}}else{
+                    
+                     %>
+                 
+                   
+                     <td><%=i%></td>
+                    <td class="mailbox-name"><b><%=rs.getString("executive") %><b></td>
+                    <td class="mailbox-subject"><a href="EmployeeReadMail1.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b><%=rs.getString("subject") %><b></a>
                     </td>
                      <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>
+                     
                      <%
                   
                     }   %>

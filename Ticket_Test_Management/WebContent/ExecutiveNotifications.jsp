@@ -207,7 +207,7 @@
                     </td>
                  
                     
-            
+              </tr>
                   
                 
                   <%}}
@@ -224,8 +224,8 @@
                     <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>
                     </td>
                  
-                 </tr>
-                
+               
+                  </tr>
                   <%}}} %>
                      
                   </tbody>
