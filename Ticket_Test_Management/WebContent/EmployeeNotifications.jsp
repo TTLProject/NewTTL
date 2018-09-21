@@ -63,6 +63,68 @@
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
     </div>
+	
+</div>
+<!--logo end-->
+<!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
+<div class="top-nav clearfix">
+    <!--search & user info start-->
+    <ul class="nav pull-right top-menu">
+       
+        <!-- user login dropdown start-->
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            
+                <%try {
+                	ConnectionSteps steps = new ConnectionSteps();
+                	Connection conn=steps.connection();
+                	
+        PreparedStatement pstmt = conn.prepareStatement("select * from registrationtable where username=?");
+        pstmt.setString(1,user.getUsername());
+        ResultSet rs = pstmt.executeQuery();
+       
+        while ( rs.next()) { %>
+ 
+                  
+        
+                           <img width='50' height='50' src=DisplayPhotoServlet?id=<%=rs.getString("username")%> style="width: 50px">     
+                <span class="username"><%=user.getUsername() %></span>
+                <b class="caret"></b>
+            </a>
+            
+        <% }
+
+        
+    }
+    catch(Exception ex) {
+ex.printStackTrace();
+    } %>            
+            
+            <ul class="dropdown-menu extended logout">
+                <!-- <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li> -->
+                <li><a href="Logout.jsp"><i class="fa fa-key"></i> Log Out</a></li>
+            </ul>
+        </li>
+        <!-- user login dropdown end -->
+        
+    </ul>
+    <!--search & user info end-->
+</div>
+
+</header>
+
+<%-- <header class="header fixed-top clearfix">
+<!--logo start-->
+<div class="brand">
+
+   <a href="EmployeeIndex.jsp" class="logo">
+        <h4 style="color:white;"><b><i>Ticket&Test Management</i></b></h4>
+    </a>
+	
+    <div class="sidebar-toggle-box">
+        <div class="fa fa-bars"></div>
+    </div>
 </div>
 <!--logo end-->
 
@@ -81,7 +143,8 @@
         </li>
     </ul>
 </div>
-</header>
+
+</header> --%>
 <!--header end-->
 <aside>
     <div id="sidebar" class="nav-collapse">

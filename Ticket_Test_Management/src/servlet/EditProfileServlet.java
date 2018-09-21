@@ -66,9 +66,9 @@ public class EditProfileServlet extends HttpServlet {
 					HttpSession session = request.getSession(true);
 					session.setAttribute("session1", user);
 					
-					response.sendRedirect("EditProfile.jsp");
+					response.sendRedirect("EditEmployeeProfile.jsp");
 				} else {
-					response.sendRedirect("EditProfile1.jsp");
+					response.sendRedirect("EditEmployeeProfile1.jsp");
 				}
 			}
 //			response.sendRedirect("EditProfile.jsp");

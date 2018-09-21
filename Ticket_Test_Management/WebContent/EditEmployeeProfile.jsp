@@ -63,30 +63,24 @@
 </header>
 <!--header end-->
 <aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->
-        <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-                <li>
-                    <a class="active" href="#">
-                        <i class="fa fa-pencil"></i>
-                        <span>EditProfile</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-laptop"></i>
-                        <span>Ticket Management</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="AddTicket.jsp">Add Ticket</a></li>
-                        <li><a href="EditTicket.jsp">Edit Ticket</a></li>
-                        <li><a href="ViewTicket.jsp">View Ticket</a></li>
-                    </ul>
-                </li>
-                
-                
-                <%
+			<div id="sidebar" class="nav-collapse">
+				<!-- sidebar menu start-->
+				<div class="leftside-navigation">
+					<ul class="sidebar-menu" id="nav-accordion">
+						<li><a class="active" href="EditEmployeeProfile.jsp"> <i
+								class="fa fa-pencil"></i> <span>EditProfile</span>
+						</a></li>
+						<li class="sub-menu"><a href="javascript:;"> <i
+								class="fa fa-laptop"></i> <span>Ticket Management</span>
+						</a>
+							<ul class="sub">
+								<li><a href="AddEmployeeTicket.jsp">Add Ticket</a></li>
+								<li><a href="EditEmployeeTicket.jsp">Edit Ticket</a></li>
+								<li><a href="ViewEmployeeTicket.jsp">View Ticket</a></li>
+							</ul></li>
+
+
+							<%
                 String desig=user.getDesignation();
 				if((desig.equals("qualityanalyst"))) {
 					%>
@@ -107,21 +101,19 @@
 				<% }
 				
                 %>
-                
-               <li>
-                    <a href="Notifications.jsp">
-                        <i class="fa fa-bell-o"></i>
-                        <span>Notifications </span>
-                    </a>
-                </li>
-               
-               
-                
-                
-            </ul>            </div>
-        <!-- sidebar menu end-->
-    </div>
-</aside>
+
+						<li><a href="EmployeeNotifications.jsp"> <i
+								class="fa fa-bell-o"></i> <span>Notifications </span>
+						</a></li>
+
+
+
+
+					</ul>
+				</div>
+				<!-- sidebar menu end-->
+			</div>
+		</aside>
 <!--sidebar end-->
     <!--main content start-->
         <section id="main-content" style="background: url(edit/images/bg3.jpg)"no-repeat;>
