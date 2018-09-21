@@ -1,9 +1,17 @@
 package userbean;
 
+import oracle.sql.BLOB;
 
 public class Userbean {
 	private int id,sno;
-
+     private String photo;
+	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	private String empid,testcaseid,empname,uname,table,data,test;
 	public String getTest() {
 		return test;

@@ -195,9 +195,6 @@ if(mname==null){
                <div>
 					<%
 						
-						/* 
-						Userbean user2 = (Userbean) session.getAttribute("modifysession1");
-						Userbean user3 = (Userbean) session.getAttribute("modifysession2"); */
 						String  modulename = "none", requirementname = "none", projectname = "none";
 			
 					%>

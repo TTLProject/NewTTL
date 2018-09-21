@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<%@page import="dao.ConnectionSteps"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page import="userbean.Userbean"%>
 <html lang="en">
 <head>
@@ -20,15 +25,15 @@
     <link href="css/style1.css" rel="stylesheet">
     <link href="css/style1-responsive.css" rel="stylesheet" />
 
-    <style>
-    span.item{
-    display:block;
-    height:5px;
-    text-align:center; 
-    width:80px;
-    font-size:11pt;
-    }
-    </style>
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]>
+    <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
@@ -41,7 +46,7 @@
 <!--logo start-->
 <div class="brand">
 
-   <a href="#" class="logo">
+   <a href="EmployeeIndex.jsp" class="logo">
         <h4 style="color:white;"><b><i>Ticket&Test Management</i></b></h4>
     </a>
 	
@@ -52,20 +57,49 @@
 </div>
 <!--logo end-->
 <!-- <h5 align="right"><a style="color:white;" href="Login.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
-
-<!-- USERNAME -->
 <div class="top-nav clearfix">
-   <ul class="nav pull-right top-menu">
+    <!--search & user info start-->
+    <ul class="nav pull-right top-menu">
+       
+        <!-- user login dropdown start-->
         <li class="dropdown">
-            <a data-toggle="dropdown" class=" dropdown-toggle" href="#">
-                <span class="item"><%= user.getUsername() %></span>
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            
+                <%try {
+                	ConnectionSteps steps = new ConnectionSteps();
+                	Connection conn=steps.connection();
+                	
+        PreparedStatement pstmt = conn.prepareStatement("select * from registrationtable where username=?");
+        pstmt.setString(1,user.getUsername());
+        ResultSet rs = pstmt.executeQuery();
+       
+        while ( rs.next()) { %>
+ 
+                  
+        
+                           <img width='50' height='50' src=DisplayPhotoServlet?id=<%=rs.getString("username")%> style="width: 50px">     
+                <span class="username"><%=user.getUsername() %></span>
                 <b class="caret"></b>
             </a>
+            
+        <% }
+
+        conn.close();
+    }
+    catch(Exception ex) {
+ex.printStackTrace();
+    } %>            
+            
             <ul class="dropdown-menu extended logout">
+                <!-- <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li> -->
                 <li><a href="Login.jsp"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
+        <!-- user login dropdown end -->
+        
     </ul>
+    <!--search & user info end-->
 </div>
 
 </header>
@@ -87,13 +121,11 @@
                         <span>Ticket Management</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="AddEmployeeTicket.jsp">Add Ticket</a></li>
-                        <li><a href="EditEmployeeTicket.jsp">Edit Ticket</a></li>
-                        <li><a href="ViewEmployeeTicket.jsp">View Ticket</a></li>
+                        <li><a href="AddTicket.jsp">Add Ticket</a></li>
+                        <li><a href="EditTicket.jsp">Edit Ticket</a></li>
+                        <li><a href="ViewTicket.jsp">View Ticket</a></li>
                     </ul>
                 </li>
-                
-                
                 <%
                 String desig=user.getDesignation();
 				if((desig.equals("qualityanalyst"))) {
@@ -116,8 +148,23 @@
 				
                 %>
                 
+               <!--  <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-check-square-o"></i>
+                        <span>Test Management</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="TestReport.jsp">Prepare TestReport</a></li>
+                        <li><a href="TestData.jsp">Prepare TestData </a></li>
+                        <li><a href="BugReport.jsp">Prepare BugReport</a></li>
+                        <li><a href="ViewTestReport.jsp">ViewTestReport</a></li>
+						 <li><a href="ModifyTestReport.jsp">ModifyTestReport</a></li>
+						
+                    </ul>
+                </li> -->
+                
                <li>
-                    <a href="EmployeeNotifications.jsp">
+                    <a href="Notifications.jsp">
                         <i class="fa fa-bell-o"></i>
                         <span>Notifications </span>
                     </a>
@@ -138,21 +185,6 @@
 
         <div class="row">
             <div class="col-sm-12">
-               
-               
-             <%
-               String desg = user.getDesignation();
-				if(desg.equalsIgnoreCase("qualityanalyst")) {
-					%>
-					
-					<h4 style="color:#45c1ab;"><b>Test Management:</b></h4>
-                     <h5><b>Test Management helps you to maintain test reports and bug reports prepared by Testers.</b></h5>
-					<%}
-				else{%>
-						  
-					<h4><b>Ticket Management:</b></h4>
-                  <h5><b>Ticket Management provides a ticketing system to manage and maintain lists of issues and time to resolution.</b></h5>
-               <%} %>
                 
             </div>
         </div>

@@ -160,7 +160,7 @@ body {
    <ul class="nav pull-right top-menu">
         <li class="dropdown">
             <a data-toggle="dropdown" class=" dropdown-toggle" href="#">
-                <span class="item"><%= user.getUsername() %></span>
+                <span class="item"><%=user.getUsername()%></span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
@@ -431,14 +431,15 @@ body {
 					<form method="post" id="insert_form">
 						<div class="table-repsonsive">
 						
-						<%-- 	<input type="submit" name="Delete" class="btn btn-info"
+						 	<input type="submit" name="Delete" class="btn btn-info"
 								value="DeleteRecord" form="insert_form" />&emsp;&emsp; <br>
-							<br> <b>ProjectName:::</b>
+								
+							<%-- <br> <b>ProjectName:::</b>
 							<%=user1.getProjectName()%>
 							&emsp; &emsp;&emsp;&emsp;<b>ModuleName:::</b>
 							<%=user1.getModuleName()%>
 							&emsp;&emsp;&emsp;<b>RequirementName:::</b>
-							<%=user1.getRequirementName()%> --%>
+							<%=user1.getRequirementName()%>  --%>
 
 							<br>
 
@@ -509,7 +510,6 @@ body {
 
 							</table>
 </form>
-							<!-- </form> -->
 							
 							
 							<div align="right">
