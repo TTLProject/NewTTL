@@ -189,9 +189,9 @@ if(mname==null){
                         <span>Ticket Management</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="AddTicket.jsp">Add Ticket</a></li>
-                        <li><a href="EditTicket.jsp">Edit Ticket</a></li>
-                        <li><a href="ViewTicket.jsp">View Ticket</a></li>
+                        <li><a href="AddEmployeeTicket.jsp">Add Ticket</a></li>
+                        <li><a href="EditEmployeeTicket.jsp">Edit Ticket</a></li>
+                        <li><a href="ViewEmployeeTicket.jsp">View Ticket</a></li>
                     </ul>
                 </li>
                 
@@ -219,7 +219,7 @@ if(mname==null){
                 %>
                 
                <li>
-                    <a href="Notifications.jsp">
+                    <a href="EmployeeNotifications.jsp">
                         <i class="fa fa-bell-o"></i>
                         <span>Notifications </span>
                     </a>
@@ -253,7 +253,7 @@ if(mname==null){
 				%>
 					<div class="card-header">
 
-
+   <br><br>
 						Project Name:&emsp;&emsp;&nbsp;&emsp;<select id="meetingPlace1" style="width:200px; overflow:hidden">
 							<option>------select project name------</option>
 							<table>

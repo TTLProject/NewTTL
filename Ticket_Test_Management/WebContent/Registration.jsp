@@ -119,7 +119,10 @@ with min 8 and max 16 characters"
 			</div><br>
 			<br><br><br>
 			
-			
+			<div class="w3l-user">
+				<label class="head"><span class="w3l-star"></span></label>
+				<input type="file" name="photo" placeholder="" required="">
+			</div>
 			<div class="w3l-rem">
 
 			

@@ -62,7 +62,7 @@ title="enter aplhabets only max 30 characters" autofocus required="">
 			<div  class="w3l-options1">
 				<label class="head">Domain<span class="w3l-star"> * </span></label>	
 					<select class="category1" required="" name="domain">
-						<option></option>
+						<option value=" " disabled selected>select</option>
 						<option value="java">java</option>
 					    <option value="dotnet">dotnet</option>
                         <option value="testing">testing</option>						
@@ -110,7 +110,7 @@ with min 8 and max 16 characters"
 			<div class="w3l-options1">
 				<label class="head">Designation<span class="w3l-star"> * </span></label>	
 					<select class="category1" required="" name="designation">
-						<option></option>
+						<option value=" " disabled selected>select</option>
 						<option value="softwaretrainee">Software Trainee</option>
 						<option value="qualityanalyst">Quality Analyst</option>
 						<option value="softwaredeveloper">Software Developer</option>
@@ -120,7 +120,10 @@ with min 8 and max 16 characters"
 					</select>
 			</div><br>
 			<br><br><br>
-				
+				<div class="w3l-user">
+				<label class="head"><span class="w3l-star"></span></label>
+				<input type="file" name="photo" placeholder="" required="">
+			</div>
 				<!--<div class="w3l-date">
 					<label class="head">Birth Date<span class="w3l-star"> * </span></label>
 						<div class="styled-input">
