@@ -56,6 +56,7 @@
 	
 </div>
 <!--logo end-->
+
 <!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
 <div class="top-nav clearfix">
     <!--search & user info start-->

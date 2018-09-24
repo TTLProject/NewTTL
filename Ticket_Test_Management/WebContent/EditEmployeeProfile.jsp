@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="dao.ConnectionSteps"%>
 <%@page import="userbean.Userbean"%>
 <html lang="en">
 <head>
@@ -51,11 +55,56 @@
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
     </div>
+	
 </div>
 <!--logo end-->
+<h2 align="center" style=color:white>Edit Profile</h2>
+<!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
+<div class="top-nav clearfix">
+    <!--search & user info start-->
+    <ul class="nav pull-right top-menu">
+       
+        <!-- user login dropdown start-->
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            
+                <%try {
+                	ConnectionSteps steps = new ConnectionSteps();
+                	Connection conn=steps.connection();
+                	
+        PreparedStatement pstmt = conn.prepareStatement("select * from registrationtable where username=?");
+        pstmt.setString(1,user.getUsername());
+        ResultSet rs = pstmt.executeQuery();
+       
+        while ( rs.next()) { %>
+ 
+                  
+        
+                           <img width='50' height='50' src=DisplayPhotoServlet?id=<%=rs.getString("username")%> style="width: 50px">     
+                <span class="username"><%=user.getUsername() %></span>
+                <b class="caret"></b>
+            </a>
+            
+        <% }
 
-<h3 style="color:#fff;" align="center"><b>EditProfile</b></h3>
-<h6 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h6>
+        
+    }
+    catch(Exception ex) {
+ex.printStackTrace();
+    } %>            
+            
+            <ul class="dropdown-menu extended logout">
+                <!-- <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li> -->
+                <li><a href="Logout.jsp"><i class="fa fa-key"></i> Log Out</a></li>
+            </ul>
+        </li>
+        <!-- user login dropdown end -->
+        
+    </ul>
+    <!--search & user info end-->
+</div>
+
 </header>
 <!--header end-->
 <aside>
@@ -137,7 +186,7 @@ title="enter aplhabets only max 30 characters" required="" autofocus required=""
 			<div  class="w3l-options1">
 				<label class="head">Domain<span class="w3l-star"> * </span></label>	
 					<select class="category1" name="domain" required="">
-						
+						<option value=" " disabled selected>select</option>
 						<option>java</option>
 					    <option>dotnet</option>
                         <option>testing</option>						
@@ -180,11 +229,15 @@ with min 8 and max 16 characters" required="">
 			</div>
 			
 			<div class="w3l-options1">
-				<label class="head">Designition<span class="w3l-star"> * </span></label>	
+				<label class="head">Designation<span class="w3l-star"> * </span></label>	
 					<select class="category1" name="designation" required="">
-						
-						<option>trainee</option>
-						<option>trainer</option>
+						<option value=" " disabled selected>select</option>
+						<option value="softwaretrainee">Software Trainee</option>
+						<option value="qualityanalyst">Quality Analyst</option>
+						<option value="softwaredeveloper">Software Developer</option>
+						<option value="hrdepartment">HR Department</option>
+						<option value="executivequalityanalyst">Executive QualityAnalyst</option>
+						<option value="executivesoftwaredeveloper">Executive SoftwareDeveloper</option>
 					</select><br><br>
 			</div>
 
