@@ -198,7 +198,7 @@
                 	Connection conn=steps.connection();
                 	
         PreparedStatement pstmt = conn.prepareStatement("select * from registrationtable where username=?");
-        pstmt.setString(1,user.getUsername());
+        pstmt.setString(1,user1.getUsername());
         ResultSet rs = pstmt.executeQuery();
        
         while ( rs.next()) { %>
@@ -206,7 +206,7 @@
                   
         
                            <img width='50' height='50' src=DisplayPhotoServlet?id=<%=rs.getString("username")%> style="width: 50px">     
-                <span class="username"><%=user.getUsername() %></span>
+                <span class="username"><%=user1.getUsername() %></span>
                 <b class="caret"></b>
             </a>
             
@@ -231,6 +231,7 @@ ex.printStackTrace();
 </div>
 
 </header><!--header end-->
+
 		<!--header end-->
 		<aside>
 			<div id="sidebar" class="nav-collapse">
