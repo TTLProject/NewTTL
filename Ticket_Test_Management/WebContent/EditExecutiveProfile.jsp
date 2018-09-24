@@ -65,7 +65,7 @@
         <!-- settings end -->
         <!-- inbox dropdown start-->
         <div>
-       <h2 style="color:white; align:center; padding-left:100%"><b><i>EditProfile</i></b></h2>	
+       <h2 style="color:white; align:center; padding-left:120%"><b><i>EditProfile</i></b></h2>	
 </div>
 <!-- inbox dropdown end -->
         <!-- notification dropdown start-->
@@ -208,16 +208,10 @@ title="enter aplhabets only max 30 characters" required="" autofocus required=""
 				<label class="head">EmpId<span class="w3l-star"> * </span></label>
 				<input type="text" name="empid" value=<%=user.getEmpid()%> "placeholder=""  required="">
 			</div>
-			<div  class="w3l-options1">
+		<div  class="w3l-options1">
 				<label class="head">Domain<span class="w3l-star"> * </span></label>	
 					<select class="category1" name="domain" required="">
-<option value=" " disabled selected>select</option>
-						<option>java</option>
-					    <option>dotnet</option>
-                        <option>testing</option>						
-                        						
-					
-						
+                        <option value=<%=user.getDomain() %>><%=user.getDomain() %></option>						
 					</select>
 			</div>
 			<div class="w3l-user">
@@ -256,13 +250,7 @@ with min 8 and max 16 characters" required="">
 			<div class="w3l-options1">
 				<label class="head">Designation<span class="w3l-star"> * </span></label>	
 					<select class="category1" name="designation" required="">
-						<option value=" " disabled selected>select</option>
-						<option value="softwaretrainee">Software Trainee</option>
-						<option value="qualityanalyst">Quality Analyst</option>
-						<option value="softwaredeveloper">Software Developer</option>
-						<option value="hrdepartment">HR Department</option>
-						<option value="executivequalityanalyst">Executive QualityAnalyst</option>
-						<option value="executivesoftwaredeveloper">Executive SoftwareDeveloper</option>
+						<option value=<%=user.getDesignation() %>><%=user.getDesignation() %></option>
 					</select><br><br>
 			</div>
 

@@ -50,7 +50,7 @@ rel="stylesheet">
    <center><h4 style="color:white;">Email already exists</h4></center>
 <div class="w3l-main"><br>
 	<div class="w3l-from">
-		<form action="RegistrationServlet" method="post">	
+		<form action="RegistrationServlet" method="post" enctype="multipart/form-data">	
 			<div class="w3l-user">
 				<label class="head">Name<span class="w3l-star"> * </span></label>
 				<input type="text" name="name" placeholder="" pattern="[a-zA-Z]{0,30}" 

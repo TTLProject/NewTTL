@@ -190,7 +190,7 @@ ex.printStackTrace();
 				<!-- sidebar menu start-->
 				<div class="leftside-navigation">
 					<ul class="sidebar-menu" id="nav-accordion">
-						<li><a class="active" href="EditExecutiveProfile.jsp"> <i
+						<li><a class="active" href="EditEmployeeProfile.jsp"> <i
 								class="fa fa-pencil"></i> <span>EditProfile</span>
 						</a></li>
 						<li class="sub-menu"><a href="javascript:;"> <i
