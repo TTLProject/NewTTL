@@ -60,7 +60,23 @@
 	
 </div>
 <!--logo end-->
-<h2 align="center" style=color:white>Add Ticket</h2>
+<div class="nav notify-row" id="top_menu">
+    <!--  notification start -->
+    <ul class="nav top-menu">
+        <!-- settings start -->
+        <!-- settings end -->
+        <!-- inbox dropdown start-->
+        <div>
+       <h2 style="color:white; align:center; padding-left:120%"><b><i>AddTicket</i></b></h2>	
+</div>
+<!-- inbox dropdown end -->
+        <!-- notification dropdown start-->
+        
+        <!-- notification dropdown end -->
+    </ul>
+    <!--  notification end -->
+</div>
+
 <!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
 <div class="top-nav clearfix">
     <!--search & user info start-->
