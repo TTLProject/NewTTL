@@ -22,11 +22,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%
 	Userbean user = (Userbean) session.getAttribute("session1");
-	System.out.println("User  "+user);
-	if(null == user){
-		user = (Userbean)  session.getAttribute("session2");
-	}
-	System.out.println("User  "+user);
+	
 %>
 
   

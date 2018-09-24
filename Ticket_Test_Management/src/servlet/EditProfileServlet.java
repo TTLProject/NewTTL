@@ -22,7 +22,7 @@ public class EditProfileServlet extends HttpServlet {
 		
 		System.out.println("Entered into Edit Profile servlet method...");
 
-		String id = request.getParameter("id");
+		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String empid = request.getParameter("empid");
 		String domain = request.getParameter("domain");		
@@ -57,6 +57,7 @@ public class EditProfileServlet extends HttpServlet {
 				user.setWebmail(webmail);
 				user.setMobile(Long.parseLong(mobile));
                 user.setDesignation(designation);
+                user.setId(id);
                 System.out.println(name);
 				EditProfileDao.insert(user);
 				Boolean status = user.isValid();
