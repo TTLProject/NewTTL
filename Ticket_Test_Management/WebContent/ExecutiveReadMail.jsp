@@ -307,24 +307,21 @@
            </table>
            </div><br>
              <p >Choose ..............................</p> 
-     <% if(rs.getString("testassignedto").equals("0")){   %>   
+     
     Select Employee:::<select style="width:200px; overflow:hidden" name="empname" id="empname">
-    <%}else{ %>
-     Project Sent to Employee:::
-     <%} %>
+    <option>--select--</option>
     <%PreparedStatement pstmt1 =conn.prepareStatement("select * from registrationtable where designation=?");
     pstmt1.setString(1, "qualityanalyst");
     
     ResultSet rs1 = pstmt1.executeQuery();
     while(rs1.next()){
-    if(rs.getString("testassignedto").equals("0")){
+   
      %>
     
 <option value=<%=rs1.getString("username") %>><%=rs1.getString("username") %></option>
-<%}else{ %>
-<%=rs1.getString("testassignedto") %>
 
-<%} }%>
+
+<% }%>
 
 
     </select>
