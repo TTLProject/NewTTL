@@ -21,7 +21,7 @@
     <link href="css/style-responsive.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%
-	Userbean user = (Userbean) session.getAttribute("session1");
+	Userbean user = (Userbean) session.getAttribute("session2");
 	
 %>
 

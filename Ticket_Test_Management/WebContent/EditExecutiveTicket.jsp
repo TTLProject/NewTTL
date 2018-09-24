@@ -66,7 +66,7 @@
 <!--logo start-->
 <div class="brand">
 
-    <a href="ExecutiveIndex.html" class="logo">
+    <a href="ExecutiveIndex.jsp" class="logo">
         <h4 style="color:white;"><b><i>Ticket&Test Management</i></b></h4>
     </a>
     <div class="sidebar-toggle-box">
@@ -103,7 +103,7 @@
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a class="active" href="EditExecutiveProfile.html">
+                    <a class="active" href="EditExecutiveProfile.jsp">
                         <i class="fa fa-pencil"></i>
                         <span>EditProfile</span>
                     </a>
