@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="dao.ConnectionSteps"%>
 <%@page import="userbean.Userbean"%>
 <html lang="en">
 <head>
@@ -21,87 +17,47 @@
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="css/style1.css" rel="stylesheet">
-    <link href="css/style1-responsive.css" rel="stylesheet" />
-    <style>
-    span.item{
-    display:block;
-    height:5px;
-    text-align:center; 
-    width:80px;
-    font-size:11pt;
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<%
+	Userbean user = (Userbean) session.getAttribute("session1");
+	
+%>
+
+  
+		<script type="text/javascript">
+  function AllowNumbersOnly(e) {
+    var code = (e.which) ? e.which : e.keyCode;
+    if (code > 31 && (code < 48 || code > 57)) {
+      e.preventDefault();
     }
-    </style>
+  }
+  </script>
 </head>
 
 <body>
-<%
-		Userbean user = (Userbean) session.getAttribute("session2");
-//System.out.print(user.getDomain());
-	%>
+
 <section id="container" >
 <!--header start-->
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
 
-   <a href="EmployeeIndex.jsp" class="logo">
+   <a href="ExecutiveIndex.jsp" class="logo">
         <h4 style="color:white;"><b><i>Ticket&Test Management</i></b></h4>
     </a>
 	
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
     </div>
-	
 </div>
 <!--logo end-->
-<!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-       
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            
-                <%try {
-                	ConnectionSteps steps = new ConnectionSteps();
-                	Connection conn=steps.connection();
-                	
-        PreparedStatement pstmt = conn.prepareStatement("select * from registrationtable where username=?");
-        pstmt.setString(1,user.getUsername());
-        ResultSet rs = pstmt.executeQuery();
-       
-        while ( rs.next()) { %>
- 
-                  
-        
-                           <img width='50' height='50' src=DisplayPhotoServlet?id=<%=rs.getString("username")%> style="width: 50px">     
-                <span class="username"><%=user.getUsername() %></span>
-                <b class="caret"></b>
-            </a>
-            
-        <% }
 
-        
-    }
-    catch(Exception ex) {
-ex.printStackTrace();
-    } %>            
-            
-            <ul class="dropdown-menu extended logout">
-                <!-- <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li> -->
-                <li><a href="Logout.jsp"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-        
-    </ul>
-    <!--search & user info end-->
-</div>
-
-</header><!--header end-->
+<h3 style="color:#fff;" align="center"><b>EditProfile</b></h3>
+<h6 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h6>
+</header>
+<!--header end-->
 <aside>
     <div id="sidebar" class="nav-collapse">
         <!-- sidebar menu start-->
@@ -164,30 +120,94 @@ ex.printStackTrace();
 </aside>
 <!--sidebar end-->
     <!--main content start-->
-    <section id="main-content">
+        <section id="main-content" style="background: url(edit/images/bg3.jpg)"no-repeat;>
         <section class="wrapper">
         <!-- page start-->
 
         <div class="row">
             <div class="col-sm-12">
-
-   
-             <%
-               String desg = user.getDesignation();
-				if(desg.equalsIgnoreCase("executivequalityanalyst"))
-				{
-					%>
+<div class="w3l-main">
+	<div class="w3l-from">
+		<form action="EditExecutiveProfileServlet" method="post">	
+			<div class="w3l-user">
+				<div>
+								<input type="hidden" name="id" value=<%=user.getId()%>></input>
+							</div>
+				<label class="head">Name<span class="w3l-star"> * </span></label>
+				<input type="text" name="name" value=<%=user.getName() %> placeholder=""   pattern="[a-zA-Z]{0,30}" 
+title="enter aplhabets only max 30 characters" required="" autofocus required="">
+				
+			</div>
+			<div class="w3l-user">
+				<label class="head">EmpId<span class="w3l-star"> * </span></label>
+				<input type="text" name="empid" value=<%=user.getEmpid()%> "placeholder=""  required="">
+			</div>
+			<div  class="w3l-options1">
+				<label class="head">Domain<span class="w3l-star"> * </span></label>	
+					<select class="category1" name="domain" required="">
+						
+						<option>java</option>
+					    <option>dotnet</option>
+                        <option>testing</option>						
+                        						
 					
-					<h4 style="color:#45c1ab;"><b>Test Management:</b></h4>
-                     <h5><b>Test Management helps you to maintain test reports and bug reports prepared by Testers.</b></h5>
-					<%}
-				else{%>
-						  
-					<h4><b>Ticket Management:</b></h4>
-                  <h5><b>Ticket Management provides a ticketing system to manage and maintain lists of issues and time to resolution.</b></h5>
-               <%} %>
+						
+					</select>
+			</div>
+			<div class="w3l-user">
+				<label class="head">Username<span class="w3l-star"> * </span></label>
+				<input type="text" name="username" value=<%=user.getUsername()%> placeholder=""  readonly="readonly"required="">
+			</div>
+			<div class="w3l-user">
+				<label class="head">Password<span class="w3l-star"> * </span></label>
+				<input type="text" name="password" value=<%=user.getPassword() %>  placeholder=""  pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{8,16})" title="password must atleast contain 
+one uppercase letter,one lowercase letter, one special character and one one number 
+with min 8 and max 16 characters" required="">
+			</div>
+			<div class="w3l-user">
+				<label class="head">Confirm Password<span class="w3l-star"> * </span></label>
+				<input type="text" name="confirmpassword" value=<%=user.getConfirmpassword() %>  placeholder=""   pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{8,16})" title="password must atleast contain 
+one uppercase letter,one lowercase letter, one special character and one one number 
+with min 8 and max 16 characters" required="">
+			</div>
+			<div class="w3l-mail">
+				<label class="head">Email Id<span class="w3l-star"> * </span></label>
+				<input type="email" name="email" value=<%=user.getEmail() %> placeholder=""  pattern="[a-z0-9._%+-]*[@]\b(gmail.com)" required="">
+			</div>
+			<div class="w3l-mail">
+				<label class="head">Web mail<span class="w3l-star"> * </span></label>
+				
+				<input type="email" name="webmail" value=<%=user.getWebmail() %> placeholder=""  pattern="[a-z0-9._%+-]*[@]\b((cubicitsolution.in)||(cubicitsolution.com))" required="">
+			</div>
+			<div class="w3l-user">
+				<label class="head">Mobile<span class="w3l-star"> * </span></label>
+				<input type="text"  name="mobile" value=<%=user.getMobile() %>  placeholder="" onkeypress="return AllowNumbersOnly(event)" required
+									autocomplete="off"  maxlength="10" minlength="10"
 
-                
+									required="">
+			</div>
+			
+			<div class="w3l-options1">
+				<label class="head">Designition<span class="w3l-star"> * </span></label>	
+					<select class="category1" name="designation" required="">
+						
+						<option>trainee</option>
+						<option>trainer</option>
+					</select><br><br>
+			</div>
+
+		         <div class="w3l-rem" >
+				
+				<div class="btn center-block">
+				
+				
+					<input type="submit" name="submit" value="Submit"/>
+				</div>
+			</div>
+			
+		</form>
+	</div>
+</div>  		
             </div>
         </div>
         <!-- page end-->
@@ -210,7 +230,7 @@ ex.printStackTrace();
         <li>
             <div class="prog-row side-mini-stat clearfix">
                 <div class="side-graph-info">
-                    <h4>Target sell</h4>ee
+                    <h4>Target sell</h4>
                     <p>
                         25%, Deadline 12 june 13
                     </p>
@@ -471,5 +491,13 @@ ex.printStackTrace();
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>
 
+<script>
+		$(function() {
+		$( "#datepicker,#datepicker" ).datepicker();
+		});
+	</script>
+		<script type="text/javascript" src="edit/js/jquery-2.1.4.min.js"></script>
+	<script src="edit/js/jquery-ui.js"></script>
+	
 </body>
 </html>

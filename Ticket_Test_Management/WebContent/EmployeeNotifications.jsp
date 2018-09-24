@@ -56,16 +56,18 @@
 <!--logo start-->
 <div class="brand">
 
-   <a href="EmployeeIndex.jsp" class="logo">
+   <a href="EmployeeIndex.jsp" class="logo" >
         <h4 style="color:white;"><b><i>Ticket&Test Management</i></b></h4>
     </a>
 	
-    <div class="sidebar-toggle-box">
-        <div class="fa fa-bars"></div>
+    <div class="sidebar-toggle-box" >
+        <div class="fa fa-bars" > </div>
     </div>
 	
 </div>
+
 <!--logo end-->
+
 <!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
 <div class="top-nav clearfix">
     <!--search & user info start-->
