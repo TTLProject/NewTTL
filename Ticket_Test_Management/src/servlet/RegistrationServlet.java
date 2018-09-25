@@ -172,7 +172,7 @@ public class RegistrationServlet extends HttpServlet{
 		}
 
 
-		if(password.equals(confirmpassword)) {
+		
 		
 		boolean status = user.isValid();
 		 System.out.println("adminstatus:::"+status);
@@ -203,5 +203,4 @@ public class RegistrationServlet extends HttpServlet{
 		
      	}
 }
-	}
 	

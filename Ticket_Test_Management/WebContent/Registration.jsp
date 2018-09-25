@@ -75,18 +75,18 @@ title="enter aplhabets only max 30 characters" autofocus required="">
 			</div>
 			<div class="w3l-user">
 				<label class="head">Password<span class="w3l-star"> * </span></label>
-				<input type="password" name="password" placeholder="" 
+				<input type="password" name="password" id="password" onkeyup='check();' placeholder="" 
 pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{8,16})" title="password must atleast contain 
 one uppercase letter,one lowercase letter, one special character and one one number 
 with min 8 and max 16 characters" required="">
 			</div>
 			<div class="w3l-user">
-				<label class="head">Confirm Password<span class="w3l-star"> * </span></label>
-				<input type="password" name="confirmpassword" placeholder="" 
+				<label class="head">Confirm Password<span class="w3l-star"> * </span> <span id='message'></span></label>
+				<input type="password" name="confirm_password" id="confirm_password" onkeyup='check();' placeholder="" 
 				pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{8,16})" title="password must atleast contain 
 one uppercase letter,one lowercase letter, one special character and one one number 
 with min 8 and max 16 characters"
-				required="">
+				required="" > 
 			</div>
 			<div class="w3l-mail">
 				<label class="head">Email Id<span class="w3l-star"> * </span></label>
@@ -146,6 +146,18 @@ with min 8 and max 16 characters"
 		$( "#datepicker,#datepicker1" ).datepicker();
 		});
 	</script>
+	<script>
+	 var check = function() {
+      if (document.getElementById('password').value ==
+          document.getElementById('confirm_password').value) {
+          document.getElementById('message').style.color = 'lawngreen';
+          document.getElementById('message').innerHTML = '&#10004;';
+      } else {
+      		document.getElementById('message').style.color = 'red';
+          document.getElementById('message').innerHTML = '&#10006;';
+      }
+  }
+	 </script>
 <!-- //Calendar -->
 
 </body>
