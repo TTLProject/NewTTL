@@ -32,6 +32,7 @@ public class EditExecutiveProfileServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String webmail = request.getParameter("webmail");
 		String mobile = request.getParameter("mobile");
+		String username = request.getParameter("username");
 		String designation = request.getParameter("designation");
 		Userbean user = new Userbean();
 
@@ -58,6 +59,7 @@ public class EditExecutiveProfileServlet extends HttpServlet {
 				user.setMobile(Long.parseLong(mobile));
                 user.setDesignation(designation);
                 user.setId(id);
+                user.setUsername(username);
                 System.out.println(name);
 				EditProfileDao.insert(user);
 				Boolean status = user.isValid();
@@ -65,9 +67,9 @@ public class EditExecutiveProfileServlet extends HttpServlet {
 				if (status) {
 					System.out.println(status);
 					HttpSession session = request.getSession(true);
-					session.setAttribute("session1", user);
+					session.setAttribute("session2", user);
 					
-					response.sendRedirect("EditExecutiveProfile.jsp");
+					response.sendRedirect("ExecutiveIndex.jsp");
 				} else {
 					response.sendRedirect("EditExecutiveProfile1.jsp");
 				}

@@ -20,18 +20,12 @@
 <%
 
 String testcaseid=request.getParameter("testcaseid");
-String projectName=request.getParameter("projectname");
-String requirementName=request.getParameter("requirementname");
-String moduleName=request.getParameter("modulename");
 
 
-System.out.println(testcaseid);
-System.out.println(projectName);
-System.out.println(requirementName);
-System.out.println(moduleName);
 
 
-Userbean user1=new Userbean();
+
+	Userbean user1 = (Userbean) session.getAttribute("testsession");
 
  user1.setProjectName(user1.getProjectName());
  user1.setRequirementName(user1.getRequirementName());

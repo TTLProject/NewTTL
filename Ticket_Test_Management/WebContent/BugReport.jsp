@@ -540,17 +540,7 @@ ex.printStackTrace();
 				%>
  --%>
 
-				<%
-//						if ((user2.getTestcaseid().equals("empty"))) {
-						if("empty".equalsIgnoreCase(user1.getTestcaseid())){
-					%>
-
-
-				<%
-						} else {
-					%>
-
-
+				
 				<form>
 					<div class="table-repsonsive">
 						<span id="error"></span>
@@ -579,7 +569,10 @@ ex.printStackTrace();
 							try
 							{
 								PreparedStatement pstmt5 = conn.prepareStatement("select * from testreporttable where testcaseid=? and projectname=? and requirementname=? and modulename=? and status1=?");
-								
+								System.out.println(user1.getTestcaseid());
+System.out.println(user1.getProjectName());
+System.out.println( user1.getRequirementName());
+System.out.println(user1.getModuleName());
 								pstmt5.setString(1, user1.getTestcaseid());
 								pstmt5.setString(2, user1.getProjectName());
 								pstmt5.setString(3, user1.getRequirementName());
@@ -587,7 +580,7 @@ ex.printStackTrace();
 								pstmt5.setString(5, "view");
 								ResultSet rs5 = pstmt5.executeQuery();
 
-								if(rs2.next()) {
+								if(rs5.next()) {
 							%>
 							<tr>
 
@@ -627,8 +620,7 @@ ex.printStackTrace();
 
 					</div>
 				</form>
-				<% } %>
-
+	
 
 
 				<div class="row">

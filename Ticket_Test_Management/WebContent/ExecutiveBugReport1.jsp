@@ -28,7 +28,7 @@ System.out.println(moduleName);
  user1.setRequirementName(requirementName);
  user1.setModuleName(moduleName);
  user1.setTestcaseid("empty");
- 
+  user1.setTable("ok");
  session.setAttribute("testsession",user1);
  response.sendRedirect("ExecutiveBugReport.jsp");
 

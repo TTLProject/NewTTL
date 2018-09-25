@@ -455,66 +455,6 @@ ex.printStackTrace();
 				</div>
 				<br>
 				
-				<%-- 
-					<form action="TestReport1.jsp" method="post">
-						<div class="card-header">
-
-							Project Name:&emsp;&emsp;&nbsp;&emsp;&nbsp;
-							<select id="projectname" name="projectname">
-								<option>Select</option>
-								<%
-								HashSet<String> projName = new HashSet<String>();
-								HashSet<String> reqName = new HashSet<String>();
-								HashSet<String> modName = new HashSet<String>();
-									ConnectionSteps steps = new ConnectionSteps();
-									Connection conn = steps.connection();
-									PreparedStatement pstmt = conn.prepareStatement("select * from tickettable where assignedto=?");
-									pstmt.setString(1, user.getUsername());
-									ResultSet rs = pstmt.executeQuery();
-									while (rs.next()) {
-							
-								
-									projName.add(rs.getString("projectname"));
-										modName.add(rs.getString("modulename"));
-										reqName.add(rs.getString("requirementname"));
-								
-									}
-								%>
-								
-
-								<%
-									for (String projectName : projName) {
-								%>
-								<option value=<%=projectName%>><%=projectName%></option>
-								<%
-									}
-								%>
-
-
-							</select> <br> <br> 
-							
-							Module Name:&emsp;&emsp;&emsp;&nbsp; <select
-								id="modulename" name="modulename">
-								<option>Select</option>
-							</select> <br> <br>
-							
-							 Requirement Name:&nbsp;&nbsp;&nbsp; <select
-								id="requirementname" name="requirementname">
-								<option>Select</option>
-								<input type="hidden" value=<%=user.getUsername()%>
-								name="username" />
-
-
-							</select> &emsp;&emsp;&emsp;&nbsp; <input type="submit" name="submit"
-								value="Submit" /><br> <br>
-
-						</div>
-
-					</form>
-
-
- --%>
-
 					<br />
 					<%
 						if ((table.equals("none"))) {
@@ -529,9 +469,16 @@ ex.printStackTrace();
 
 					<form method="post" id="insert_form">
 						<div class="table-repsonsive">
+						
 						 	<input type="submit" name="Delete" class="btn btn-info"
 								value="DeleteRecord" form="insert_form" />&emsp;&emsp; <br>
-							
+								
+							<%-- <br> <b>ProjectName:::</b>
+							<%=user1.getProjectName()%>
+							&emsp; &emsp;&emsp;&emsp;<b>ModuleName:::</b>
+							<%=user1.getModuleName()%>
+							&emsp;&emsp;&emsp;<b>RequirementName:::</b>
+							<%=user1.getRequirementName()%>  --%>
 
 							<br>
 
@@ -602,7 +549,6 @@ ex.printStackTrace();
 
 							</table>
 </form>
-							<!-- </form> -->
 							
 							
 							<div align="right">
@@ -617,15 +563,15 @@ ex.printStackTrace();
 									<span class="glyphicon glyphicon-plus"></span>
 								</button>
 									</div>
-							<%-- 
-							<form action="TestReportNotification" method="post">
+							
+							<%-- <form action="TestReportNotification" method="post">
                               <input type="hidden" name="projectname" value=<%=user1.getProjectName() %>>
                                <input type="hidden" name="modulename" value=<%=user1.getModuleName() %>>
                                 <input type="hidden" name="requirementname" value=<%=user1.getRequirementName() %>>
 								<input type="submit" name="submit" value="Submit"
 									class="btn btn-success" />&emsp; 
-							</form>	 --%>
-						
+							</form>	
+						 --%>
 		 
 
 						</div>
@@ -987,56 +933,48 @@ ex.printStackTrace();
 							var value = $(this).text();
 							update_data(id, column_name, value);
 						});
-
+						
 						$(document)
-								.on(
-										'click',
-										'.add',
-										function() {
+						.on(
+								'click',
+								'.add',
+								function() {
 
-											var maxId = "";
-											$
-													.get(
-															'GetTestCaseIDServlet',
-															{
-																projectName : "<%=user1.getProjectName()%>",
-																moduleName  :  "<%=user1.getModuleName()%>",
-																reqName  :  "<%=user1.getRequirementName()%>"
-															},
-															function(
-																	responseText) {
-																maxId = responseText;
-																var i=maxId;
-															
-															
-																/* console
-																		.log(
-																				"maxId  INNER ",
-																				maxId); */
-																
-																var html = '';
-																html += '<tr>';
-																html += '<td contentedible="false"><input type="checkbox"/></td>';
-																html += '<td ><input type="text" name="testcaseid[]" class="form-control item_name" value="'+i+'"/></td>';
-																html += '<td><textarea rows="1" name="testdescription[]" class="form-control item_name" ></textarea></td>';
-																html += '<td><textarea rows="1" name="precondition[]" class="form-control item_name" /></td>';
-																html += '<td><textarea rows="1" name="testdesign[]" class="form-control item_name" /></td>';
-																html += '<td><textarea rows="1" name="expectedresult[]" class="form-control item_name" /></td>';
-																html += '<td class="unselectable"></td>';
-																html += '<td class="unselectable"></td>';
-																html += '<td class="unselectable"></td>';
-																html += '<td><button name="Delete"  class="remove" ><i class="fa fa-trash-o"></i></button></td>';
-
-																$('#item_table')
-																		.append(
-																				html);
-																
-
-															});
+									var maxId = "";
+									$
+											.get(
+													'GetTestCaseIDServlet',
+													{
+														projectName : "<%=user1.getProjectName()%>",
+														moduleName  :  "<%=user1.getModuleName()%>",
+														reqName  :  "<%=user1.getRequirementName()%>"
+													},
+													function(responseText) {
+														maxId = responseText;
 														
-											//console.log("maxId  ", maxId);
+													
+													
+														 console.log("maxId  INNER ", maxId); 
+														
+														var html = '';
+														html += '<tr>';
+														html += '<td contentedible="false"><input type="checkbox"/></td>';
+														html += '<td ><input type="text" name="testcaseid[]" class="form-control item_name" value="'+maxId+'"/></td>';
+														html += '<td><textarea rows="1" name="testdescription[]" class="form-control item_name" ></textarea></td>';
+														html += '<td><textarea rows="1" name="precondition[]" class="form-control item_name" /></td>';
+														html += '<td><textarea rows="1" name="testdesign[]" class="form-control item_name" /></td>';
+														html += '<td><textarea rows="1" name="expectedresult[]" class="form-control item_name" /></td>';
+														html += '<td class="unselectable"></td>';
+														html += '<td class="unselectable"></td>';
+														html += '<td class="unselectable"></td>';
+														html += '<td><button name="Delete"  class="remove" ><i class="fa fa-trash-o"></i></button></td>';
+                                                          
+														$('#item_table').append(html);
 
-										});
+													});
+													console.log("maxId  ", maxId);
+
+								});
 
 						$(document).on('click', '.remove', function() {
 							$(this).closest('tr').remove();
@@ -1208,93 +1146,104 @@ ex.printStackTrace();
 																+ '</div>');
 											}
 										});
-										
+
+					});
+</script>
+
+
+
+
+
+
 				
 
-
+<script>
+$(document)
+.ready(
+		function() {
 $("#meetingPlace").on("change", function() {
-	var value = $(this).val();
+var value = $(this).val();
 
-	update_data1(value);
+update_data1(value);
 });
 function update_data1(value) {
-	$.ajax({
-		url : "Report1.jsp",
-		method : "POST",
-		data : {
-			value : value
-		},
-		success : function(data) {
-			// 	$("#div1").load("NewFile.jsp #div1");
+$.ajax({
+url : "Report1.jsp",
+method : "POST",
+data : {
+value : value
+},
+success : function(data) {
+// 	$("#div1").load("NewFile.jsp #div1");
 
-			location.reload();
+location.reload();
 
-		}
-	});
+}
+});
 
 }
 
 $("#meetingPlace1").on("change", function() {
-	var value1 = $(this).val();
+var value1 = $(this).val();
 
-	update_data(value1);
+update_data(value1);
 });
 function update_data(value1) {
-	$.ajax({
-		url : "Report2.jsp",
-		method : "POST",
-		data : {
-			value1 : value1
-		},
-		success : function(data) {
-			location.reload();
+$.ajax({
+url : "Report2.jsp",
+method : "POST",
+data : {
+value1 : value1
+},
+success : function(data) {
+location.reload();
 
-		}
-	});
+}
+});
 
 }
 
 $("#meetingPlace2").on("change", function() {
-	var value2 = $(this).val();
+var value2 = $(this).val();
 
-	update_data2(value2);
+update_data2(value2);
 });
 function update_data2(value2) {
-	$.ajax({
-		url : "Report3.jsp",
-		method : "POST",
-		data : {
-			value2 : value2
-		},
-		success : function(data) {
-			location.reload();
+$.ajax({
+url : "Report3.jsp",
+method : "POST",
+data : {
+value2 : value2
+},
+success : function(data) {
+location.reload();
 
-		}
-	});
+}
+});
 
 }
 $("#meetingPlace3").on("change", function() {
-	var value2 = $(this).val();
+var value2 = $(this).val();
 
-	update_data3(value2);
+update_data3(value2);
 });
 function update_data3(value2) {
-	$.ajax({
-		url : "Report4.jsp",
-		method : "POST",
-		data : {
-			value2 : value2
-		},
-		success : function(data) {
-			location.reload();
-
-		}
-	});
+$.ajax({
+url : "Report4.jsp",
+method : "POST",
+data : {
+value2 : value2
+},
+success : function(data) {
+location.reload();
 
 }
-					
+});
 
-					});
+}
+		});
+
+
 </script>
 
 

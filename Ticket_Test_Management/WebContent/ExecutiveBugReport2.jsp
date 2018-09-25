@@ -14,28 +14,19 @@
 </head>
 <body>
 <%
-		Userbean user1 = (Userbean) session.getAttribute("testsession");
-	%>
-<%
-
-String testcaseid=request.getParameter("testcaseid");
-String projectName=request.getParameter("projectname");
-String requirementName=request.getParameter("requirementname");
-String moduleName=request.getParameter("modulename");
+	String testcaseid=request.getParameter("testcaseid");
 
 
-System.out.println(testcaseid);
-System.out.println(projectName);
-System.out.println(requirementName);
-System.out.println(moduleName);
 
 
+
+	Userbean user1 = (Userbean) session.getAttribute("testsession");
 
  user1.setProjectName(user1.getProjectName());
  user1.setRequirementName(user1.getRequirementName());
  user1.setModuleName(user1.getModuleName());
  user1.setTestcaseid(testcaseid);
- 
+ user1.setTable("ok");
  
 	
  
@@ -43,6 +34,7 @@ System.out.println(moduleName);
  
  session.setAttribute("testsession",user1);
  response.sendRedirect("ExecutiveBugReport.jsp");
+
 
 %>
 </body>

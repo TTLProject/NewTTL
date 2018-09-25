@@ -268,7 +268,7 @@ ex.printStackTrace();
 		</aside>
 		<!--sidebar end-->
 		<!--main content start-->
-		<section id="main-content">
+			<section id="main-content">
 			<section class="wrapper">
 				<!-- page start-->
 
@@ -901,6 +901,7 @@ ex.printStackTrace();
 
 </body>
 </html>
+
 <script>
 	$(document)
 			.ready(
@@ -933,48 +934,48 @@ ex.printStackTrace();
 							var value = $(this).text();
 							update_data(id, column_name, value);
 						});
-
+						
 						$(document)
-								.on(
-										'click',
-										'.add',
-										function() {
+						.on(
+								'click',
+								'.add',
+								function() {
 
-											var maxId = "";
-											$
-													.get(
-															'GetTestCaseIDServlet',
-															{
-																projectName : "<%=user1.getProjectName()%>",
-																moduleName  :  "<%=user1.getModuleName()%>",
-																reqName  :  "<%=user1.getRequirementName()%>"
-															},
-															function(responseText) {
-																maxId = responseText;
-																
-															
-															
-																 console.log("maxId  INNER ", maxId); 
-																
-																var html = '';
-																html += '<tr>';
-																html += '<td contentedible="false"><input type="checkbox"/></td>';
-																html += '<td ><input type="text" name="testcaseid[]" class="form-control item_name" value="'+maxId+'"/></td>';
-																html += '<td><textarea rows="1" name="testdescription[]" class="form-control item_name" ></textarea></td>';
-																html += '<td><textarea rows="1" name="precondition[]" class="form-control item_name" /></td>';
-																html += '<td><textarea rows="1" name="testdesign[]" class="form-control item_name" /></td>';
-																html += '<td><textarea rows="1" name="expectedresult[]" class="form-control item_name" /></td>';
-																html += '<td class="unselectable"></td>';
-																html += '<td class="unselectable"></td>';
-																html += '<td class="unselectable"></td>';
-																html += '<td><button name="Delete"  class="remove" ><i class="fa fa-trash-o"></i></button></td>';
-                                                                  
-																$('#item_table').append(html);
+									var maxId = "";
+									$
+											.get(
+													'GetTestCaseIDServlet',
+													{
+														projectName : "<%=user1.getProjectName()%>",
+														moduleName  :  "<%=user1.getModuleName()%>",
+														reqName  :  "<%=user1.getRequirementName()%>"
+													},
+													function(responseText) {
+														maxId = responseText;
+														
+													
+													
+														 console.log("maxId  INNER ", maxId); 
+														
+														var html = '';
+														html += '<tr>';
+														html += '<td contentedible="false"><input type="checkbox"/></td>';
+														html += '<td ><input type="text" name="testcaseid[]" class="form-control item_name" value="'+maxId+'"/></td>';
+														html += '<td><textarea rows="1" name="testdescription[]" class="form-control item_name" ></textarea></td>';
+														html += '<td><textarea rows="1" name="precondition[]" class="form-control item_name" /></td>';
+														html += '<td><textarea rows="1" name="testdesign[]" class="form-control item_name" /></td>';
+														html += '<td><textarea rows="1" name="expectedresult[]" class="form-control item_name" /></td>';
+														html += '<td class="unselectable"></td>';
+														html += '<td class="unselectable"></td>';
+														html += '<td class="unselectable"></td>';
+														html += '<td><button name="Delete"  class="remove" ><i class="fa fa-trash-o"></i></button></td>';
+                                                          
+														$('#item_table').append(html);
 
-															});
-															console.log("maxId  ", maxId);
+													});
+													console.log("maxId  ", maxId);
 
-										});
+								});
 
 						$(document).on('click', '.remove', function() {
 							$(this).closest('tr').remove();
@@ -1147,90 +1148,102 @@ ex.printStackTrace();
 											}
 										});
 
+					});
+</script>
+
+
+
+
+
+
 				
 
-
+<script>
+$(document)
+.ready(
+		function() {
 $("#meetingPlace").on("change", function() {
-	var value = $(this).val();
+var value = $(this).val();
 
-	update_data1(value);
+update_data1(value);
 });
 function update_data1(value) {
-	$.ajax({
-		url : "Report1.jsp",
-		method : "POST",
-		data : {
-			value : value
-		},
-		success : function(data) {
-			// 	$("#div1").load("NewFile.jsp #div1");
+$.ajax({
+url : "Report1.jsp",
+method : "POST",
+data : {
+value : value
+},
+success : function(data) {
+// 	$("#div1").load("NewFile.jsp #div1");
 
-			location.reload();
+location.reload();
 
-		}
-	});
+}
+});
 
 }
 
 $("#meetingPlace1").on("change", function() {
-	var value1 = $(this).val();
+var value1 = $(this).val();
 
-	update_data(value1);
+update_data(value1);
 });
 function update_data(value1) {
-	$.ajax({
-		url : "Report2.jsp",
-		method : "POST",
-		data : {
-			value1 : value1
-		},
-		success : function(data) {
-			location.reload();
+$.ajax({
+url : "Report2.jsp",
+method : "POST",
+data : {
+value1 : value1
+},
+success : function(data) {
+location.reload();
 
-		}
-	});
+}
+});
 
 }
 
 $("#meetingPlace2").on("change", function() {
-	var value2 = $(this).val();
+var value2 = $(this).val();
 
-	update_data2(value2);
+update_data2(value2);
 });
 function update_data2(value2) {
-	$.ajax({
-		url : "Report3.jsp",
-		method : "POST",
-		data : {
-			value2 : value2
-		},
-		success : function(data) {
-			location.reload();
+$.ajax({
+url : "Report3.jsp",
+method : "POST",
+data : {
+value2 : value2
+},
+success : function(data) {
+location.reload();
 
-		}
-	});
+}
+});
 
 }
 $("#meetingPlace3").on("change", function() {
-	var value2 = $(this).val();
+var value2 = $(this).val();
 
-	update_data3(value2);
+update_data3(value2);
 });
 function update_data3(value2) {
-	$.ajax({
-		url : "Report4.jsp",
-		method : "POST",
-		data : {
-			value2 : value2
-		},
-		success : function(data) {
-			location.reload();
-
-		}
-	});
+$.ajax({
+url : "Report4.jsp",
+method : "POST",
+data : {
+value2 : value2
+},
+success : function(data) {
+location.reload();
 
 }
-					});
+});
+
+}
+		});
+
 
 </script>
 
