@@ -90,6 +90,8 @@ public class RegistrationServlet extends HttpServlet{
 			String webmail=user.getWebmail();
 			*/
 			
+			if(password.equals(confirmpassword)) {
+				
 			
 			Connection conn=steps.connection();
 			PreparedStatement pstmt1 =conn.prepareStatement("select * from registrationtable");
@@ -128,6 +130,7 @@ public class RegistrationServlet extends HttpServlet{
 			if(hs2.contains(webmail)) 
 			{
 				user.setValid2(false);
+				
 			}else {
 				user.setValid2(true);
 				PreparedStatement pstmt = conn.prepareStatement("insert into registrationtable(name,empid,domain,username,password,confirmpassword,email,webmail,mobile,designation,photo) values(?,?,?,?,?,?,?,?,?,?,?)");
@@ -160,7 +163,11 @@ public class RegistrationServlet extends HttpServlet{
 			}
 			}
 		
-		} }catch (Exception e) {
+		} 
+			}else {
+				response.sendRedirect("Registration4.jsp");
+			}
+			}catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -193,11 +200,8 @@ public class RegistrationServlet extends HttpServlet{
 		}
 		
 		
-		}else {
-			response.sendRedirect("Registration4.jsp");
-		}
+		
      	}
-
-
+}
 	}
 	

@@ -51,11 +51,17 @@ public class Userbean {
 	}
 	private long mobile;
 	private String name,domain,username,password,confirmpassword,email,webmail,designation;
-	private boolean isValid, isValid1,isValid2;
+	private boolean isValid, isValid1,isValid2,isValid3;
 	private String column_name,value;
 	private String ticketId,ticketDescription,projectName,moduleName,requirementName,assignedTo,assignedBy,dateOfIssue,dateOfCompletion,status,testAssignedTo;
 	
 	
+	public boolean isValid3() {
+		return isValid3;
+	}
+	public void setValid3(boolean isValid3) {
+		this.isValid3 = isValid3;
+	}
 	public int getSno() {
 		return sno;
 	}
