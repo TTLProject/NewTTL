@@ -452,7 +452,7 @@ if(status.equals("Assign")){
                  ResultSet rs1 = pstmt1.executeQuery();
                  while(rs1.next()){
                   %>
-                 <option value="Assign">Assign</option>
+                 <option value=<%=rs.getString("username") %>><%=rs.getString("username") %></option>
                  <%} %>
                  </td>
                  <%} %>
