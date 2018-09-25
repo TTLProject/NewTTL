@@ -438,10 +438,10 @@ ResultSet rs5 = pstmt5.executeQuery();
 
  while(rs5.next()){   
 	 if(rs5.getString("testdescription").equals("red")||rs5.getString("precondition").equals("red")||rs5.getString("testdesign").equals("red")||rs5.getString("expectedresult").equals("red")){
-	 PreparedStatement pstmt6 = conn.prepareStatement("select * from testreporttable where id=? and test=?");
+	 PreparedStatement pstmt6 = conn.prepareStatement("select * from testreporttable where id=? and report=?");
 	
 	 pstmt6.setInt(1, rs5.getInt("id"));
-	 pstmt6.setString(2, "notify");
+	 pstmt6.setString(2, "modify");
 	 ResultSet rs6 = pstmt6.executeQuery();
 	 if(rs6.next()){
        %>
