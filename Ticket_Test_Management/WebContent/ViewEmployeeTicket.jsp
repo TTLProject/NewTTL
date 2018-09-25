@@ -256,6 +256,7 @@ ex.printStackTrace();
 							<th>Assigned To</th>
 							<th>Assigned By</th>
 							<th>Date of Issue</th>
+							<th>Date of Completion</th>
 							<th>Status</th>
 
 						</tr>
@@ -265,8 +266,9 @@ ex.printStackTrace();
 
 								ConnectionSteps steps = new ConnectionSteps();
 								Connection conn = steps.connection();
-								PreparedStatement pstmt = conn.prepareStatement("select * from tickettable where username=? order by id");
+								PreparedStatement pstmt = conn.prepareStatement("select * from tickettable where username=? and editstatus=? order by id");
 								pstmt.setString(1, user.getUsername());
+								pstmt.setString(2, "approved");
 									ResultSet rs = pstmt.executeQuery();
 									while(rs.next()){
 									
@@ -284,6 +286,7 @@ ex.printStackTrace();
 							<td><%=rs.getString("assignedto")%></td>
 							<td><%=rs.getString("assignedby")%></td>
 							<td><%=rs.getString("dateofissue")%></td>
+							<td><%=rs.getString("dateofcompletion")%></td>
 							<td><%=rs.getString("status")%></td>
 
 
@@ -303,31 +306,13 @@ ex.printStackTrace();
 							<td><%=rs.getString("assignedto")%></td>
 							<td><%=rs.getString("assignedby")%></td>
 							<td><%=rs.getString("dateofissue")%></td>
+							<td><%=rs.getString("dateofcompletion")%></td>
 							<td><%=rs.getString("status")%></td>
 
 
 						</tr>
 					
 
-						<%
-						}
-						else if((rs.getString("status").equals("Development"))||(rs.getString("status").equals("Deploy"))||(rs.getString("status").equals("Design"))||(rs.getString("status").equals("Review"))||(rs.getString("status").equals("UnitTest"))||(rs.getString("status").equals("FunctionalityTesting"))){
-							
-							
-							%>
-							<tr bgcolor="red">
-							<td><%=rs.getString("ticketid")%></td>
-							<td><%=rs.getString("ticketdescription")%></td>
-							<td><%=rs.getString("projectname")%></td>
-							<td><%=rs.getString("modulename")%></td>
-							<td><%=rs.getString("requirementname")%></td>
-							<td><%=rs.getString("assignedto")%></td>
-							<td><%=rs.getString("assignedby")%></td>
-							<td><%=rs.getString("dateofissue")%></td>
-							<td><%=rs.getString("status")%></td>
-
-
-						</tr>
 						
 						
 						<%
@@ -344,6 +329,7 @@ ex.printStackTrace();
 							<td><%=rs.getString("assignedto")%></td>
 							<td><%=rs.getString("assignedby")%></td>
 							<td><%=rs.getString("dateofissue")%></td>
+							<td><%=rs.getString("dateofcompletion")%></td>
 							<td><%=rs.getString("status")%></td>
 
 

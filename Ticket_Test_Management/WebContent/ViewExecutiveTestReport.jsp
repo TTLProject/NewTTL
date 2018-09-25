@@ -300,12 +300,12 @@ ex.printStackTrace();
 					<%
 						ConnectionSteps steps = new ConnectionSteps();
 						Connection conn = steps.connection();
-						PreparedStatement pstmt = conn.prepareStatement("select * from testreporttable");
+						PreparedStatement pstmt = conn.prepareStatement("select * from testreporttable1");
 						ResultSet rs = pstmt.executeQuery();
 						HashSet<String> hs = new HashSet();
 						while (rs.next()) {
 
-							hs.add(rs.getString("username"));
+							hs.add(rs.getString("assignedto"));
 						}
 						Iterator<String> itr = hs.iterator();
 					%>
@@ -349,7 +349,7 @@ ex.printStackTrace();
 							<option>------select project name------</option>
 							<table>
 								<%
-									PreparedStatement pstmt2 = conn.prepareStatement("select * from testreporttable where username=?");
+									PreparedStatement pstmt2 = conn.prepareStatement("select * from testreporttable1 where assignedto=?");
 									pstmt2.setString(1, uname);
 									ResultSet rs2 = pstmt2.executeQuery();
 									HashSet<String> hs1 = new HashSet();
@@ -390,7 +390,7 @@ ex.printStackTrace();
 							<table>
 								<%
 									PreparedStatement pstmt3 = conn
-											.prepareStatement("select * from testreporttable where username=? and projectname=?");
+											.prepareStatement("select * from testreporttable1 where assignedto=? and projectname=?");
 									pstmt3.setString(1, uname);
 
 									// System.out.print(user2.getProjectName());
@@ -442,7 +442,7 @@ ex.printStackTrace();
 							<option>--select requirement name--</option>
 							<%
 								PreparedStatement pstmt4 = conn.prepareStatement(
-										"select * from testreporttable where username=? and projectname=? and modulename=? ");
+										"select * from testreporttable1 where assignedto=? and projectname=? and modulename=? ");
 								pstmt4.setString(1, uname);
 								if (user1 == null) {
 									pstmt4.setString(2, projectname);
@@ -522,12 +522,12 @@ ex.printStackTrace();
 		<th>Comment</th>
 	  <%
       
-PreparedStatement pstmt1 = conn.prepareStatement("select * from testreporttable where username=? and projectname=? and requirementname=? and modulename=? and report=? order by id");
-pstmt1.setString(1, uname);
-pstmt1.setString(2, pname);
-pstmt1.setString(3, rname);
-pstmt1.setString(4, mname);
-pstmt1.setString(5, "modified");
+PreparedStatement pstmt1 = conn.prepareStatement("select * from testreporttable where  projectname=? and requirementname=? and modulename=? and report=? order by id");
+
+pstmt1.setString(1, pname);
+pstmt1.setString(2, rname);
+pstmt1.setString(3, mname);
+pstmt1.setString(4, "modified");
 ResultSet rs1 = pstmt1.executeQuery();
     while(rs1.next()){   
        %>

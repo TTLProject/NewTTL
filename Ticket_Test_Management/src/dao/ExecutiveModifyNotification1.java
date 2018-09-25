@@ -40,7 +40,7 @@ public class ExecutiveModifyNotification1 {
 			Connection conn= steps.connection();
 			PreparedStatement pstmt=conn.prepareStatement("Insert into notifications(subject,assignedto,projectname,requirementname,modulename,assignedby,status,domain,dateofissue,empname) values(?,?,?,?,?,?,?,?,?,?) ");
 			pstmt.setString(1, "ApprovedReport");
-			pstmt.setString(2, user.getEmpname());		
+			pstmt.setString(2, user.getAssignedTo());		
 			pstmt.setString(3, user.getProjectName());	
 			pstmt.setString(4, user.getRequirementName());		
 			pstmt.setString(5, user.getModuleName());

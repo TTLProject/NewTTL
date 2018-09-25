@@ -33,6 +33,7 @@ public class ModifyTestReportServlet1 extends HttpServlet {
 		String expectedresult[]=request.getParameterValues("expectedresult[]");
 		
 		String comments[]=request.getParameterValues("comments[]");
+		String assignedto[]=request.getParameterValues("assignedto[]");
 		String id1[]=request.getParameterValues("id[]");
 		
 		try {
@@ -88,7 +89,7 @@ public class ModifyTestReportServlet1 extends HttpServlet {
 			if(status1) {
 				
 				PreparedStatement pstmt2 = conn.prepareStatement("select * from testreporttable where id=?");
-				pstmt2.setString(1, id1[1]);
+				pstmt2.setString(1, id1[0]);
 				ResultSet rs= pstmt2.executeQuery();
 				if(rs.next()) {
 					user.setEmpname(rs.getString("username"));
@@ -101,6 +102,7 @@ public class ModifyTestReportServlet1 extends HttpServlet {
 				Userbean user1 = (Userbean) session.getAttribute("session2");
 				user.setUsername(user1.getUsername());
 				user.setDomain(user1.getDomain());
+				user.setAssignedTo(assignedto[0]);
 				ExecutiveModifyNotification1.insert(user);
 				
 				

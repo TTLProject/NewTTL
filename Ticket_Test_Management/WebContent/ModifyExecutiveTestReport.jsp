@@ -193,7 +193,7 @@ if(mname==null){
         <!-- settings end -->
         <!-- inbox dropdown start-->
         <div>
-       <h2 style="color:white; align:center; padding-left:100%"><b><i>ModifyTestReport</i></b></h2>	
+       <h2 style="color:white; align:center; padding-left:90%"><b><i>ModifyTestReport</i></b></h2>	
 </div>
 <!-- inbox dropdown end -->
         <!-- notification dropdown start-->
@@ -333,12 +333,12 @@ ex.printStackTrace();
 					<%
 						ConnectionSteps steps = new ConnectionSteps();
 						Connection conn = steps.connection();
-						PreparedStatement pstmt = conn.prepareStatement("select * from testreporttable");
+						PreparedStatement pstmt = conn.prepareStatement("select * from testreporttable1");
 						ResultSet rs = pstmt.executeQuery();
 						HashSet<String> hs = new HashSet();
 						while (rs.next()) {
 
-							hs.add(rs.getString("username"));
+							hs.add(rs.getString("assignedto"));
 						}
 						Iterator<String> itr = hs.iterator();
 					%>
@@ -382,7 +382,7 @@ ex.printStackTrace();
 							<option>----select----</option>
 							<table>
 								<%
-									PreparedStatement pstmt2 = conn.prepareStatement("select * from testreporttable where username=?");
+									PreparedStatement pstmt2 = conn.prepareStatement("select * from testreporttable1 where assignedto=?");
 									pstmt2.setString(1, uname);
 									ResultSet rs2 = pstmt2.executeQuery();
 									HashSet<String> hs1 = new HashSet();
@@ -423,7 +423,7 @@ ex.printStackTrace();
 							<table>
 								<%
 									PreparedStatement pstmt3 = conn
-											.prepareStatement("select * from testreporttable where username=? and projectname=?");
+											.prepareStatement("select * from testreporttable1 where assignedto=? and projectname=?");
 									pstmt3.setString(1, uname);
 
 									// System.out.print(user2.getProjectName());
@@ -475,7 +475,7 @@ ex.printStackTrace();
 							<option>--select--</option>
 							<%
 								PreparedStatement pstmt4 = conn.prepareStatement(
-										"select * from testreporttable where username=? and projectname=? and modulename=? ");
+										"select * from testreporttable1 where assignedto=? and projectname=? and modulename=? ");
 								pstmt4.setString(1, uname);
 								if (user1 == null) {
 									pstmt4.setString(2, projectname);
@@ -533,7 +533,7 @@ ex.printStackTrace();
 							%>
 							<br>
 							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" name="submit" />
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" name="submit" value="submit" />
 						</form>
 					</div>
 				</div>
@@ -557,13 +557,12 @@ ex.printStackTrace();
 						<tbody>
 							<%
 								PreparedStatement pstmt1 = conn.prepareStatement(
-										"select * from testreporttable where username=? and projectname=? and requirementname=? and modulename=? order by id");
-								pstmt1.setString(1, un);
-
+										"select * from testreporttable where  projectname=? and requirementname=? and modulename=? order by id");
 								
-									pstmt1.setString(2, pname);
-									pstmt1.setString(3, rname);
-									pstmt1.setString(4, mname);
+								
+									pstmt1.setString(1, pname);
+									pstmt1.setString(2, rname);
+									pstmt1.setString(3, mname);
 								
 
 								ResultSet rs1 = pstmt1.executeQuery();
@@ -595,7 +594,9 @@ ex.printStackTrace();
 			 <%} %>
 			
 			  <td style="display:none;" class="id"><%=rs1.getString("id")%></td>
+			   <td style="display:none;" class="assignedto"><%=uname%></td>
       <input type="hidden" name="id[]" value=<%=rs1.getString("id")%>>
+      <input type="hidden" name="assignedto[]" value=<%=uname%>>
       </tr>
   
       <%
@@ -603,6 +604,7 @@ ex.printStackTrace();
 } %>
       <!-- This is our clonable table line -->
 </tbody>
+
 					</table>
 					<p align="right">
 						 <button type="button" name="save" id="save" class="btn btn-info">Modify</button>
@@ -932,6 +934,7 @@ $('.shifts_clickable td').on('click',function() {
 			  var testdesign = [];
 			  var expectedresult = [];
 			  var comments = [];
+			   var assignedto = [];
 			 var id = [];
 			 $('.testdescription').each(function(){
 				  testdescription.push($(this).text());
@@ -951,11 +954,14 @@ $('.shifts_clickable td').on('click',function() {
 			 $('.id').each(function(){
 				  id.push($(this).text());
 			  });
+			   $('.assignedto').each(function(){
+				  assignedto.push($(this).text());
+			  });
 			 
 			  $.ajax({
 				   url:"ModifyTestReportServlet1",
 				   method:"POST",
-				   data:{testdescription:testdescription, precondition:precondition, testdesign:testdesign, expectedresult:expectedresult,comments:comments,id:id },
+				   data:{testdescription:testdescription, precondition:precondition, testdesign:testdesign, expectedresult:expectedresult,comments:comments,id:id,assignedto:assignedto },
 				   success:function(data){
 					   $('#alert_message').html('<div class="alert alert-success" align="center">'+data+'</div>');
 				  
@@ -978,6 +984,7 @@ $('.shifts_clickable td').on('click',function() {
 			  var status = [];
 			  var comments = [];
 			  var id = [];
+			  var assignedto = [];
 			  var color1=[]; 
 			  var color2=[]; 
 			  var color3=[]; 
@@ -1044,6 +1051,9 @@ $('.shifts_clickable td').on('click',function() {
 			  $('.status').each(function(){
 				  status.push($(this).text());
 			  });
+			   $('.assignedto').each(function(){
+				  assignedto.push($(this).text());
+			  });
 			  $('.comments').each(function(){
 				  if ($(this).hasClass('registered_active')) {
 						
@@ -1063,7 +1073,7 @@ $('.shifts_clickable td').on('click',function() {
 			  $.ajax({
 				   url:"ModifyTestReportServlet",
 				   method:"POST",
-				   data:{testcaseid:testcaseid, testdescription:testdescription, precondition:precondition, testdesign:testdesign, expectedresult:expectedresult, actualresult:actualresult, status:status, comments:comments, id:id, color1:color1, color2:color2, color3:color3, color4:color4, color5:color5},
+				   data:{testcaseid:testcaseid, testdescription:testdescription, precondition:precondition, testdesign:testdesign, expectedresult:expectedresult, actualresult:actualresult, status:status,assignedto:assignedto, comments:comments, id:id, color1:color1, color2:color2, color3:color3, color4:color4, color5:color5},
 				   success:function(data){
 					   $('#alert_message').html('<div class="alert alert-success" align="center">'+data+'</div>');
 					   

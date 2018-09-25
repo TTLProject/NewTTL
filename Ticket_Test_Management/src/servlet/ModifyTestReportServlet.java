@@ -35,6 +35,7 @@ public class ModifyTestReportServlet extends HttpServlet {
 		String status[]=request.getParameterValues("status[]");
 		String comment[]=request.getParameterValues("comments[]");
 		String id1[]=request.getParameterValues("id[]");
+		String assignedto[]=request.getParameterValues("assignedto[]");
 		String color1[]=request.getParameterValues("color1[]");
 		String color2[]=request.getParameterValues("color2[]");
 		String color3[]=request.getParameterValues("color3[]");
@@ -61,7 +62,7 @@ public class ModifyTestReportServlet extends HttpServlet {
 				System.out.println("id"+id1[i]);*/
 				
 				//int id = Integer.parseInt(testcaseid[i].split("TC-")[1]);
-				
+				System.out.println(assignedto[0]);
 				pstmt.setString(1, testcaseid[i]); 
 				pstmt.setString(2, testdescription[i]);
 				pstmt.setString(3, precondition[i]); 
@@ -104,7 +105,8 @@ public class ModifyTestReportServlet extends HttpServlet {
 			boolean status1 = user.isValid();
 			if(status1) {
 				PreparedStatement pstmt2 = conn.prepareStatement("select * from testreporttable where id=?");
-				pstmt2.setString(1, id1[1]);
+				System.out.println(assignedto[0]);
+				pstmt2.setString(1, id1[0]);
 				ResultSet rs= pstmt2.executeQuery();
 				if(rs.next()) {
 					user.setEmpname(rs.getString("username"));
@@ -117,7 +119,9 @@ public class ModifyTestReportServlet extends HttpServlet {
 				Userbean user1 = (Userbean) session.getAttribute("session2");
 				user.setUsername(user1.getUsername());
 				user.setDomain(user1.getDomain());
-				user.setUsername(user1.getUsername());
+				System.out.println(assignedto[0]);
+				user.setAssignedTo(assignedto[0]);
+				
 				ExecutiveModifyNotification.insert(user);
 			
 				String greetings = "Modifications sent to employee";

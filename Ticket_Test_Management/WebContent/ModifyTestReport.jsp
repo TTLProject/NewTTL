@@ -257,7 +257,7 @@ ex.printStackTrace();
 							<option>---Select---</option>
 							<table>
 								<%
-									PreparedStatement pstmt2 = conn.prepareStatement("select * from testreporttable where username=?");
+									PreparedStatement pstmt2 = conn.prepareStatement("select * from testreporttable1 where assignedto=?");
 									pstmt2.setString(1, user.getUsername());
 									ResultSet rs2 = pstmt2.executeQuery();
 									HashSet<String> hs1 = new HashSet();
@@ -297,7 +297,7 @@ ex.printStackTrace();
 							<table>
 								<%
 									PreparedStatement pstmt3 = conn
-											.prepareStatement("select * from testreporttable where username=? and projectname=?");
+											.prepareStatement("select * from testreporttable1 where assignedto=? and projectname=?");
 									pstmt3.setString(1, user.getUsername());
 
 									// System.out.print(user2.getProjectName());
@@ -349,7 +349,7 @@ ex.printStackTrace();
 							<option>--Select--</option>
 							<%
 								PreparedStatement pstmt4 = conn.prepareStatement(
-										"select * from testreporttable where username=? and projectname=? and modulename=? ");
+										"select * from testreporttable1 where assignedto=? and projectname=? and modulename=? ");
 								pstmt4.setString(1, user.getUsername());
 								if (user1 == null) {
 									pstmt4.setString(2, projectname);
@@ -427,12 +427,12 @@ ex.printStackTrace();
       </tr>
        <%
        
-PreparedStatement pstmt5 = conn.prepareStatement("select * from duplicatetable where username=? and projectname=? and modulename=? and requirementname=? order by id");
+PreparedStatement pstmt5 = conn.prepareStatement("select * from duplicatetable where  projectname=? and modulename=? and requirementname=? order by id");
 
-pstmt5.setString(1, user.getUsername());
-pstmt5.setString(2,pname);
-pstmt5.setString(3,mname);
-pstmt5.setString(4,rname);
+
+pstmt5.setString(1,pname);
+pstmt5.setString(2,mname);
+pstmt5.setString(3,rname);
 
 ResultSet rs5 = pstmt5.executeQuery();
 

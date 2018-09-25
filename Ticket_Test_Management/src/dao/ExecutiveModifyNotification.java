@@ -39,10 +39,11 @@ public class ExecutiveModifyNotification {
 			System.out.println("Current Date1 : " + dt1Text);
 			LocalDate date=java.time.LocalDate.now();
 			System.out.println(date);
+			System.out.println(user.getAssignedTo());
 			Connection conn= steps.connection();
 			PreparedStatement pstmt=conn.prepareStatement("Insert into notifications(subject,assignedto,projectname,requirementname,modulename,assignedby,status,domain,dateofissue,empname) values(?,?,?,?,?,?,?,?,?,?) ");
 			pstmt.setString(1, "ModifyReport");
-			pstmt.setString(2, user.getEmpname());		
+			pstmt.setString(2, user.getAssignedTo());		
 			pstmt.setString(3, user.getProjectName());	
 			pstmt.setString(4, user.getRequirementName());		
 			pstmt.setString(5, user.getModuleName());
