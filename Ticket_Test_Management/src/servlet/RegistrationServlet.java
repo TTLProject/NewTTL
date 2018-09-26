@@ -167,9 +167,7 @@ public class RegistrationServlet extends HttpServlet{
 			}else {
 				response.sendRedirect("Registration4.jsp");
 			}
-			}catch (Exception e) {
-			e.printStackTrace();
-		}
+			
 
 
 		
@@ -199,7 +197,9 @@ public class RegistrationServlet extends HttpServlet{
 			response.sendRedirect("Registration1.jsp");
 		}
 		
-		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
      	}
 }

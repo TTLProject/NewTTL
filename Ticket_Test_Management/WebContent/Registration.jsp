@@ -146,7 +146,7 @@ with min 8 and max 16 characters"
 		$( "#datepicker,#datepicker1" ).datepicker();
 		});
 	</script>
-	<script>
+	<!-- <script>
 	 var check = function() {
       if (document.getElementById('password').value ==
           document.getElementById('confirm_password').value) {
@@ -157,7 +157,7 @@ with min 8 and max 16 characters"
           document.getElementById('message').innerHTML = '&#10006;';
       }
   }
-	 </script>
+	 </script> -->
 <!-- //Calendar -->
 
 </body>
