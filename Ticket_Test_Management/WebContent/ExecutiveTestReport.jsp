@@ -38,8 +38,15 @@
 
 
 
+<%@page errorPage="500.jsp"%>
 <html lang="en">
 <head>
+<%
+	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
+	response.setDateHeader("Expires", 0);
+	response.setHeader("Pragma", "no-cache");
+%>
 <meta charset="utf-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
