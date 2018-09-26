@@ -273,7 +273,7 @@ ex.printStackTrace();
 				<!-- page start-->
 
 
-
+<div id="alert_message"></div>
 				<br />
 				<div class="container">
 				

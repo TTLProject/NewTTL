@@ -29,6 +29,14 @@ public class UpdateTestReportServlet extends HttpServlet {
 		user.setColumn_name(column_name);
 		user.setValue(value);
 		UpdateTestReportDao.update(user);
+		boolean status = user.isValid();
+		if(status) {
+			String greetings = "Update success";
+			
+			response.setContentType("text/plain");
+			response.getWriter().write(greetings);
+			
+		}
 	}
 	
 	
