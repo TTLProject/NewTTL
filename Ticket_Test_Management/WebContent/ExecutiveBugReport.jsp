@@ -55,8 +55,8 @@
 	src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 <script
 	src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-	
-	<!-- project filter js files includes when user select project name in drop down -->
+
+<!-- project filter js files includes when user select project name in drop down -->
 <script src="js/ion.rangeSlider-1.8.2/js/vendor/jquery-1.10.2.min.js"
 	type="text/javascript"></script>
 <!--  Custom js file for displaying requirement and module information based on project -->
@@ -137,114 +137,113 @@
 </style>
 
 <style>
-    span.item{
-    display:block;
-    height:5px;
-    text-align:center; 
-    width:80px;
-    font-size:11pt;
-    }
-    </style>
+span.item {
+	display: block;
+	height: 5px;
+	text-align: center;
+	width: 80px;
+	font-size: 11pt;
+}
+</style>
 </head>
 
 <body>
 	<%
-	
 		Userbean user = (Userbean) session.getAttribute("session2");
-	Userbean user1 = (Userbean) session.getAttribute("testsession");
-String pname=request.getParameter("projectname");
-String rname=request.getParameter("requirementname");
-String mname= request.getParameter("modulename");
+		Userbean user1 = (Userbean) session.getAttribute("testsession");
+		String pname = request.getParameter("projectname");
+		String rname = request.getParameter("requirementname");
+		String mname = request.getParameter("modulename");
 
-if(pname==null){
-	pname="none";
-}
-if(rname==null){
-	rname="";
-}
-if(mname==null){
-	mname="none";
-}
+		if (pname == null) {
+			pname = "none";
+		}
+		if (rname == null) {
+			rname = "";
+		}
+		if (mname == null) {
+			mname = "none";
+		}
 	%>
 	<section id="container">
 		<!--header start-->
 		<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
+			<!--logo start-->
+			<div class="brand">
 
-   <a href="ExecutiveIndex.jsp" class="logo">
-        <h4 style="color:white;"><b><i>Ticket&Test Management</i></b></h4>
-    </a>
-	
-    <div class="sidebar-toggle-box">
-        <div class="fa fa-bars"></div>
-    </div>
-	
-</div>
-<!--logo end-->
-<div class="nav notify-row" id="top_menu">
-    <!--  notification start -->
-    <ul class="nav top-menu">
-        <!-- settings start -->
-        <!-- settings end -->
-        <!-- inbox dropdown start-->
-        <div>
-       <h2 style="color:white; align:center; padding-left:120%"><b><i>BugReport</i></b></h2>	
-</div>
-<!-- inbox dropdown end -->
-        <!-- notification dropdown start-->
-        
-        <!-- notification dropdown end -->
-    </ul>
-    <!--  notification end -->
-</div>
-<!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-       
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            
-                <%try {
-                	ConnectionSteps steps = new ConnectionSteps();
-                	Connection conn=steps.connection();
-                	
-        PreparedStatement pstmt = conn.prepareStatement("select * from registrationtable where username=?");
-        pstmt.setString(1,user.getUsername());
-        ResultSet rs = pstmt.executeQuery();
-       
-        while ( rs.next()) { %>
- 
-                  
-        
-                           <img width='50' height='50' src=DisplayPhotoServlet?id=<%=rs.getString("username")%> style="width: 50px">     
-                <span class="username"><%=user.getUsername() %></span>
-                <b class="caret"></b>
-            </a>
-            
-        <% }
+				<a href="ExecutiveIndex.jsp" class="logo">
+					<h4 style="color: white;">
+						<b><i>Ticket&Test Management</i></b>
+					</h4>
+				</a>
 
-        
-    }
-    catch(Exception ex) {
-ex.printStackTrace();
-    } %>            
-            
-            <ul class="dropdown-menu extended logout">
-                <!-- <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+				<div class="sidebar-toggle-box">
+					<div class="fa fa-bars"></div>
+				</div>
+
+			</div>
+			<!--logo end-->
+			<div class="nav notify-row" id="top_menu">
+				<!--  notification start -->
+				<ul class="nav top-menu">
+					<!-- settings start -->
+					<!-- settings end -->
+					<!-- inbox dropdown start-->
+					<div>
+						<h2 style="color: white; align: center; padding-left: 120%">
+							<b><i>BugReport</i></b>
+						</h2>
+					</div>
+					<!-- inbox dropdown end -->
+					<!-- notification dropdown start-->
+
+					<!-- notification dropdown end -->
+				</ul>
+				<!--  notification end -->
+			</div>
+			<!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
+			<div class="top-nav clearfix">
+				<!--search & user info start-->
+				<ul class="nav pull-right top-menu">
+
+					<!-- user login dropdown start-->
+					<li class="dropdown"><a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <%
+ 	try {
+ 		ConnectionSteps steps = new ConnectionSteps();
+ 		Connection conn = steps.connection();
+
+ 		PreparedStatement pstmt = conn.prepareStatement("select * from registrationtable where username=?");
+ 		pstmt.setString(1, user.getUsername());
+ 		ResultSet rs = pstmt.executeQuery();
+
+ 		while (rs.next()) {
+ %> <img width='50' height='50'
+							src=DisplayPhotoServlet?id= <%=rs.getString("username")%>
+							style="width: 50px"> <span class="username"><%=user.getUsername()%></span>
+							<b class="caret"></b>
+					</a> <%
+ 	}
+
+ 	} catch (Exception ex) {
+ 		ex.printStackTrace();
+ 	}
+ %>
+
+						<ul class="dropdown-menu extended logout">
+							<!-- <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li> -->
-                <li><a href="Logout.jsp"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-        
-    </ul>
-    <!--search & user info end-->
-</div>
+							<li><a href="Logout.jsp"><i class="fa fa-key"></i> Log
+									Out</a></li>
+						</ul></li>
+					<!-- user login dropdown end -->
 
-</header><!--header end-->
+				</ul>
+				<!--search & user info end-->
+			</div>
+
+		</header>
+		<!--header end-->
 
 		<!--header end-->
 		<aside>
@@ -266,29 +265,27 @@ ex.printStackTrace();
 
 
 						<%
-                String desig=user.getDesignation();
-				if(desig.equals("executivequalityanalyst")) {
-					%>
-					  <li class="sub-menu">
-	                    <a href="javascript:;">
-	                        <i class="fa fa-check-square-o"></i>
-	                        <span>Test Management</span>
-	                    </a>
-	                    <ul class="sub">
-	                        <li><a href="ExecutiveTestReport.jsp">Prepare TestReport</a></li>
-	                        <li><a href="ExecutiveTestData.jsp">Prepare TestData </a></li>
-	                        <li><a href="ExecutiveBugReport.jsp">Prepare BugReport</a></li>
-	                        <li><a href="ViewExecutiveTestReport.jsp">ViewTestReport</a></li>
-							 <li><a href="ModifyExecutiveTestReport.jsp">ModifyTestReport</a></li>
-							
-	                    </ul>
-	                </li>
-				<% }
-				
-                %>
+							String desig = user.getDesignation();
+							if (desig.equals("executivequalityanalyst")) {
+						%>
+						<li class="sub-menu"><a href="javascript:;"> <i
+								class="fa fa-check-square-o"></i> <span>Test Management</span>
+						</a>
+							<ul class="sub">
+								<li><a href="ExecutiveTestReport.jsp">Prepare
+										TestReport</a></li>
+								<li><a href="ExecutiveTestData.jsp">Prepare TestData </a></li>
+								<li><a href="ExecutiveBugReport.jsp">Prepare BugReport</a></li>
+								<li><a href="ViewExecutiveTestReport.jsp">ViewTestReport</a></li>
+								<li><a href="ModifyExecutiveTestReport.jsp">ModifyTestReport</a></li>
 
-						<li><a href="ExecutiveNotifications.jsp"> <i class="fa fa-bell-o"></i>
-								<span>Notifications </span>
+							</ul></li>
+						<%
+							}
+						%>
+
+						<li><a href="ExecutiveNotifications.jsp"> <i
+								class="fa fa-bell-o"></i> <span>Notifications </span>
 						</a></li>
 
 
@@ -309,20 +306,18 @@ ex.printStackTrace();
 				<br> <br>
 				<div>
 					<%
-						
-					String  modulename = "none", requirementname = "none", projectname = "none"; 
-			
+						String modulename = "none", requirementname = "none", projectname = "none";
 					%>
 					<%
 						ConnectionSteps steps = new ConnectionSteps();
 						Connection conn = steps.connection();
-						
 					%>
-				
+
 					<div class="card-header">
 
 
-						Project Name:&emsp;&emsp;&nbsp;&emsp;<select id="meetingPlace1" style="width:200px; overflow:hidden">
+						Project Name:&emsp;&emsp;&nbsp;&emsp;<select id="meetingPlace1"
+							style="width: 200px; overflow: hidden">
 							<option>---Select---</option>
 							<table>
 								<%
@@ -347,22 +342,20 @@ ex.printStackTrace();
 							</table>
 						</select> &emsp;&emsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<%
-						if (user1.getProjectName().equals("none")) {
+							if (user1.getProjectName().equals("none")) {
 							} else {
 						%>
-						
-							<br>
-							<span  style="color:blue">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-							<%=user1.getProjectName() %></span>
-							
+
+						<br> <span style="color: blue">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+							<%=user1.getProjectName()%></span>
+
 						<%
-					
 							}
 						%>
-						
-						
-						<br> <br> Module Name:&emsp;&emsp;&nbsp;&nbsp;
-						<select id="meetingPlace2" style="width:200px; overflow:hidden">
+
+
+						<br> <br> Module Name:&emsp;&emsp;&nbsp;&nbsp; <select
+							id="meetingPlace2" style="width: 200px; overflow: hidden">
 							<option>---Select---</option>
 							<table>
 								<%
@@ -373,7 +366,7 @@ ex.printStackTrace();
 									// System.out.print(user1.getProjectName());
 									if (user1 == null) {
 										pstmt3.setString(2, projectname);
-										
+
 									} else if (user1.getProjectName().equals("none")) {
 
 										pstmt3.setString(2, projectname);
@@ -397,9 +390,7 @@ ex.printStackTrace();
 									}
 								%>
 							</table>
-						</select> 
-						
-						&emsp;&emsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</select> &emsp;&emsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<%
 							if (user1 == null) {
 
@@ -408,85 +399,81 @@ ex.printStackTrace();
 						%>
 						<%-- <input type="text" value=<%=user1.getModuleName()%>
 							readonly="readonly"> --%>
-							<br>
-							<span  style="color:blue">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-							<%=user1.getModuleName() %></span>
+						<br> <span style="color: blue">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+							<%=user1.getModuleName()%></span>
 						<%
 							}
 						%>
-		<form action="ExecutiveBugReport1.jsp" method="post">
-						<br>   Requirement
-						Name:&nbsp;<select id="meetingPlace3" style="width:200px; overflow:hidden">
-							<option>--Select--</option>
-							<%
-								PreparedStatement pstmt4 = conn.prepareStatement(
-										"select * from testreporttable1 where assignedby=? and projectname=? and modulename=? ");
-								pstmt4.setString(1, user1.getUsername());
-								if (user1 == null) {
-									pstmt4.setString(2, projectname);
-								} else if (user1.getProjectName().equals("none")) {
-									pstmt4.setString(2, projectname);
+						<form action="ExecutiveBugReport1.jsp" method="post">
+							<br> Requirement Name:&nbsp;<select id="meetingPlace3"
+								style="width: 200px; overflow: hidden">
+								<option>--Select--</option>
+								<%
+									PreparedStatement pstmt4 = conn.prepareStatement(
+											"select * from testreporttable1 where assignedby=? and projectname=? and modulename=? ");
+									pstmt4.setString(1, user1.getUsername());
+									if (user1 == null) {
+										pstmt4.setString(2, projectname);
+									} else if (user1.getProjectName().equals("none")) {
+										pstmt4.setString(2, projectname);
 
-								} else {
-									pstmt4.setString(2, user1.getProjectName());
-								}
+									} else {
+										pstmt4.setString(2, user1.getProjectName());
+									}
 
-								if (user1 == null) {
-									pstmt4.setString(3, modulename);
-								} else if (user1.getModuleName().equals("none")) {
-									pstmt4.setString(3, modulename);
-								} else {
-									pstmt4.setString(3, user1.getModuleName());
-								}
-								ResultSet rs4 = pstmt4.executeQuery();
-								HashSet<String> hs3 = new HashSet();
-								while (rs4.next()) {
-									hs3.add(rs4.getString("requirementname"));
-								}
-								Iterator<String> itr3 = hs3.iterator();
-								while (itr3.hasNext()) {
-									String reqname = itr3.next();
-							%>
-							<tr>
-								<option value=<%=reqname%>><%=reqname%></option>
-							</tr>
-							<%
-								}
-							%>
-							</table>
+									if (user1 == null) {
+										pstmt4.setString(3, modulename);
+									} else if (user1.getModuleName().equals("none")) {
+										pstmt4.setString(3, modulename);
+									} else {
+										pstmt4.setString(3, user1.getModuleName());
+									}
+									ResultSet rs4 = pstmt4.executeQuery();
+									HashSet<String> hs3 = new HashSet();
+									while (rs4.next()) {
+										hs3.add(rs4.getString("requirementname"));
+									}
+									Iterator<String> itr3 = hs3.iterator();
+									while (itr3.hasNext()) {
+										String reqname = itr3.next();
+								%>
+								<tr>
+									<option value=<%=reqname%>><%=reqname%></option>
+								</tr>
+								<%
+									}
+								%>
+								</table>
 
-						</select>
-				
-							&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</select> &emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<%
 								if (user1 == null) {
 
 								} else if (user1.getRequirementName().equals("none")) {
 								} else {
 							%>
-							
-								<br>
-							<span  style="color:blue">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-							<%=user1.getRequirementName() %></span>
+
+							<br> <span style="color: blue">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								<%=user1.getRequirementName()%></span>
 							<%
 								}
 							%>
 							<br>
 							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" name="submit" />
-							<input type="hidden" name="projectname"
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit"
+								name="submit" /> <input type="hidden" name="projectname"
 								value=<%=user1.getProjectName()%>> <input type="hidden"
 								name="modulename" value=<%=user1.getModuleName()%>> <input
 								type="hidden" name="username" value=<%=user1.getUname()%>>
-							<input type="hidden" value=<%=user1.getRequirementName()%> name="requirementname"
-								readonly="readonly">
-							<input type="hidden" name="table" value="ok">
-							
+							<input type="hidden" value=<%=user1.getRequirementName()%>
+								name="requirementname" readonly="readonly"> <input
+								type="hidden" name="table" value="ok">
+
 						</form>
 					</div>
 				</div>
 				<br>
-				
+
 
 				<%-- <%
 					/* if ((user2.getProjectName().equals("none")) && (user2.getRequirementName().equals("none"))
@@ -500,20 +487,25 @@ ex.printStackTrace();
 				<%
 					} else {
 				%> --%>
-			
-		
-							<br> <br>
+
+
+				<br> <br>
 
 				<form action="ExecutiveBugReport2.jsp" method="post">
-				
-					<%
-						PreparedStatement pstmt1 = conn.prepareStatement("select * from testreporttable where status1=?");
-								pstmt1.setString(1, "view");
-							ResultSet rs1 = pstmt1.executeQuery();
-					%>
-					
 
-					TC-ID :   <select id="hosting-plan" name="testcaseid">
+					<%
+						PreparedStatement pstmt1 = conn.prepareStatement(
+								"select * from testreporttable where status1=? and projectname=? and modulename=? and requirementname=?");
+
+						pstmt1.setString(1, "view");
+						pstmt1.setString(2, user1.getProjectName());
+						pstmt1.setString(3, user1.getModuleName());
+						pstmt1.setString(4, user1.getRequirementName());
+						ResultSet rs1 = pstmt1.executeQuery();
+					%>
+
+
+					TC-ID : <select id="hosting-plan" name="testcaseid">
 						<option>----select-----</option>
 						<%
 							while (rs1.next()) {
@@ -522,21 +514,20 @@ ex.printStackTrace();
 						<%
 							}
 						%>
-					</select>
-					 &emsp; <input type="submit" name="submit" value="Submit" />
-					 <input type="hidden" name="table" value="ok">
+					</select> &emsp; <input type="submit" name="submit" value="Submit" /> <input
+						type="hidden" name="table" value="ok">
 
-					
+
 				</form>
 
 
-<%-- 
+				<%-- 
 				<%
 					}
 				%>
  --%>
 
-				
+
 				<form>
 					<div class="table-repsonsive">
 						<span id="error"></span>
@@ -562,49 +553,46 @@ ex.printStackTrace();
 
 							</tr>
 							<%
-							try
-							{
-								PreparedStatement pstmt5 = conn.prepareStatement("select * from testreporttable where testcaseid=? and projectname=? and requirementname=? and modulename=? and status1=?");
-								System.out.println(user1.getTestcaseid());
-System.out.println(user1.getProjectName());
-System.out.println( user1.getRequirementName());
-System.out.println(user1.getModuleName());
-								pstmt5.setString(1, user1.getTestcaseid());
-								pstmt5.setString(2, user1.getProjectName());
-								pstmt5.setString(3, user1.getRequirementName());
-								pstmt5.setString(4, user1.getModuleName());
-								pstmt5.setString(5, "view");
-								ResultSet rs5 = pstmt5.executeQuery();
+								try {
+									PreparedStatement pstmt5 = conn.prepareStatement(
+											"select * from testreporttable where testcaseid=? and projectname=? and requirementname=? and modulename=? and status1=?");
+									System.out.println(user1.getTestcaseid());
+									System.out.println(user1.getProjectName());
+									System.out.println(user1.getRequirementName());
+									System.out.println(user1.getModuleName());
+									pstmt5.setString(1, user1.getTestcaseid());
+									pstmt5.setString(2, user1.getProjectName());
+									pstmt5.setString(3, user1.getRequirementName());
+									pstmt5.setString(4, user1.getModuleName());
+									pstmt5.setString(5, "view");
+									ResultSet rs5 = pstmt5.executeQuery();
 
-								if(rs5.next()) {
+									if (rs5.next()) {
 							%>
 							<tr>
 
 								<td><%=rs5.getString("testcaseid")%></td>
 								<td><%=rs5.getString("testdescription")%></td>
-								
+
 								<td><%=rs5.getString("precondition")%></td>
-							
-								<td><%=rs5.getString("testdesign")%>	</td>
-							
+
+								<td><%=rs5.getString("testdesign")%></td>
+
 								<td><%=rs5.getString("expectedresult")%></td>
-								
-								<td> <%=rs5.getString("actualresult")%>	</td>
 
-						
-								<td>
-									<%=rs5.getString("status")%> 
+								<td><%=rs5.getString("actualresult")%></td>
 
-								</td>
+
+								<td><%=rs5.getString("status")%></td>
 
 							</tr>
 							<%
-								}}
-											 catch (Exception e) {
-												System.out.println(e);
-											}
-										%>
-							
+								}
+								} catch (Exception e) {
+									System.out.println(e);
+								}
+							%>
+
 						</table>
 
 
@@ -616,7 +604,7 @@ System.out.println(user1.getModuleName());
 
 					</div>
 				</form>
-	
+
 
 
 				<div class="row">
@@ -893,91 +881,88 @@ System.out.println(user1.getModuleName());
 </body>
 </html>
 <script>
-	$(document)
-			.ready(
-					function() {
-$("#meetingPlace").on("change", function() {
-	var value = $(this).val();
+	$(document).ready(function() {
+		$("#meetingPlace").on("change", function() {
+			var value = $(this).val();
 
-	update_data1(value);
-});
-function update_data1(value) {
-	$.ajax({
-		url : "Report1.jsp",
-		method : "POST",
-		data : {
-			value : value
-		},
-		success : function(data) {
-			// 	$("#div1").load("NewFile.jsp #div1");
+			update_data1(value);
+		});
+		function update_data1(value) {
+			$.ajax({
+				url : "Report1.jsp",
+				method : "POST",
+				data : {
+					value : value
+				},
+				success : function(data) {
+					// 	$("#div1").load("NewFile.jsp #div1");
 
-			location.reload();
+					location.reload();
+
+				}
+			});
+
+		}
+
+		$("#meetingPlace1").on("change", function() {
+			var value1 = $(this).val();
+
+			update_data(value1);
+		});
+		function update_data(value1) {
+			$.ajax({
+				url : "Report2.jsp",
+				method : "POST",
+				data : {
+					value1 : value1
+				},
+				success : function(data) {
+					location.reload();
+
+				}
+			});
+
+		}
+
+		$("#meetingPlace2").on("change", function() {
+			var value2 = $(this).val();
+
+			update_data2(value2);
+		});
+		function update_data2(value2) {
+			$.ajax({
+				url : "Report3.jsp",
+				method : "POST",
+				data : {
+					value2 : value2
+				},
+				success : function(data) {
+					location.reload();
+
+				}
+			});
+
+		}
+		$("#meetingPlace3").on("change", function() {
+			var value2 = $(this).val();
+
+			update_data3(value2);
+		});
+		function update_data3(value2) {
+			$.ajax({
+				url : "Report4.jsp",
+				method : "POST",
+				data : {
+					value2 : value2
+				},
+				success : function(data) {
+					location.reload();
+
+				}
+			});
 
 		}
 	});
-
-}
-
-$("#meetingPlace1").on("change", function() {
-	var value1 = $(this).val();
-
-	update_data(value1);
-});
-function update_data(value1) {
-	$.ajax({
-		url : "Report2.jsp",
-		method : "POST",
-		data : {
-			value1 : value1
-		},
-		success : function(data) {
-			location.reload();
-
-		}
-	});
-
-}
-
-$("#meetingPlace2").on("change", function() {
-	var value2 = $(this).val();
-
-	update_data2(value2);
-});
-function update_data2(value2) {
-	$.ajax({
-		url : "Report3.jsp",
-		method : "POST",
-		data : {
-			value2 : value2
-		},
-		success : function(data) {
-			location.reload();
-
-		}
-	});
-
-}
-$("#meetingPlace3").on("change", function() {
-	var value2 = $(this).val();
-
-	update_data3(value2);
-});
-function update_data3(value2) {
-	$.ajax({
-		url : "Report4.jsp",
-		method : "POST",
-		data : {
-			value2 : value2
-		},
-		success : function(data) {
-			location.reload();
-
-		}
-	});
-
-}
-					});
-
 </script>
 
 
