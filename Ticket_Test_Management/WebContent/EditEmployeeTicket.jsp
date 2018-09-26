@@ -535,7 +535,7 @@ ex.printStackTrace();
 							</tr>
 
 
-
+<%-- 
 							<%
 							
 			}}else if(rs.getString("username").equals(user.getUsername())&&rs.getString("assignedby").equals(user.getUsername())&&rs.getString("editstatus").equals("approved")){ %>
@@ -579,11 +579,11 @@ ex.printStackTrace();
 								<%
 									String date = rs.getString("dateofcompletion");
 								%>
-								<%--  <td  ><div calss="update" data-id=<%=rs.getString("id")%> data-column="dateofcompletion"><div class="styled-input" >
+								 <td  ><div calss="update" data-id=<%=rs.getString("id")%> data-column="dateofcompletion"><div class="styled-input" >
 							<input class="date"  name="Text" type="text"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'MM/DD/YYYY';}" required="">
 						</div></div>
 			 
-			 --%>
+			
 								<%
 									String status = rs.getString("status");
 										if (status.equals("Completed")) {
@@ -835,7 +835,7 @@ ex.printStackTrace();
 										<!-- This is our clonable table line -->
 									</tr>
 
-
+ --%>
 
 
 							<%}}}}%>

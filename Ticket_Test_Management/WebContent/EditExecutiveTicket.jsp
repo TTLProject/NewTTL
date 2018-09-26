@@ -442,19 +442,37 @@ if(status.equals("Assign")){
 			   System.out.println(s);
 			   if(s.equals("empty")||s.equals("Assign")||s.equals("Design")||s.equals("Development")||s.equals("Review")||s.equals("UnitTest")){ %>
                   <td class='unselectable' ></td>
-                <%} else{
-                
-                %>
-                 <td ><select class="update2" data-id=<%=rs.getString("id")%> data-column="testassignedto" >
-                 <option >select</option>
-                 <%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
+             <%
+									} else {
+								%>
+								<td><select class="update2" data-id=<%=rs.getString("id")%>
+									data-column="testassignedto">
+										<%if(rs.getString("testassignedto").equals("0")){ %>
+										<option>select</option>
+										<%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
                  pstmt1.setString(1, "executivequalityanalyst");
                  ResultSet rs1 = pstmt1.executeQuery();
                  while(rs1.next()){
                   %>
-                 <option value=<%=rs.getString("username") %>><%=rs.getString("username") %></option>
-                 <%} %>
-                 </td>
+										<option value=<%=rs1.getString("username") %>><%=rs1.getString("username") %></option>
+										<%} %>
+
+								</select></td>
+								<%}else{ %>
+
+								        <option><%=rs.getString("testassignedto") %></option>
+								        <option>--select--</option>
+										
+										<%PreparedStatement pstmt1 = conn.prepareStatement("select * from registrationtable where designation=?");
+ 
+           pstmt1.setString(1, "executivequalityanalyst");
+                 ResultSet rs1 = pstmt1.executeQuery();
+                 while(rs1.next()){
+                  %>
+										<option value=<%=rs1.getString("username") %>><%=rs1.getString("username") %></option>
+										<%}}
+                  %>
+								</select></td>
                  <%} %>
                  
       <!-- This is our clonable table line -->
