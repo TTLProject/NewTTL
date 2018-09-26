@@ -169,7 +169,7 @@ ex.printStackTrace();
          
              <%
                String desg = user.getDesignation();
-				if(desg.equalsIgnoreCase("executivequalityanalyst"))
+				if(desg.equalsIgnoreCase("qualityanalyst"))
 				{
 					%>
 					
