@@ -165,7 +165,22 @@ ex.printStackTrace();
 
         <div class="row">
             <div class="col-sm-12">
-                
+         
+         
+             <%
+               String desg = user.getDesignation();
+				if(desg.equalsIgnoreCase("executivequalityanalyst"))
+				{
+					%>
+					
+					<h4 style="color:#45c1ab;"><b>Test Management:</b></h4>
+                     <h5><b>Test Management helps you to maintain test reports and bug reports prepared by Testers.</b></h5>
+					<%}
+				else{%>
+						  
+					<h4><b>Ticket Management:</b></h4>
+                  <h5><b>Ticket Management provides a ticketing system to manage and maintain lists of issues and time to resolution.</b></h5>
+               <%} %>       
             </div>
         </div>
         <!-- page end-->
