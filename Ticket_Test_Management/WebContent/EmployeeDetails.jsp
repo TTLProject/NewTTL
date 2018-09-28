@@ -186,29 +186,6 @@ div.scrollmenu a {
 div.scrollmenu a:hover {
 	background-color: #777;
 }
-
-
-
-.btn {
-    border-collapse: collapse;
-
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    background-image: none;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    padding: 6x 2px; 
-     
-    font-size: 12px;
-    line-height: 1.42857143;
-    border-radius: 40px;
-}
-
-
 </style>
 </head>
 
@@ -217,143 +194,80 @@ div.scrollmenu a:hover {
 	<section id="container">
 		<!--header start-->
 		<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
+			<div class="clearfix">
+				<!--logo start-->
+				<div class="brand">
 
-   <a href="EmployeeIndex.jsp" class="logo">
-        <h4 style="color:white;"><b><i>Ticket&Test Management</i></b></h4>
-    </a>
-	
-    <div class="sidebar-toggle-box">
-        <div class="fa fa-bars"></div>
-    </div>
-	
-</div>
-<!--logo end-->
-<div class="nav notify-row" id="top_menu">
-    <!--  notification start -->
-    <ul class="nav top-menu">
-        <!-- settings start -->
-        <!-- settings end -->
-        <!-- inbox dropdown start-->
-        <div>
-       <h2 style="color:white; align:center; padding-left:120%"><b><i>AddTicket</i></b></h2>	
-</div>
-<!-- inbox dropdown end -->
-        <!-- notification dropdown start-->
-        
-        <!-- notification dropdown end -->
-    </ul>
-    <!--  notification end -->
-</div>
-<!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
-<div class="top-nav clearfix">
-    <!--search & user info start-->
+					<a href="#" class="logo">
+						<h4 style="color: white;">
+							<b><i>Ticket&Test Management</i></b>
+						</h4>
+					</a>
+					<div class="sidebar-toggle-box">
+						<div class="fa fa-bars"></div>
+					</div>
+
+				</div>
+				<!--logo end-->
+				<div>
+				<h3 style="color: #fff;" align="center">
+					<b>Employee Details</b>
+					
+				</h3>
+				
+				</div>
+              <h5 align="right">
+
+					<a style="color: white;" href="Login.jsp"><i class="fa fa-key"></i><b>
+							Log Out</b></a>
+				</h5>
+			
+
+
+<%-- <div class="top-nav clearfix">
+ 
     <ul class="nav pull-right top-menu">
        
-        <!-- user login dropdown start-->
+      
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            
-                <%try {
-                	ConnectionSteps steps = new ConnectionSteps();
-                	Connection conn=steps.connection();
-                	
-        PreparedStatement pstmt = conn.prepareStatement("select * from registrationtable where username=?");
-        pstmt.setString(1,user.getUsername());
-        ResultSet rs = pstmt.executeQuery();
-       
-        while ( rs.next()) { %>
- 
-                  
-        
-                           <img width='50' height='50' src=DisplayPhotoServlet?id=<%=rs.getString("username")%> style="width: 50px">     
-                <span class="username"><%=user.getUsername() %></span>
+              <span class="username"><%=user.getUsername() %></span>
                 <b class="caret"></b>
             </a>
             
-        <% }
-
-        
-    }
-    catch(Exception ex) {
-ex.printStackTrace();
-    } %>            
-            
-            <ul class="dropdown-menu extended logout">
-                <!-- <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li> -->
+             <ul class="dropdown-menu extended logout">
                 <li><a href="Logout.jsp"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
-        <!-- user login dropdown end -->
+      
         
     </ul>
-    <!--search & user info end-->
+    
+</div> --%>
 </div>
-
-</header>
+		</header>
 
 		<!--header end-->
 		<aside>
 
-<div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->
-        <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-                <li>
-                    <a class="active" href="EditProfile.jsp">
-                        <i class="fa fa-pencil"></i>
-                        <span>EditProfile</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-laptop"></i>
-                        <span>Ticket Management</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="AddExecutiveTicket.jsp">Add Ticket</a></li>
-                        <li><a href="EditExecutiveTicket.jsp">Edit Ticket</a></li>
-                        <li><a href="ViewExecutiveTicket.jsp">View Ticket</a></li>
-                    </ul>
-                </li>
-                
-                
-                
-					  <li class="sub-menu">
-	                    <a href="javascript:;">
-	                        <i class="fa fa-check-square-o"></i>
-	                        <span>Test Management</span>
-	                    </a>
-	                    <ul class="sub">
-	                        <li><a href="TestReport.jsp">Prepare TestReport</a></li>
-	                        <li><a href="TestData.jsp">Prepare TestData </a></li>
-	                        <li><a href="BugReport.jsp">Prepare BugReport</a></li>
-	                        <li><a href="ViewTestReport.jsp">ViewTestReport</a></li>
-							 <li><a href="ModifyTestReport.jsp">ModifyTestReport</a></li>
-							
-	                    </ul>
-	                </li>
-				
-               <li>
-                    <a href="ExecutiveNotifications.jsp">
-                        <i class="fa fa-bell-o"></i>
-                        <span>Notifications </span>
-                    </a>
-                </li>
-               
-               
-                
-                
-            </ul>            </div>
-        <!-- sidebar menu end-->
-    </div>
+
+			<div id="sidebar" class="nav-collapse">
+				<!-- sidebar menu start-->
+				<div class="leftside-navigation">
+					<ul class="sidebar-menu" id="nav-accordion">
+
+
+
+
+					</ul>
+				</div>
+				<!-- sidebar menu end-->
+			</div>
 		</aside>
 		<!--sidebar end-->
 		<!--main content start-->
 
-		<section id="main-content">
+	<section id="main-content">
 			<div class="scrollmenu">
 				<section class="wrapper">
 					<!-- page start-->
