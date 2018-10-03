@@ -547,12 +547,12 @@ ResultSet rs1 = pstmt1.executeQuery();
 		   <% if(rs1.getString("actualresult")==null){%>
 		   <td><textarea rows="1" name="actualresult[]"></textarea></td>
 		   <%}else{ %>
-		    <td ><textarea rows="1" name="actualresult[]"><%=rs1.getString("actualresult") %></textarea></td>
+		    <td ><%=rs1.getString("actualresult") %></td>
 		    <%} %>
 		     <% if(rs1.getString("status")==null){%>
 		      <td><textarea rows="1" name="status[]" ></textarea></td>
 		   <%}else{ %>
-			 <td ><textarea rows="1" name="status[]" ><%=rs1.getString("status") %></textarea></td>
+			 <td ><%=rs1.getString("status") %></td>
 			<%} %>
 			 <% if(rs1.getString("comments")==null){%>
 		      <td></td>

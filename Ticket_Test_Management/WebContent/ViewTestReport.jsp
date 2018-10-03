@@ -499,12 +499,12 @@ ResultSet rs5 = pstmt5.executeQuery();
 		   <% if(rs5.getString("actualresult")==null){%>
 		   <td><textarea rows="1" name="actualresult[]"></textarea></td>
 		   <%}else{ %>
-		    <td ><textarea rows="1" name="actualresult[]"><%=rs5.getString("actualresult") %></textarea></td>
+		    <td ><%=rs5.getString("actualresult") %></td>
 		    <%} %>
 		     <% if(rs5.getString("status")==null){%>
 		      <td><textarea rows="1" name="status[]" ></textarea></td>
 		   <%}else{ %>
-			 <td ><textarea rows="1" name="status[]" ><%=rs5.getString("status") %></textarea></td>
+			 <td ><%=rs5.getString("status") %></td>
 			<%} %>
 			 <% if(rs5.getString("comments")==null){%>
 		      <td></td>
