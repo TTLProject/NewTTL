@@ -38,13 +38,15 @@ rel="stylesheet">
 
 	
 	
+	
 <!-- //css files -->
 </head>
 <body>
 <%
 		Userbean user = (Userbean) session.getAttribute("registration");
 %>
-	<h3><b><strong>Registration Form<strong><b></h3>
+
+	<center><h3>Registration</h3></center>
 <div class="w3l-main"><br>
 	<div class="w3l-from">
 		<form action="RegistrationServlet" method="post" enctype="multipart/form-data">	
@@ -59,7 +61,7 @@ title="enter aplhabets only max 30 characters" autofocus required="">
 			</div>
 			<div  class="w3l-options1">
 				<label class="head">Domain<span class="w3l-star"> * </span></label>	
-					<select class="category1" required="" name="domain" >
+					<select class="category1" required="" name="domain">
 						<option value=" " disabled selected>select</option>
 						<option value="java">java</option>
 					    <option value="dotnet">dotnet</option>
@@ -75,18 +77,18 @@ title="enter aplhabets only max 30 characters" autofocus required="">
 			</div>
 			<div class="w3l-user">
 				<label class="head">Password<span class="w3l-star"> * </span></label>
-				<input type="password" name="password" id="password" onkeyup='check();' placeholder="" 
+				<input type="password" name="password" placeholder="" 
 pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{8,16})" title="password must atleast contain 
 one uppercase letter,one lowercase letter, one special character and one one number 
 with min 8 and max 16 characters" required="">
 			</div>
 			<div class="w3l-user">
-				<label class="head">Confirm Password<span class="w3l-star"> * </span> <span id='message'></span></label>
-				<input type="password" name="confirm_password" id="confirm_password" onkeyup='check();' placeholder="" 
+				<label class="head">Confirm Password<span class="w3l-star"> * </span></label>
+				<input type="password" name="confirmpassword" placeholder="" 
 				pattern="((?=.*\d)(?=.*[A-Z])(?=.*\W).{8,16})" title="password must atleast contain 
 one uppercase letter,one lowercase letter, one special character and one one number 
 with min 8 and max 16 characters"
-				required="" > 
+				required="">
 			</div>
 			<div class="w3l-mail">
 				<label class="head">Email Id<span class="w3l-star"> * </span></label>
@@ -118,11 +120,19 @@ with min 8 and max 16 characters"
 					</select>
 			</div><br>
 			<br><br><br>
-			
-			<div class="w3l-user">
+				<div class="w3l-user">
 				<label class="head"><span class="w3l-star"></span></label>
 				<input type="file" name="photo" placeholder="" required="">
 			</div>
+				<!--<div class="w3l-date">
+					<label class="head">Birth Date<span class="w3l-star"> * </span></label>
+						<div class="styled-input">
+							<input class="date" id="datepicker" name="Text" type="text" 
+value="MM/DD/YYYY" onfocus="this.value = '';" onblur="if (this.value == 
+'') {this.value = 'MM/DD/YYYY';}" required="">
+						</div>
+					</div>	-->
+			
 			<div class="w3l-rem">
 
 			
@@ -146,18 +156,6 @@ with min 8 and max 16 characters"
 		$( "#datepicker,#datepicker1" ).datepicker();
 		});
 	</script>
-	<!-- <script>
-	 var check = function() {
-      if (document.getElementById('password').value ==
-          document.getElementById('confirm_password').value) {
-          document.getElementById('message').style.color = 'lawngreen';
-          document.getElementById('message').innerHTML = '&#10004;';
-      } else {
-      		document.getElementById('message').style.color = 'red';
-          document.getElementById('message').innerHTML = '&#10006;';
-      }
-  }
-	 </script> -->
 <!-- //Calendar -->
 
 </body>
