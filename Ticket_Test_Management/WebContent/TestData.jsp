@@ -612,9 +612,9 @@ ex.printStackTrace();
 				for (var i = 3; i <= columnCount; i++) {
 					var newCel = row.insertCell(i - 1); //create a new cell           
 					var element = document.createElement("div"); //create a div element
-					var txt = document.createTextNode("cell "); //create a text element
+					var txt = document.createTextNode("."); //create a text element
 					element.appendChild(txt); //append text to div      
-					newCel.appendChild(element); //appent div to cell
+					newCel.appendChild(element).contenteditable = "true"; //appent div to cell
 				}
 			}
 		}
@@ -639,14 +639,14 @@ ex.printStackTrace();
 			var tblHeadObj = document.getElementById('my_table').tHead; //table head
 			for (var h = 0; h < tblHeadObj.rows.length; h++) {
 				var newTH = document.createElement('th');
-				tblHeadObj.rows[h].appendChild(newTH); //append ne th to table
+				tblHeadObj.rows[h].appendChild(newTH).contenteditable = "true"; //append ne th to table
 				newTH.innerHTML = 'New Header '; //append th content to th
 			}
 			var tblBodyObj = document.getElementById('my_table').tBodies[0]; //table body
 			for (var i = 0; i < tblBodyObj.rows.length; i++) {
 				var newCell = tblBodyObj.rows[i].insertCell(-1); //create new cell
 
-				newCell.innerHTML = 'cell ';//append data to cell
+				newCell.innerHTML = '';//append data to cell
 			}
 		}
 

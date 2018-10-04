@@ -253,7 +253,8 @@ ex.printStackTrace();
 
 <br><br>
 
-
+<div>
+<form action="TestDataServlet" method="post">
 <table id="my_table"  border="2" cellpadding="0" cellspacing="0" contenteditable="true">
 <thead ><tr width="30%">
 <th >Select</th>
@@ -276,10 +277,11 @@ ex.printStackTrace();
 </tbody>
 
 </table>
-
+<br>
  <button  onClick="addRow()" >+</button>
+ <button >Submit</button>
 
-			
+			</form>
             </div>
  
 

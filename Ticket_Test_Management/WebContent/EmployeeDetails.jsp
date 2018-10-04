@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -7,7 +6,6 @@
 <%@page import="userbean.Userbean"%>
 <html lang="en">
 <head>
-
 <%
 	response.setHeader("Cache-Control", "no-cache");
 	response.setHeader("Cache-Control", "no-store");
@@ -186,6 +184,29 @@ div.scrollmenu a {
 div.scrollmenu a:hover {
 	background-color: #777;
 }
+
+
+
+.btn {
+    border-collapse: collapse;
+
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6x 2px; 
+     
+    font-size: 12px;
+    line-height: 1.42857143;
+    border-radius: 40px;
+}
+
+
 </style>
 </head>
 
@@ -211,7 +232,7 @@ div.scrollmenu a:hover {
 				<!--logo end-->
 				<div>
 				<h3 style="color: #fff;" align="center">
-					<b>Employee Details</b>
+					<b><i>Employee Details</i></b>
 					
 				</h3>
 				
