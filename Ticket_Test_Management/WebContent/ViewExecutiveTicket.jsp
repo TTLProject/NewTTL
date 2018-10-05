@@ -90,7 +90,7 @@ div.scrollmenu a:hover {
 
 	<%
 	
-	Userbean user=(Userbean)session.getAttribute("session1");
+
 		Userbean user1 = (Userbean) session.getAttribute("session2");
 	Userbean user2 = (Userbean) session.getAttribute("view");
 	%>
@@ -244,13 +244,20 @@ ex.printStackTrace();
 										try {
 											ConnectionSteps steps = new ConnectionSteps();
 											Connection conn = steps.connection();
-											PreparedStatement pstmt = conn.prepareStatement("select * from tickettable");
-											
+											PreparedStatement pstmt = conn.prepareStatement("select * from tickettable where assignedby=?");
+											pstmt.setString(1, user1.getUsername());
 											ResultSet rs = pstmt.executeQuery();
 											HashSet<String> hs1 = new HashSet();
 											while (rs.next()) {
-												hs1.add(rs.getString("username"));
+												if(rs.getString("assignedto").equals(user1.getUsername())){
+													
+												}else{
+												
+												hs1.add(rs.getString("assignedto"));
+												
+												}
 											}
+											
 											Iterator<String> itr1 = hs1.iterator();
 											while (itr1.hasNext()) {
 												String empid = itr1.next();
@@ -292,23 +299,41 @@ ex.printStackTrace();
 
 											ConnectionSteps steps = new ConnectionSteps();
 											Connection conn = steps.connection();
-											PreparedStatement pstmt2 = conn.prepareStatement("select * from tickettable where username=? and editstatus=? order by id");
-											pstmt2.setString(1, user2.getEmpid());
-											pstmt2.setString(2,"approved");
-											ResultSet rs2 = pstmt2.executeQuery();
+											PreparedStatement pstmt = conn.prepareStatement("select * from tickettable order by id");
+											//pstmt.setString(1, user.getUsername());
+											ResultSet rs = pstmt.executeQuery();
 
-											while (rs2.next()) {
+											while (rs.next()) {
+												if (rs.getString("editstatus").equals("approved")) {
+													if ((rs.getString("username").equals(user2.getEmpid())
+															&& rs.getString("assignedby").equals(user2.getEmpid())
+															&& rs.getString("assignedto").equals(user2.getEmpid()))
+															|| (rs.getString("username").equals(user2.getEmpid())
+																	&& rs.getString("empname").equals(user2.getEmpid()))
+															|| (rs.getString("username").equals(user2.getEmpid())
+																	&& rs.getString("assignedby").equals(user2.getEmpid()))
+															|| (rs.getString("assignedto").equals(user2.getEmpid()))) {
 												
 									%>
 
 									<tr>
-										<td><%=rs2.getString("ticketid")%></td>
-										<td><%=rs2.getString("ticketdescription")%></td>
-										<td><%=rs2.getString("projectname")%></td>
-										<td><%=rs2.getString("modulename")%></td>
-										<td><%=rs2.getString("requirementname")%></td>
-										<td><%=rs2.getString("dateofissue")%></td>
-										<td><%=rs2.getString("dateofcompletion")%></td>
+										<td><%=rs.getString("ticketid")%></td>
+										<td><%=rs.getString("ticketdescription")%></td>
+										<td><%=rs.getString("projectname")%></td>
+										<td><%=rs.getString("modulename")%></td>
+										<td><%=rs.getString("requirementname")%></td>
+										<td><%=rs.getString("dateofissue")%></td>
+										<%
+								if(rs.getString("dateofcompletion")==null){
+									%>
+									<td></td>
+								<%	
+								}else{
+								
+								%>
+								<td><%=rs.getString("dateofcompletion")%></td>	
+								<% }
+								%>
 										
 										 <td><select>
 												<option>issued</option>
@@ -322,7 +347,7 @@ ex.printStackTrace();
 
 									</tr>
 									<%
-										}
+										}}}
 
 										} catch (Exception e) {
 											System.out.println(e);
@@ -376,7 +401,18 @@ ex.printStackTrace();
 								<td><%=rs.getString("assignedto")%></td>
 								<td><%=rs.getString("assignedby")%></td>
 								<td><%=rs.getString("dateofissue")%></td>
-								<td><%=rs.getString("dateofcompletion")%></td>
+								
+								<%
+								if(rs.getString("dateofcompletion")==null){
+									%>
+									<td></td>
+								<%	
+								}else{
+								
+								%>
+								<td><%=rs.getString("dateofcompletion")%></td>	
+								<% }
+								%>
 								<td><%=rs.getString("status")%></td>
 
 
@@ -399,7 +435,17 @@ ex.printStackTrace();
 								<td><%=rs.getString("assignedto")%></td>
 								<td><%=rs.getString("assignedby")%></td>
 								<td><%=rs.getString("dateofissue")%></td>
-								<td><%=rs.getString("dateofcompletion")%></td>
+								<%
+								if(rs.getString("dateofcompletion")==null){
+									%>
+									<td></td>
+								<%	
+								}else{
+								
+								%>
+								<td><%=rs.getString("dateofcompletion")%></td>	
+								<% }
+								%>
 								<td><%=rs.getString("status")%></td>
 
 
@@ -418,7 +464,17 @@ ex.printStackTrace();
 								<td><%=rs.getString("assignedto")%></td>
 								<td><%=rs.getString("assignedby")%></td>
 								<td><%=rs.getString("dateofissue")%></td>
-								<td><%=rs.getString("dateofcompletion")%></td>
+							<%
+								if(rs.getString("dateofcompletion")==null){
+									%>
+									<td></td>
+								<%	
+								}else{
+								
+								%>
+								<td><%=rs.getString("dateofcompletion")%></td>	
+								<% }
+								%>
 								<td><%=rs.getString("status")%></td>
 
 

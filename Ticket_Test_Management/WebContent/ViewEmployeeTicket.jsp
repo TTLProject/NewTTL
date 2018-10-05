@@ -265,21 +265,25 @@ ex.printStackTrace();
 							<th>Date of Issue</th>
 							<th>Date of Completion</th>
 							<th>Status</th>
-
 						</tr>
-
-						<%
-							try {
-
+	<%
 								ConnectionSteps steps = new ConnectionSteps();
 								Connection conn = steps.connection();
-								PreparedStatement pstmt = conn.prepareStatement("select * from tickettable where username=? and editstatus=? order by id");
-								pstmt.setString(1, user.getUsername());
-								pstmt.setString(2, "approved");
-									ResultSet rs = pstmt.executeQuery();
-									while(rs.next()){
-									
-											%>
+								PreparedStatement pstmt = conn.prepareStatement("select * from tickettable order by id");
+								//pstmt.setString(1, user.getUsername());
+								ResultSet rs = pstmt.executeQuery();
+
+								while (rs.next()) {
+									if (rs.getString("editstatus").equals("approved")) {
+										if ((rs.getString("username").equals(user.getUsername())
+												&& rs.getString("assignedby").equals(user.getUsername())
+												&& rs.getString("assignedto").equals(user.getUsername()))
+												|| (rs.getString("username").equals(user.getUsername())
+														&& rs.getString("empname").equals(user.getUsername()))
+												|| (rs.getString("username").equals(user.getUsername())
+														&& rs.getString("assignedby").equals(user.getUsername()))
+												|| (rs.getString("assignedto").equals(user.getUsername()))) {
+							%>
 						<%
 						if(rs.getString("status").equals("Completed")){
 							
@@ -293,7 +297,17 @@ ex.printStackTrace();
 							<td><%=rs.getString("assignedto")%></td>
 							<td><%=rs.getString("assignedby")%></td>
 							<td><%=rs.getString("dateofissue")%></td>
-							<td><%=rs.getString("dateofcompletion")%></td>
+							<%
+								if(rs.getString("dateofcompletion")==null){
+									%>
+									<td></td>
+								<%	
+								}else{
+								
+								%>
+								<td><%=rs.getString("dateofcompletion")%></td>	
+								<% }
+								%>
 							<td><%=rs.getString("status")%></td>
 
 
@@ -313,7 +327,17 @@ ex.printStackTrace();
 							<td><%=rs.getString("assignedto")%></td>
 							<td><%=rs.getString("assignedby")%></td>
 							<td><%=rs.getString("dateofissue")%></td>
-							<td><%=rs.getString("dateofcompletion")%></td>
+							<%
+								if(rs.getString("dateofcompletion")==null){
+									%>
+									<td></td>
+								<%	
+								}else{
+								
+								%>
+								<td><%=rs.getString("dateofcompletion")%></td>	
+								<% }
+								%>
 							<td><%=rs.getString("status")%></td>
 
 
@@ -327,7 +351,7 @@ ex.printStackTrace();
 						else {
 							
 							%>
-							<tr >
+							<tr bgcolor="red">
 							<td><%=rs.getString("ticketid")%></td>
 							<td><%=rs.getString("ticketdescription")%></td>
 							<td><%=rs.getString("projectname")%></td>
@@ -336,7 +360,17 @@ ex.printStackTrace();
 							<td><%=rs.getString("assignedto")%></td>
 							<td><%=rs.getString("assignedby")%></td>
 							<td><%=rs.getString("dateofissue")%></td>
-							<td><%=rs.getString("dateofcompletion")%></td>
+						<%
+								if(rs.getString("dateofcompletion")==null){
+									%>
+									<td></td>
+								<%	
+								}else{
+								
+								%>
+								<td><%=rs.getString("dateofcompletion")%></td>	
+								<% }
+								%>
 							<td><%=rs.getString("status")%></td>
 
 
@@ -345,11 +379,11 @@ ex.printStackTrace();
 						<% 
 						
 					}}
+									}
+								
 							
 						}
-					 catch (Exception e) { System.out.println(e);
 					
-						 }
 						 %>
 
 						<!-- This is our clonable table line -->
@@ -676,7 +710,7 @@ ex.printStackTrace();
 
 
 	<script src="table/js/index.js"></script>
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 		window.onload = function() {
 
 			document.getElementById("trCanada").style.display = 'none';
@@ -698,6 +732,6 @@ ex.printStackTrace();
 			}
 
 		}
-	</script>
+	</script> -->
 </body>
 </html>

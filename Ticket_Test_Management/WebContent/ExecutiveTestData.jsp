@@ -252,9 +252,9 @@ ex.printStackTrace();
 <button onclick="exportTableToCSV('file.csv')">Download Csv</button>
 
 <br><br>
-
+<!-- <form action="TestDataServlet" method="post"> -->
 <div>
-<form action="TestDataServlet" method="post">
+
 <table id="my_table"  border="2" cellpadding="0" cellspacing="0" contenteditable="true">
 <thead ><tr width="30%">
 <th >Select</th>
@@ -279,11 +279,10 @@ ex.printStackTrace();
 </table>
 <br>
  <button  onClick="addRow()" >+</button>
- <button >Submit</button>
 
-			</form>
+ 	<input type="submit" value="submit">
             </div>
- 
+ <!-- </form> -->
 
   
  

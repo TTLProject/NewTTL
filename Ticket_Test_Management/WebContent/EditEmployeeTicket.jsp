@@ -305,6 +305,7 @@ ex.printStackTrace();
 
 								<td>
 									<%
+									
 										String doc = rs.getString("dateofcompletion");
 														if (doc == null) {
 									%>
