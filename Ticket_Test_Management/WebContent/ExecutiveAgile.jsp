@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<%@page errorPage="500.jsp"%>
-<%@page import="dao.ConnectionSteps"%>
-<%@page import="userbean.Userbean"%>
-<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.Connection"%>
+<%@page import="dao.ConnectionSteps"%>
+<%@page import="userbean.Userbean"%>
 <html lang="en">
 <head>
 <%
@@ -29,14 +27,9 @@
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    
-	<link rel="stylesheet" href="edit/css/jquery-ui.css"/>
-	
-	
-	<style>
+    <link href="css/style1.css" rel="stylesheet">
+    <link href="css/style1-responsive.css" rel="stylesheet" />
+    <style>
     span.item{
     display:block;
     height:5px;
@@ -50,6 +43,9 @@
 <body>
 <%
 		Userbean user = (Userbean) session.getAttribute("session2");
+		
+		
+//System.out.print(user.getDomain());
 	%>
 <section id="container" >
 <!--header start-->
@@ -67,23 +63,6 @@
 	
 </div>
 <!--logo end-->
-<div class="nav notify-row" id="top_menu">
-    <!--  notification start -->
-    <ul class="nav top-menu">
-        <!-- settings start -->
-        <!-- settings end -->
-        <!-- inbox dropdown start-->
-        <div>
-       <h2 style="color:white; align:center; padding-left:120%"><b><i>AddTicket</i></b></h2>	
-</div>
-<!-- inbox dropdown end -->
-        <!-- notification dropdown start-->
-        
-        <!-- notification dropdown end -->
-    </ul>
-    <!--  notification end -->
-</div>
-
 <!-- <h5 align="right"><a style="color:white;" href="Logout.jsp"><i class="fa fa-key"></i><b> Log Out</b></a></h5> -->
 <div class="top-nav clearfix">
     <!--search & user info start-->
@@ -131,7 +110,6 @@ ex.printStackTrace();
 </div>
 
 </header><!--header end-->
-<!--header end-->
 <aside>
     <div id="sidebar" class="nav-collapse">
         <!-- sidebar menu start-->
@@ -149,7 +127,7 @@ ex.printStackTrace();
                         <span>Ticket Management</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="#">Add Ticket</a></li>
+                        <li><a href="AddExecutiveTicket.jsp">Add Ticket</a></li>
                         <li><a href="EditExecutiveTicket.jsp">Edit Ticket</a></li>
                         <li><a href="ViewExecutiveTicket.jsp">View Ticket</a></li>
                     </ul>
@@ -194,175 +172,99 @@ ex.printStackTrace();
 </aside>
 <!--sidebar end-->
     <!--main content start-->
-    
-	   <section id="main-content" style="background: url(edit/images/bg3.jpg)"no-repeat;>
+    <section id="main-content">
         <section class="wrapper">
         <!-- page start-->
 
         <div class="row">
             <div class="col-sm-12">
-               
-<div class="w3l-main">
-<div class="w3l-from">
-		<form action="TicketServlet" method="post">	
+<div id="image">
+   <% 
+   Userbean user1 = (Userbean) session.getAttribute("ticket1");
+ String tid,tid1;
 		
-		<%
-		ConnectionSteps steps = new ConnectionSteps();
-		Connection conn = steps.connection();
-PreparedStatement pstmt = conn.prepareStatement("select * from tickettable where id=(select MAX(id) from tickettable )");
+		if(user1==null){
+		tid=null;
+		tid1=null;
+		}else{
+		   tid=user1.getStatus();
+		   tid1=user1.getTicketId();
+		  }
+		System.out.println(tid);
+		 %>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <%if(tid==null){ %>
+            <img  width='700' height='400' src="images/default.PNG" align="center"> 
+            <%}else if(tid.equals("Assign")){ %>
+            <img  width='700' height='400' src="images/assign.PNG" align="center"> 
+            <%}else if(tid.equals("Design")){ %>
+            <img  width='700' height='400' src="images/design.PNG" align="center"> 
+            <%}else if(tid.equals("Development")){ %>
+            <img  width='700' height='400' src="images/development.PNG" align="center"> 
+            <%}else if(tid.equals("Review")){ %>
+            <img  width='700' height='400' src="images/review.PNG" align="center"> 
+            <%}else if(tid.equals("UnitTest")){ %>
+            <img  width='700' height='400' src="images/unittest.PNG" align="center"> 
+            <%}else if(tid.equals("FunctionalityTesting")){ %>
+            <img  width='700' height='400' src="images/functionality.PNG" align="center"> 
+            <%}else if(tid.equals("Deploy")){ %>
+            <img  width='700' height='400' src="images/deploy.PNG" align="center"> 
+            <%}else if(tid.equals("Completed")){ %>
+            <img  width='700' height='400' src="images/completed.PNG" align="center"> 
+            <%} %>
+            <br><br>
+                <form action="ExecutiveAgile" method="post">
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>Select Ticketid:::: </b><select class="update"   style="width:200px; overflow:hidden">
+            <option>--select--</option>
+            <%
+           
+								ConnectionSteps steps = new ConnectionSteps();
+								Connection conn = steps.connection();
+								PreparedStatement pstmt = conn.prepareStatement("select * from tickettable where username=? order by id");
+								pstmt.setString(1, user.getUsername());
+								ResultSet rs = pstmt.executeQuery();
+								while (rs.next()) {
+								
+							%>
+		    <option value=<%=rs.getString("ticketid") %>><%=rs.getString("ticketid") %></option>
+            <%}%>
+            </select><br> &emsp;&emsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <%
+							if (user1 == null) {
 
-
-ResultSet rs = pstmt.executeQuery();
-String s;
-if(rs.next()){
-s=rs.getString("ticketid");	
-int n1=s.length();
-//System.out.println(s.substring(3));
-int r=Integer.parseInt(s.substring(4)) + 1;
- String s2="TID-00"+r;
- //System.out.println(s2);
- //System.out.println(s2.length());
- int n2=s2.length();
- int n3=n1+1;
-
-if(n1==n2){
-	
-	 %>
-	 	<div class="w3l-user">
-				<label class="head">Ticket-Id<span class="w3l-star"> * </span></label>
-				<input type="text" name="ticketid" placeholder=""  required="" value=<%=s2%>>
-				</div>
-			
-		<%
-  } 
-
-else if(n3==n2){
-	int r1=Integer.parseInt(s.substring(4)) + 1;
-	 String s3="TID-0"+r1;
-	// System.out.println(s3);
-	 %>
-	 	<div class="w3l-user">
-				<label class="head">Ticket-Id<span class="w3l-star"> * </span></label>
-				<input type="text" name="ticketid" placeholder=""  required="" value=<%=s3%>>
-				</div>
-	 <% 
-}else{
-	int r2=Integer.parseInt(s.substring(4)) + 1;
-	 String s4="TID-"+r2;
-	 //System.out.println(s4);
-	 %>
-	 	<div class="w3l-user">
-				<label class="head">Ticket-Id<span class="w3l-star"> * </span></label>
-				<input type="text" name="ticketid" placeholder=""  required="" value=<%=s4%>>
-				</div>
-	 <% 
-	
-}
-
-}
-else{
-	 String id ="TID-001";
-	
-	%>
-
-	<div class="w3l-user" contenteditable="false">
-	<label class="head">Ticket-Id<span class="w3l-star"> * </span></label>
-	<input type="text" name="ticketid" placeholder=""  required="" value=<%=id%> readonly="readonly">
-	</div>
-<%} %>
-			<div class="w3l-rem">
-				<div class="w3l-right">
-					<label class="head">Ticket-description<span class="w3l-star"> * </span></label>
-					<textarea name="ticketdescription"></textarea>
-				</div>	
-			
-			</div>
-			<!--<div  class="w3l-options1">
-				<label class="head">Domain<span class="w3l-star"> * </span></label>	
-					<select class="category1" required="">
-						<option></option>
-						<option>java</option>
-					    <option>dotnet</option>
-                        <option>testing</option>						
-                        						
-					
 						
-					</select>
-			</div>-->
-			<input type="hidden" name="username" value=<%=user.getUsername() %>>
-			<div class="w3l-user">
-				<label class="head">Project Name<span class="w3l-star"> * </span></label>
-				<input type="text" name="projectname" placeholder=""  "required="">
-			</div>
-			<div class="w3l-user">
-				<label class="head">Module Name<span class="w3l-star"> * </span></label>
-				<input type="text" name="modulename"  placeholder="" required="">
-			</div>
-			<div class="w3l-user">
-				<label class="head">Requirement Name</label>
-				<input type="text" name="requirementname"  placeholder="">
-			</div>
-		
-			<div  class="w3l-options1">
-				<label class="head">Assigned To<span class="w3l-star"> * </span></label>	
-					<select class="category1" required="" name="assignedto">
-						<option>select</option>
-							  <% 
-					    ConnectionSteps steps2 = new ConnectionSteps();
-						Connection conn2 = steps2.connection();
-				PreparedStatement pstmt2 = conn2.prepareStatement("select * from registrationtable where domain=?");
-			
-			  pstmt2.setString(1, user.getDomain());
-			  ResultSet rs2 = pstmt2.executeQuery();
-			  while(rs2.next()){%>
-						<option value=<%=rs2.getString("username")%>><%=rs2.getString("username")%></option>
-				<%
-			  }
-
-                %>	   		
+							} else {
+						%>
 						
-					 					
-                  <%--  <%
-			  }
-
-%> --%>
-					</select>
-			</div>
-			
-			
-			<div  class="w3l-options1">
-				<label class="head">Assigned By<span class="w3l-star"> * </span></label>	
-					<select class="category1" required="" name="assignedby">
-					
-						<option value=<%=user.getUsername() %>><%=user.getUsername() %></option>
-					   				
-                        						
-					
 						
-					</select>
-			</div>
-			<div class="w3l-date">
-					<label class="head">Date of Issue<span class="w3l-star"> * </span></label>
-						<div class="styled-input">
-							<input  class="date datepicker" name="dateofissue" type="text" placeholder="MM/DD/YYYY" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'MM/DD/YYYY';}" required="">
-						</div><br>
-					</div>
-			
-			<input type="hidden" name="empname" value=<%=user.getUsername()%>>
-		
-		         <div class="w3l-rem"  >
-				
-				<div class="btn center-block"  >
-				
-					<input type="submit" name="submit" value="Submit"/>
-				
-				</div>
-			</div>
-			
-		</form>
-	</div>
-		
-</div>		
+							<span  style="color:blue">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<%=user1.getTicketId() %></span><br>
+						<%
+							}
+						%>
+        <br>
+        
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>Select Status::::   </b>&nbsp;<select name="status"  style="width:200px; overflow:hidden">
+         <option>--select--</option>
+         
+            <option value="Assign">Assign</option>
+										<option value="Design">Design</option>
+
+										<option value="Development">Development</option>
+
+										<option value="Review">Review</option>
+										<option value="UnitTest">UnitTest</option>
+										<option value="FunctionalityTesting">Functionality
+											Testing</option>
+										<option value="Deploy">Deploy</option>
+										<option value="Completed">Completed</option>
+										</select>
+										&emsp;<input type="submit" value="submit" >
+						<input type="hidden" name="ticketid" value=<%=tid1%>	>			
+            </form>
+            
+            
+                
             </div>
         </div>
         <!-- page end-->
@@ -385,7 +287,7 @@ else{
         <li>
             <div class="prog-row side-mini-stat clearfix">
                 <div class="side-graph-info">
-                    <h4>Target sell</h4>
+                    <h4>Target sell</h4>ee
                     <p>
                         25%, Deadline 12 june 13
                     </p>
@@ -646,52 +548,31 @@ else{
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>
 
-<script>
-		$(function() {
-		$( ".datepicker" ).datepicker();
-		});
-	</script>
-		<script type="text/javascript" src="edit/js/jquery-2.1.4.min.js"></script>
-	<script src="edit/js/jquery-ui.js"></script>
 </body>
 </html>
-<!-- <script>
-
-
-$(document).ready(function(){
+<script type="text/javascript" language="javascript">
+	$(document).ready(function() {
 	
-	 function Insert_Ticket(id, column_name, value)
-	  {
-	   $.ajax({
-	    url:"UpdateServlet",
-	    method:"POST",
-	    data:{id:id, column_name:column_name, value:value},
-	    success:function(data)
-	    {
-	     $('#alert_message').html('<div class="alert alert-success">'+data+'</div>');
-	   
-	     
-	    }
-	   });
-	 /*   setInterval(function(){
-	    $('#alert_message').html('');
-	   }, 5000); */
-	  }
+	$(".update").on("change", function() {
+			var value2 = $(this).val();
 
-	  $(document).on('submit', '.submit', function(){
-	   var ticketid = $('.ticketid').val();
-	   var ticketdescription = $('.ticketdescription').val();
-	   var ticketdescription = $('.ticketdescription').val();
-	   var ticketdescription = $('.ticketdescription').val();
-	   var ticketdescription = $('.ticketdescription').val();
-	   var ticketdescription = $('.ticketdescription').val();
-	   var ticketdescription = $('.ticketdescription').val();
-	  
-	   update_data(id, column_name, value);
-	  });
-	
-	
+			update_data2(value2);
+		});
+		function update_data2(value2) {
+			$.ajax({
+				url : "agile2.jsp",
+				method : "POST",
+				data : {
+					value2 : value2
+				},
+				success : function(data) {
+						//$("#image").load("agile.jsp #image");
+					location.reload();
 
+				}
+			});
+
+		}
 	
-});
-</script> -->
+	});
+</script>

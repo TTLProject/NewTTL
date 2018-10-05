@@ -20,7 +20,7 @@ public class Admindao {
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				 user.setValid(true);
-				System.out.println("login success");
+				System.out.println("login successs");
 			}
 			else {
 				
