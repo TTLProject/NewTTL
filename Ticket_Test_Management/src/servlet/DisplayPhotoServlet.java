@@ -20,7 +20,7 @@ public class DisplayPhotoServlet extends HttpServlet {
             PreparedStatement ps = conn.prepareStatement("select photo from registrationtable where username=?");
             String id = request.getParameter("id");
             ps.setString(1,id);
-            System.out.println("1");
+           
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
     			//System.out.println("rs next enter");

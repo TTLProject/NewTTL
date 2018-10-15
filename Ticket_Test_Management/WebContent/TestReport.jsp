@@ -942,13 +942,7 @@ ex.printStackTrace();
 							update_data(id, column_name, value);
 						});
 						
-						$(document)
-						.on(
-								'click',
-								'.add',
-								function() {
-
-									var maxId = "";
+					var maxId = "";
 									$
 											.get(
 													'GetTestCaseIDServlet',
@@ -958,16 +952,22 @@ ex.printStackTrace();
 														reqName  :  "<%=user1.getRequirementName()%>"
 													},
 													function(responseText) {
-														maxId = responseText;
+														maxID = responseText;
 														
 													
-													
-														 console.log("maxId  INNER ", maxId); 
+											
+						$(document)
+						.on(
+								'click',
+								'.add',
+								function() {
+
+									
 														
 														var html = '';
 														html += '<tr>';
 														html += '<td contentedible="false"><input type="checkbox"/></td>';
-														html += '<td ><input type="text" name="testcaseid[]" class="form-control item_name" value="'+maxId+'"/></td>';
+														html += '<td ><input type="text" name="testcaseid[]" class="form-control item_name" value="'+maxID+'"/></td>';
 														html += '<td><textarea rows="1" name="testdescription[]" class="form-control item_name" ></textarea></td>';
 														html += '<td><textarea rows="1" name="precondition[]" class="form-control item_name" /></td>';
 														html += '<td><textarea rows="1" name="testdesign[]" class="form-control item_name" /></td>';
@@ -979,10 +979,19 @@ ex.printStackTrace();
                                                           
 														$('#item_table').append(html);
 
-													});
-													console.log("maxId  ", maxId);
+											var i =maxID.length;
+											
+											var s =parseInt(maxID.substring(4))+1;
+											if(s<=9){
+											maxID="TC-0"+s;
+											}
+											else{
+											maxID="TC-"+s;
+											
+											}
 
 								});
+									});
 
 						$(document).on('click', '.remove', function() {
 							$(this).closest('tr').remove();
@@ -1230,6 +1239,8 @@ location.reload();
 });
 
 }
+
+
 $("#meetingPlace3").on("change", function() {
 var value2 = $(this).val();
 

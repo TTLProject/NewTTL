@@ -48,8 +48,6 @@
 	;
 @import
 url('scss/style.css')
-@import
-url('https://www.w3schools.com/w3css/4/w3.css')
 </style>
 
 <script src="https://code.jquery.com/jquery-1.10.2.js"
@@ -86,17 +84,6 @@ position:fixed;
 background-color:#313131;
 overflow:auto
 }
-#abc1 {
-width:100%;
-height:100%;
-opacity:.95;
-top:0;
-left:0;
-display:none;
-position:fixed;
-background-color:#313131;
-overflow:auto
-}
 img#close {
 position:absolute;
 right:-14px;
@@ -122,6 +109,49 @@ background-color:#fff
 
 }
     </style>
+    <script>
+function downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    // CSV file
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Hide download link
+    downloadLink.style.display = "none";
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+
+    // Click download link
+    downloadLink.click();
+}
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+    }
+
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
+}
+</script>
 </head>
 
 <body>
@@ -247,7 +277,7 @@ ex.printStackTrace();
 		</aside>
 <!--sidebar end-->
     <!--main content start-->
-    <section id="main-content">
+ <section id="main-content">
         <section class="wrapper">
         <!-- page start-->
         <div id="alert_message" align="center"></div>
@@ -324,11 +354,6 @@ ex.printStackTrace();
 
 				<br> <br>  
 
-
-
- 
-   
-
 <div id="table">
   
 
@@ -340,8 +365,9 @@ ex.printStackTrace();
 							<th>Select</th>
 
 							<th>Type of Testing</th>
+							<th style="display:none;" >Type of Testing</th>
 							<%
-					
+						
 					PreparedStatement pstmt = conn.prepareStatement("select * from testdata1 order by id");
 					ResultSet rs=pstmt.executeQuery();
 					int count=0;
@@ -349,15 +375,16 @@ ex.printStackTrace();
 					while(rs.next()){
 				count++;
 						%>
-						<th><%=rs.getString("columnname") %></th>
+						<th><%=rs.getString("heading") %></th>
 						<%
 						
-						al.add(rs.getString("columnname"));
+						al.add(rs.getString("heading"));
 						
 						} %>
 						</tr>
 					</thead>
 <form action="TestDataDeleteRows.jsp" method="post" id="deleteform">
+<form action="UpdateTestDataServlet1" method="post" id="update">
 					<tbody>
 					
 					<% PreparedStatement pstmt1 = conn.prepareStatement("select * from testdata");
@@ -365,44 +392,73 @@ ex.printStackTrace();
 										 while(rs1.next()){ %>
 						<tr width="30%">
 							<td contenteditable="false"><input type="checkbox" name="check" value="<%=rs1.getString("id")%>"></td>
-							<td contenteditable="false" class="data[]">
-							<select  id="d" >
-							<option	value="1">Select</option>
-									<option value="2">Positive</option>
-									<option value="3">Negative</option>
+							<%if(rs1.getString("typeoftesting")==null){%>
+							<td contenteditable="false" >
+							<select class="update2" data-id=<%=rs1.getString("id")%>
+									data-column="typeoftesting" >
+							<option	value="000">Select</option>
+									<option value="Positive">Positive</option>
+									<option value="Negative">Negative</option>
 									</select></td>
+									<%}else if(rs1.getString("typeoftesting").equals("Positive")){ %>
+									
+									<td contenteditable="false" >
+							<select class="update2" data-id=<%=rs1.getString("id")%>
+									data-column="typeoftesting" >
+									<option value="Positive">Positive</option>
+									<option value="Negative">Negative</option>
+									</select></td>
+									<%}else if(rs1.getString("typeoftesting").equals("Negative")){ %>
+									
+									<td contenteditable="false" >
+							<select class="update2" data-id=<%=rs1.getString("id")%>
+									data-column="typeoftesting" >
+									<option value="Negative">Negative</option>
+									<option value="Positive">Positive</option>
+									
+									</select></td>
+									
+									<%} %>
+									
+									<%if(rs1.getString("typeoftesting")==null){ %>
+									<td style="display:none;" ></td>
+									<%}else{ %>
+									<td style="display:none;" ><%=rs1.getString("typeoftesting")%></td>
 									<%
-										
+										}
 									 Iterator itr=al.iterator(); 
 									for(int i=0;i<count;i++){ 
 								while(itr.hasNext()){
 								 String in = (String)itr.next();
-								 System.out.println(in);
+								
 							if(rs1.getString(in)==null){
 									%>
 									
-									<td ><textarea class="update1"
-										data-id=<%=rs1.getString("id")%> data-column=<%=in %> rows="1"></textarea></td>
+									<td contenteditable="true" name="content[]"  class="content"></td>
+									<input type="hidden" name="id[]" class="id" value=<%=rs1.getString("id")%> >
+									<input type="hidden" name="column[]"  value=<%=in %> >
 									<% }else{%>
-									<td ><div id="update"
-										data-id=<%=rs1.getString("id")%> data-column=<%=in %> ><%=rs1.getString(in)%></div></td>
+									<td contenteditable="true" name="content[]"  class="content" ><%=rs1.getString(in)%></td>
+									<input type="hidden" name="id[]" class="id" value=<%=rs1.getString("id")%> >
+									<input type="hidden" name="column[]"  value=<%=in %> >
 									<%}}}
 									
 									%>
 									
 									</tr>
 									<%} %>
-
+  
 						
 						
 						  <input type="hidden" name="count[]" value=<%=count %>>
 
 					</tbody>  
-		</form>
+		</form></form>
 				</table>
 		
 </div>
  <br>
+ <button type="submit" id="save">Submit</button>
 				<button id="add">AddRow</button> &emsp;&emsp;&emsp;
 				
 
@@ -699,19 +755,20 @@ function check_empty() {
 	}
 	}
 	//Function To Display Popup
-	function div_show1() {
-	document.getElementById('abc').style.display = "block";
-	}
-	//Function to Hide Popup
-	function div_hide1(){
-	document.getElementById('abc1').style.display = "none";
-	}
 	function div_show() {
-	document.getElementById('abc1').style.display = "block";
+	document.getElementById('abc').style.display = "block";
 	}
 	//Function to Hide Popup
 	function div_hide(){
 	document.getElementById('abc').style.display = "none";
+	}
+	
+	function div_show1() {
+	document.getElementById('abc1').style.display = "block";
+	}
+	//Function to Hide Popup
+	function div_hide1(){
+	document.getElementById('abc1').style.display = "none";
 	}
 </script>
 
@@ -729,7 +786,7 @@ function check_empty() {
 					   data:{},
 					   success:function(data){
 						   
-					  	$("#table").load("empTD.jsp #table");
+					  	$("#table").load("NewFile.jsp #table");
 					   }
 					  });
 					 });
@@ -745,9 +802,47 @@ function check_empty() {
 </script>
 <script type="text/javascript" language="javascript">
 	$(document).ready(function() {
+		document.getElementById('abc1').style.display = "none";
+		document.getElementById('abc').style.display = "none";
+$('#save').click(function(){
+			 
+			  var content = [];
+			  var id = $('input[name="id[]"]').map(function () {
+    return this.value; // $(this).val()
+}).get();
+			  var testing=[]
+	  var column = $('input[name="column[]"]').map(function () {
+    return this.value; // $(this).val()
+}).get();
+		 $('.content').each(function(){
+				  content.push($(this).text());
+			  });
+		/*  $('.id').each(function(){
+				  id.push($(this).val());
+			  });	
+		 $('.column').each(function(){
+				  column.push($(this).val());
+			  }); */
+		$('.testing').each(function(){
+				  testing.push($(this).text());
+			  });
+		 $.ajax({
+				   url:"UpdateTestDataServlet1",
+				   method:"POST",
+				   data:{id:id, value:content, column_name:column, testing:testing},
+				   success:function(data){
+							location.reload();					   
+				  
+				   }
+				  });
+			  setInterval(function(){
+				     $('#alert_message').html('');
+				    }, 5000);
+				 });
 		
 		
-	function update_data(id, column_name, value) {
+		
+		function update_data1(id, column_name, value) {
 					$.ajax({
 						url : "UpdateTestDataServlet",
 						method : "POST",
@@ -757,36 +852,20 @@ function check_empty() {
 							value : value
 						},
 						success : function(data) {
-							$('#alert_message').html(
-									'<div class="alert alert-success">' + data
-											+ '</div>');
-							$('#user_data').DataTable().destroy();
-							fetch_data();
+							//$("#btn").load("EditExecutiveTicket.jsp #btn");
+							
+
 						}
 					});
-					setInterval(function() {
-						$('#alert_message').html('');
-					}, 1000);
-				}				 
-					 
-			$(document).on('blur', '.update1', function() {
-					var id = $(this).data("id");
-					
-					var column_name = $(this).data("column");
-					var value = $(this).val();
-				
-					update_data(id, column_name, value);
-				});		 
-					 
-				$(document).on('blur', '.update', function() {
+
+				}
+		$(document).on('change', '.update2', function() {
+					var tr = $(this).closest("tr");
 					var id = $(this).data("id");
 					var column_name = $(this).data("column");
-					var value = $(this).text();
-					alert(id);
-					update_data(id, column_name, value);
+
+					var value = tr.find('.update2').val();
+					update_data1(id, column_name, value);
 				});
-});
-	
-			
-			
+	});			
 </script>

@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -40,8 +42,91 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-	
-	<script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+@import
+	url('http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
+	;
+
+@import
+	url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800')
+	;
+@import
+url('scss/style.css')
+</style>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"
+	type="text/javascript"></script>
+<style>
+span.item {
+	display: block;
+	height: 5px;
+	text-align: center;
+	width: 80px;
+	font-size: 11pt;
+}
+</style>
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]>
+    <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <style type="text/css">
+    #abc {
+width:100%;
+height:100%;
+opacity:.95;
+top:0;
+left:0;
+display:none;
+position:fixed;
+background-color:#313131;
+overflow:auto
+}
+ #abc1 {
+width:100%;
+height:100%;
+opacity:.95;
+top:0;
+left:0;
+display:none;
+position:fixed;
+background-color:#313131;
+overflow:auto
+}
+img#close {
+position:absolute;
+right:-14px;
+top:-14px;
+cursor:pointer
+}
+div#popupContact {
+position:absolute;
+left:50%;
+top:17%;
+margin-left:-202px;
+font-family:'Raleway',sans-serif
+}
+form {
+max-width:300px;
+min-width:250px;
+padding:10px 50px;
+border:2px solid gray;
+border-radius:10px;
+font-family:raleway;
+background-color:#fff
+
+
+}
+    </style>
+    <script>
 function downloadCSV(csv, filename) {
     var csvFile;
     var downloadLink;
@@ -84,13 +169,6 @@ function exportTableToCSV(filename) {
     downloadCSV(csv.join("\n"), filename);
 }
 </script>
-	
-	
-	<style>
-@import url('http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800');
-@import url('scss/style.css')
-</style>
 	
 </head>
 
@@ -241,59 +319,197 @@ ex.printStackTrace();
 </aside>
 <!--sidebar end-->
     <!--main content start-->
-    <section id="main-content">
+     <section id="main-content">
         <section class="wrapper">
         <!-- page start-->
+        <div id="alert_message" align="center"></div>
+                                   <button type="submit" onclick="return myFunction()" 
+															form="deleteform">DeleteRows</button>
+														<script>
+							function myFunction() {
+								
+								var r=confirm("Confirm Submission");
+								if(r==true){
+                                return true;
+								}
+								else{
+									return false;
+								}
+							}
+						</script>
+      
+	<button id="popup" onclick="div_show()">DeleteColumn</button>	
+<div id="abc">
+<!-- Popup Div Starts Here -->
+<div id="popupContact">
+<!-- Contact Us Form -->
+<form action="ExeTDServlet" id="form" method="post" name="form">
+<img id="close" src="images/3.png" onclick ="div_hide()">
+<h4>Enter column Name</h4>
 
- <input type="button"  onClick="deleteSelectedRows()" value="DeleteRows"></input>	
-<input type="button" value="Delete column" onClick="deleteColumn()" />
-<input type="button" onClick="addColumn()" value="+" ></button>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button onclick="exportTableToCSV('file.csv')">Download Csv</button>
-
+<input id="name" name="testdata" type="text">
 <br><br>
-<!-- <form action="TestDataServlet" method="post"> -->
-<div>
-
-<table id="my_table"  border="2" cellpadding="0" cellspacing="0" contenteditable="true">
-<thead ><tr width="30%">
-<th >Select</th>
-
-<th >Type of Testing</th>
-
-</tr>
-
-
-</thead>
-
-<tbody>
-<tr width="30%">
-<td contenteditable="false"><input type="checkbox" ></td>
-<td  contenteditable="false"><select><option value="1">Select<option value="2">Positive<option value="3">Negative</select></td>
+&emsp;&emsp;&emsp;&emsp;<input type="submit" value="submit">
+</form>
+</div>
+<!-- Popup Div Ends Here -->
+</div>
+<!-- Display Popup Button -->
+	
+				
+<button id="popup" onclick="div_show1()">AddColumn</button>
 
 
-</tr>
+<div id="abc1">
+<!-- Popup Div Starts Here -->
+<div id="popupContact">
+<!-- Contact Us Form -->
+<form action="TestDataDeleteColumn1.jsp" id="form" method="post" name="form">
+<img id="close" src="images/3.png" onclick ="div_hide1()">
+<h4>Select column Name</h4>
 
-</tbody>
+<select required="required" style="width:200px; overflow:hidden" name="column">
+<option value="">Select</option>
+<%
+						ConnectionSteps steps = new ConnectionSteps();
+						Connection conn=steps.connection();
+					PreparedStatement pstmt2 = conn.prepareStatement("select * from testdata1 order by id");
+					ResultSet rs2=pstmt2.executeQuery();
+					while(rs2.next()){
+			
+						%>
+						<option value=<%=rs2.getString("columnname") %>><%=rs2.getString("columnname") %></option>
+						<%} %>
 
-</table>
-<br>
- <button  onClick="addRow()" >+</button>
+</select>
+<br><br>
+&emsp;&emsp;&emsp;&emsp;<input type="submit" value="submit">
+</form>
+</div>
+<!-- Popup Div Ends Here -->
+</div>
+<!-- Display Popup Button -->
+	
+				
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+				<button onclick="exportTableToCSV('file.csv')">Download Csv</button>
 
- 	<input type="submit" value="submit">
-            </div>
- <!-- </form> -->
+				<br> <br>  
 
-  
+
+
  
+
+<div id="table">
+  
+
+<table id="my_table" border="2" cellpadding="0" cellspacing="0"
+					contenteditable="true">
+					<thead>
+						<tr contenteditable="true" width="30%">
+						
+							<th>Select</th>
+
+							<th>Type of Testing</th>
+							<th style="display:none;" >Type of Testing</th>
+							<%
+						
+					PreparedStatement pstmt = conn.prepareStatement("select * from testdata1 order by id");
+					ResultSet rs=pstmt.executeQuery();
+					int count=0;
+					ArrayList al = new ArrayList();
+					while(rs.next()){
+				count++;
+						%>
+						<th><%=rs.getString("columnname") %></th>
+						<%
+						
+						al.add(rs.getString("columnname"));
+						
+						} %>
+						</tr>
+					</thead>
+<form action="TestDataDeleteRows1.jsp" method="post" id="deleteform">
+
+					<tbody>
+					
+					<% PreparedStatement pstmt1 = conn.prepareStatement("select * from testdata");
+										 ResultSet rs1 =pstmt1.executeQuery();
+										 while(rs1.next()){ %>
+						<tr width="30%">
+							<td contenteditable="false"><input type="checkbox" name="check" value="<%=rs1.getString("id")%>"></td>
+							<%if(rs1.getString("typeoftesting")==null){%>
+							<td contenteditable="false" >
+							<select class="update2" data-id=<%=rs1.getString("id")%>
+									data-column="typeoftesting" >
+							<option	value="000">Select</option>
+									<option value="Positive">Positive</option>
+									<option value="Negative">Negative</option>
+									</select></td>
+									<%}else if(rs1.getString("typeoftesting").equals("Positive")){ %>
+									
+									<td contenteditable="false" >
+							<select class="update2" data-id=<%=rs1.getString("id")%>
+									data-column="typeoftesting" >
+									<option value="Positive">Positive</option>
+									<option value="Negative">Negative</option>
+									</select></td>
+									<%}else if(rs1.getString("typeoftesting").equals("Negative")){ %>
+									
+									<td contenteditable="false" >
+							<select class="update2" data-id=<%=rs1.getString("id")%>
+									data-column="typeoftesting" >
+									<option value="Negative">Negative</option>
+									<option value="Positive">Positive</option>
+									
+									</select></td>
+									
+									<%} %>
+									
+									<%if(rs1.getString("typeoftesting")==null){ %>
+									<td style="display:none;" ></td>
+									<%}else{ %>
+									<td style="display:none;" ><%=rs1.getString("typeoftesting")%></td>
+									<%
+										}
+									 Iterator itr=al.iterator(); 
+									for(int i=0;i<count;i++){ 
+								while(itr.hasNext()){
+								 String in = (String)itr.next();
+								
+							if(rs1.getString(in)==null){
+									%>
+									
+									<td contenteditable="true" name="content[]"  class="content"></td>
+									<input type="hidden" name="id[]" class="id" value=<%=rs1.getString("id")%> >
+									<input type="hidden" name="column[]"  value=<%=in %> >
+									<% }else{%>
+									<td contenteditable="true" name="content[]"  class="content" ><%=rs1.getString(in)%></td>
+									<input type="hidden" name="id[]" class="id" value=<%=rs1.getString("id")%> >
+									<input type="hidden" name="column[]"  value=<%=in %> >
+									<%}}}
+									
+									%>
+									
+									</tr>
+									<%} %>
+  
+						
+						
+						  <input type="hidden" name="count[]" value=<%=count %>>
+
+					</tbody>  
+		</form>
+				</table>
 		
-		
-		
-        <div class="row">
-            <div class="col-sm-12">
-                
-            </div>
-        </div>
+</div>
+ <br>
+ <button type="submit" id="save">Submit</button>
+				<button id="add">AddRow</button> &emsp;&emsp;&emsp;
+				
+
+
+
         <!-- page end-->
         </section>
     </section>
@@ -584,109 +800,121 @@ ex.printStackTrace();
 
     <script  src="table/js/index.js"></script>
 	<script>
-// Add row to the HTML table
-function addRow() {    
- var table = document.getElementById('my_table'); //html table
- var rowCount = table.rows.length; //no. of rows in table
- var columnCount =  table.rows[0].cells.length; //no. of columns in table          
- var row = table.insertRow(rowCount); //insert a row            
- 
- var cell1 = row.insertCell(0); //create a new cell      
-cell1.contenteditable="true"; 
- var element1 = document.createElement("input"); //create a new element           
- element1.type = "checkbox"; //set the element type 
- element1.setAttribute('id', 'newCheckbox'); //set the id attribute         
- cell1.appendChild(element1).contenteditable="true"; //append element to cell
-             
-             
- 
- var cell2 = row.insertCell(1);            
- var element2 = document.createElement("select");
- element2.setAttribute('id', 'newSelect'); //set the id attribute      
- //Create options dynamically. This will not work in mozilla.
- var option1 = document.createElement("option"); //create a option element
- option1.text = "select"; //set the text for option
- option1.value = "1"; //set the value for option
- element2.add(option1); //add option to select box  
- 
- var option2 = document.createElement("option");
- option2.text = "positive";
- option2.value = "2"; 
- element2.add(option2);
- 
- var option3 = document.createElement("option");
- option3.text = "negative";
- option3.value = "3";
- element2.add(option3);
- cell2.appendChild(element2);
- 
- 
-
- //Add the cells for more than 3 columns
-if(columnCount >= 2){
-  for (var i=3; i<=columnCount; i++) {
-   var newCel = row.insertCell(i-1); //create a new cell           
-   var element = document.createElement("div"); //create a div element
-   var txt = document.createTextNode(". "); //create a text element
-   element.appendChild(txt); //append text to div      
-   newCel.appendChild(element); //appent div to cell
-  }
- }
-} 
-
-// delete the selected rows from table
-function deleteSelectedRows() {    
- var table = document.getElementById('my_table'); //html table
-        var rowCount = table.rows.length; //no. of rows in table          
- for(var i=1; i< rowCount; i++) { //loops for all row in table               
-  var row = table.rows[i]; //return a particular row              
-  var chkbox = row.cells[0].childNodes[0]; //get check box onject               
-  if(null != chkbox && true == chkbox.checked) { //wheather check box is selected                   
-   table.deleteRow(i); //delete the selected row                    
-   rowCount--; //decrease rowcount by 1                   
-   i--;               
-  }             
- }
-}
-
-// append column to the HTML table
-function addColumn() {    
- var tblHeadObj = document.getElementById('my_table').tHead; //table head
- for (var h=0; h< tblHeadObj.rows.length; h++) {
-  var newTH = document.createElement('th');
-  tblHeadObj.rows[h].appendChild(newTH); //append ne th to table
-  newTH.innerHTML = 'New Header '+ (tblHeadObj.rows[h].cells.length); //append th content to th
- }
- var tblBodyObj = document.getElementById('my_table').tBodies[0]; //table body
- for (var i=0; i< tblBodyObj.rows.length; i++) {
-  var newCell = tblBodyObj.rows[i].insertCell(-1); //create new cell
- 
-  newCell.innerHTML = ' ';//append data to cell
- }
-}
-
-// delete table rows with index greater then 0
-function deleteAllRows() {    
- var tbl = document.getElementById('my_table'); // table reference        
- lastRow = tbl.rows.length - 1; // set the last row index           
- // delete rows with index greater then 0    
- for (i = lastRow; i > 1; i--) {        
-  tbl.deleteRow(i);  //delete the row  
- }
-} 
-  
-// delete last table column
-function deleteColumn() {    
- var allRows = document.getElementById('my_table').rows;
- for (var i=0; i< allRows.length; i++) {
-  if (allRows[i].cells.length > 2) {
-   allRows[i].deleteCell(-1); //delete the cell
-  } else {
-   alert("You can't delete more columns.");
-   return;
-  }
- }
-}
+function check_empty() {
+	if (document.getElementById('name').value == "" || document.getElementById('email').value == "" || document.getElementById('msg').value == "") {
+	alert("Fill All Fields !");
+	} else {
+	document.getElementById('form').submit();
+	alert("Form Submitted Successfully...");
+	}
+	}
+	//Function To Display Popup
+	function div_show1() {
+	document.getElementById('abc').style.display = "block";
+	}
+	//Function to Hide Popup
+	function div_hide1(){
+	document.getElementById('abc1').style.display = "none";
+	}
+	function div_show() {
+	document.getElementById('abc1').style.display = "block";
+	}
+	//Function to Hide Popup
+	function div_hide(){
+	document.getElementById('abc').style.display = "none";
+	}
 </script>
 </body>
 </html>
+<script type="text/javascript" language="javascript">
+	$(document).ready(function() {
+		
+			$('#add').click(function(){
+		  $.ajax({
+					   url:"TestDataAddRow.jsp",
+					   method:"POST",
+					   data:{},
+					   success:function(data){
+						   
+					  	$("#table").load("ExecutiveTestData.jsp #table");
+					   }
+					  });
+					 });
+					 
+
+					 
+					 
+					 
+});
+	
+			
+			
+</script>
+<script type="text/javascript" language="javascript">
+	$(document).ready(function() {
+		
+$('#save').click(function(){
+			 
+			  var content = [];
+			  var id = $('input[name="id[]"]').map(function () {
+    return this.value; // $(this).val()
+}).get();
+			  var testing=[]
+	  var column = $('input[name="column[]"]').map(function () {
+    return this.value; // $(this).val()
+}).get();
+		 $('.content').each(function(){
+				  content.push($(this).text());
+			  });
+		/*  $('.id').each(function(){
+				  id.push($(this).val());
+			  });	
+		 $('.column').each(function(){
+				  column.push($(this).val());
+			  }); */
+		$('.testing').each(function(){
+				  testing.push($(this).text());
+			  });
+		 $.ajax({
+				   url:"UpdateTestDataServlet1",
+				   method:"POST",
+				   data:{id:id, value:content, column_name:column, testing:testing},
+				   success:function(data){
+							location.reload();					   
+				  
+				   }
+				  });
+			  setInterval(function(){
+				     $('#alert_message').html('');
+				    }, 5000);
+				 });
+		
+		
+		
+		function update_data1(id, column_name, value) {
+					$.ajax({
+						url : "UpdateTestDataServlet",
+						method : "POST",
+						data : {
+							id : id,
+							column_name : column_name,
+							value : value
+						},
+						success : function(data) {
+							//$("#btn").load("EditExecutiveTicket.jsp #btn");
+							
+
+						}
+					});
+
+				}
+		$(document).on('change', '.update2', function() {
+					var tr = $(this).closest("tr");
+					var id = $(this).data("id");
+					var column_name = $(this).data("column");
+
+					var value = tr.find('.update2').val();
+					update_data1(id, column_name, value);
+				});
+	});			
+</script>

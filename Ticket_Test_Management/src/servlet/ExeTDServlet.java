@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ConnectionSteps;
 
-@WebServlet("/empTDServlet")
-
-public class empTDServlet extends HttpServlet{
+/**
+ * Servlet implementation class ExeTDServlet
+ */
+@WebServlet("/ExeTDServlet")
+public class ExeTDServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		   
 		try {
@@ -33,11 +35,12 @@ public class empTDServlet extends HttpServlet{
 			PreparedStatement pstmt = conn.prepareStatement("insert into testdata1 (columnname) values(?)");
 			pstmt.setString(1, testdata);
 			int i=pstmt.executeUpdate();
-			response.sendRedirect("TestData.jsp");
+			response.sendRedirect("ExecutiveTestData.jsp");
 			
 		}catch(Exception e) {
 			System.out.println(e);
 		}
 		
 	}
+
 }
