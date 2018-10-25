@@ -251,11 +251,18 @@ ex.printStackTrace();
 												|| (rs.getString("username").equals(user.getUsername())
 														&& rs.getString("assignedby").equals(user.getUsername()))
 												|| (rs.getString("assignedto").equals(user.getUsername()))) {
+												
+												PreparedStatement pstmt5 = conn.prepareStatement("select * from tickettable1 where id=? and username=?");
+												pstmt5.setInt(1, rs.getInt("id"));
+												pstmt5.setString(2, user.getUsername());
+												ResultSet rs5 =pstmt5.executeQuery();
+												if(rs5.next()){ 
+												
 							%>
 							<tr>
 								<td><div class="update" data-id=<%=rs.getString("id")%>
 										data-column="ticketid">
-										<%=rs.getString("ticketid")%></div></td>
+										<%=rs5.getString("ticketid")%></div></td>
 								<td><div contenteditable class="update"
 										data-id=<%=rs.getString("id")%>
 										data-column="ticketdescription"><%=rs.getString("ticketdescription")%></div></td>
@@ -570,7 +577,7 @@ ex.printStackTrace();
 								}
 										}
 									}
-								}
+								}}
 							%>
 						</table>
 						<p align="right"><a href="EmployeeAgile.jsp" style="color:red">Click here</a> to edit status back</p>

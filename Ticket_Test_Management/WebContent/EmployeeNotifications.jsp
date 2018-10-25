@@ -309,7 +309,7 @@ ex.printStackTrace();
         <td><%=i%></td>
 				   <td class="mailbox-name"><b><%=rs.getString("executive") %><b></td>
                     
-                    <td class="mailbox-subject"><a href="EmployeeReadMail1.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b>TicketAssigned <b></a>
+                    <td class="mailbox-subject"><a href="EmployeeReadMail1.jsp?notificationid=<%=rs.getString("id") %>" style=color:blue> <b>TicketApproved <b></a>
                     </td>
                     
                     <td class="mailbox-name"><b><%=rs.getString("dateofissue") %><b></td>

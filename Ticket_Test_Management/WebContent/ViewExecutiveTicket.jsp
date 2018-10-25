@@ -313,11 +313,18 @@ ex.printStackTrace();
 															|| (rs.getString("username").equals(user2.getEmpid())
 																	&& rs.getString("assignedby").equals(user2.getEmpid()))
 															|| (rs.getString("assignedto").equals(user2.getEmpid()))) {
+															
+															
+															PreparedStatement pstmt4 = conn.prepareStatement("select * from tickettable1 where id=? and username=?");
+												pstmt4.setInt(1, rs.getInt("id"));
+												pstmt4.setString(2, user1.getUsername());
+												ResultSet rs4 =pstmt4.executeQuery();
+												if(rs4.next()){ 
 												
 									%>
 
 									<tr>
-										<td><%=rs.getString("ticketid")%></td>
+										<td><%=rs4.getString("ticketid")%></td>
 										<td><%=rs.getString("ticketdescription")%></td>
 										<td><%=rs.getString("projectname")%></td>
 										<td><%=rs.getString("modulename")%></td>
@@ -347,7 +354,7 @@ ex.printStackTrace();
 
 									</tr>
 									<%
-										}}}
+										}}}}
 
 										} catch (Exception e) {
 											System.out.println(e);
@@ -389,11 +396,18 @@ ex.printStackTrace();
 							<%
 								if (rs.getString("username").equals(rs.getString("assignedto"))
 												&& rs.getString("assignedto").equals(rs.getString("assignedby"))) {
+												
+												
+												PreparedStatement pstmt5 = conn.prepareStatement("select * from tickettable1 where id=? and username=?");
+												pstmt5.setInt(1, rs.getInt("id"));
+												pstmt5.setString(2, user1.getUsername());
+												ResultSet rs5 =pstmt5.executeQuery();
+												if(rs5.next()){ 
 
 											if (rs.getString("status").equals("Completed")) {
 							%>
 							<tr bgcolor="#42F445">
-								<td><%=rs.getString("ticketid")%></td>
+								<td><%=rs5.getString("ticketid")%></td>
 								<td><%=rs.getString("ticketdescription")%></td>
 								<td><%=rs.getString("projectname")%></td>
 								<td><%=rs.getString("modulename")%></td>
@@ -427,7 +441,7 @@ ex.printStackTrace();
 													|| (rs.getString("status").equals("FunctionalityTesting"))) {
 							%>
 							<tr bgcolor="red">
-								<td><%=rs.getString("ticketid")%></td>
+								<td><%=rs5.getString("ticketid")%></td>
 								<td><%=rs.getString("ticketdescription")%></td>
 								<td><%=rs.getString("projectname")%></td>
 								<td><%=rs.getString("modulename")%></td>
@@ -456,7 +470,7 @@ ex.printStackTrace();
 								} else {
 							%>
 							<tr bgcolor="yellow">
-								<td><%=rs.getString("ticketid")%></td>
+								<td><%=rs5.getString("ticketid")%></td>
 								<td><%=rs.getString("ticketdescription")%></td>
 								<td><%=rs.getString("projectname")%></td>
 								<td><%=rs.getString("modulename")%></td>
@@ -481,7 +495,7 @@ ex.printStackTrace();
 							</tr>
 
 							<%
-								}
+								}}
 										}
 
 									}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@page errorPage="500.jsp"%>
+
 <%@page import="dao.ConnectionSteps"%>
 <%@page import="userbean.Userbean"%>
 <%@page import="java.sql.DriverManager"%>
@@ -209,9 +209,9 @@ ex.printStackTrace();
 		<%
 		ConnectionSteps steps = new ConnectionSteps();
 		Connection conn = steps.connection();
-PreparedStatement pstmt = conn.prepareStatement("select * from tickettable where id=(select MAX(id) from tickettable )");
-
-
+PreparedStatement pstmt = conn.prepareStatement("select * from tickettable1 where pid=(select MAX(pid) from tickettable1 where username=?) and username=? ");
+pstmt.setString(1, user.getUsername());
+pstmt.setString(2, user.getUsername());
 ResultSet rs = pstmt.executeQuery();
 String s;
 if(rs.next()){
@@ -347,7 +347,6 @@ else{
 							<input  class="date datepicker" name="dateofissue" type="text" placeholder="MM/DD/YYYY" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'MM/DD/YYYY';}" required="">
 						</div><br>
 					</div>
-			
 			<input type="hidden" name="empname" value=<%=user.getUsername()%>>
 		
 		         <div class="w3l-rem"  >

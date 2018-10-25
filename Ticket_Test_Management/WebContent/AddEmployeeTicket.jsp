@@ -210,9 +210,9 @@ ex.printStackTrace();
 									<%
 										ConnectionSteps steps = new ConnectionSteps();
 										Connection conn = steps.connection();
-										PreparedStatement pstmt = conn.prepareStatement(
-												"select * from tickettable where id=(select MAX(id) from tickettable)");
-										
+										PreparedStatement pstmt = conn.prepareStatement("select * from tickettable1 where pid=(select MAX(pid) from tickettable1 where username=?) and username=? ");
+pstmt.setString(1, user.getUsername());
+pstmt.setString(2, user.getUsername());
 										ResultSet rs = pstmt.executeQuery();
 										String s;
 										if (rs.next()) {

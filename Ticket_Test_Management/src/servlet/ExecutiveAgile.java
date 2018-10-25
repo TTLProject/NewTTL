@@ -22,21 +22,20 @@ public class ExecutiveAgile extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 try {
 
-		String ticketid=request.getParameter("ticketid");
+	int id=Integer.parseInt(request.getParameter("id"));
 		String status=request.getParameter("status");
-		System.out.println(ticketid);
-		System.out.println(ticketid);
+		
 		System.out.println(status);
 		ConnectionSteps steps = new ConnectionSteps();
 		Connection conn = steps.connection();
-		if(status.equals("--select--")||ticketid==null) {
+		if(status.equals("--select--")||id==0) {
 			HttpSession session=request.getSession();
 			session.setAttribute("ticket1", null);
 			response.sendRedirect("ExecutiveAgile.jsp");
 		}else {
-		PreparedStatement pstmt = conn.prepareStatement("update tickettable set status=? where ticketid=?");
+		PreparedStatement pstmt = conn.prepareStatement("update tickettable set status=? where id=?");
 		pstmt.setString(1,status);
-		pstmt.setString(2,ticketid);
+		pstmt.setInt(2,id);
 		int i=pstmt.executeUpdate();
 		HttpSession session=request.getSession();
 		session.setAttribute("ticket1", null);

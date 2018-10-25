@@ -173,14 +173,17 @@ ex.printStackTrace();
 <div id="image">
    <% 
    Userbean user1 = (Userbean) session.getAttribute("ticket");
+   int id;
  String tid,tid1;
 		
 		if(user1==null){
 		tid=null;
 		tid1=null;
+		id=0;
 		}else{
 		   tid=user1.getStatus();
 		   tid1=user1.getTicketId();
+		   id=user1.getId();
 		  }
 		System.out.println(tid);
 		 %>
@@ -212,21 +215,14 @@ ex.printStackTrace();
            
 								ConnectionSteps steps = new ConnectionSteps();
 								Connection conn = steps.connection();
-								PreparedStatement pstmt = conn.prepareStatement("select * from tickettable  order by id");
+								PreparedStatement pstmt = conn.prepareStatement("select * from tickettable1 where username=?  order by id");
+								pstmt.setString(1, user.getUsername());
 								ResultSet rs = pstmt.executeQuery();
 								while (rs.next()) {
-								if (rs.getString("editstatus").equals("approved")) {
-										if ((rs.getString("username").equals(user.getUsername())
-												&& rs.getString("assignedby").equals(user.getUsername())
-												&& rs.getString("assignedto").equals(user.getUsername()))
-												|| (rs.getString("username").equals(user.getUsername())
-														&& rs.getString("empname").equals(user.getUsername()))
-												|| (rs.getString("username").equals(user.getUsername())
-														&& rs.getString("assignedby").equals(user.getUsername()))
-												|| (rs.getString("assignedto").equals(user.getUsername()))) {
+								
 							%>
 		    <option value=<%=rs.getString("ticketid") %>><%=rs.getString("ticketid") %></option>
-            <%}} }%>
+            <%} %>
             </select><br> &emsp;&emsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <%
 							if (user1 == null) {
@@ -259,7 +255,7 @@ ex.printStackTrace();
 										<option value="Completed">Completed</option>
 										</select>
 										&emsp;<input type="submit" value="submit" >
-						<input type="hidden" name="ticketid" value=<%=tid1%>	>			
+						<input type="hidden" name="id" value=<%=id%>	>			
             </form>
             
             

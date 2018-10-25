@@ -519,7 +519,7 @@ ex.printStackTrace();
 <form action="ViewTestServlet" method="post">
 <table id="customers">
       <tr>
-        <th>Ticket Id</th>
+        <th>TestCase Id</th>
         <th>Test Description</th>
 		<th>Precondition</th>
 		<th>Test Design</th>
