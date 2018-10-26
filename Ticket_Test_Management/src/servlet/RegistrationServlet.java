@@ -165,7 +165,10 @@ public class RegistrationServlet extends HttpServlet{
 		
 		} 
 			}else {
-				response.sendRedirect("Registration4.jsp");
+				String greetings = "password";
+				
+				response.setContentType("text/plain");
+				response.getWriter().write(greetings);
 			}
 			
 
@@ -187,14 +190,26 @@ public class RegistrationServlet extends HttpServlet{
 					
 				}else {
 					
-					response.sendRedirect("Registration3.jsp");
+					String greetings = "webmail";
+					
+					response.setContentType("text/plain");
+					response.getWriter().write(greetings);
 				}
 				
 			}else {
-				response.sendRedirect("Registration2.jsp");
+				String greetings = "email";
+				
+				response.setContentType("text/plain");
+				response.getWriter().write(greetings);
 			}
 		} else {
-			response.sendRedirect("Registration1.jsp");
+			/*response.sendRedirect("Registration1.jsp");*/
+			String greetings = "username";
+			
+			response.setContentType("text/plain");
+			response.getWriter().write(greetings);
+			
+			
 		}
 		
 		}catch (Exception e) {

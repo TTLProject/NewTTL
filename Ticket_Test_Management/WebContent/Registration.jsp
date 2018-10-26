@@ -49,7 +49,7 @@ rel="stylesheet">
 	<center><h3>Registration</h3></center>
 <div class="w3l-main"><br>
 	<div class="w3l-from">
-		<form action="RegistrationServlet" method="post" enctype="multipart/form-data">	
+		<form id="AddNewEmployee" method="post" enctype="multipart/form-data" onsubmit="return AjaxPost(this)">	
 			<div class="w3l-user">
 				<label class="head">Name<span class="w3l-star"> * </span></label>
 				<input type="text" name="name" placeholder="" pattern="[a-zA-Z]{0,30}" 
@@ -137,7 +137,7 @@ value="MM/DD/YYYY" onfocus="this.value = '';" onblur="if (this.value ==
 
 			
 			<div class="btn">
-					<input type="submit" name="submit"  value="Submit"/>
+					<button>submit</button>
 				</div>
 			
 			</div>
@@ -160,3 +160,44 @@ value="MM/DD/YYYY" onfocus="this.value = '';" onblur="if (this.value ==
 
 </body>
 </html>
+<script>
+function AjaxPost(formData){
+
+
+
+var ajaxConfig = {
+   type: "post",
+   url: "RegistrationServlet",
+   data: new FormData(formData),
+   success: function(data){
+  
+   if(data === "username"){
+   alert("username alredy exists");
+   }
+   else if (data === "passwordusername"){
+    alert("password and confirm password does not match");
+   }
+   else if (data === "password"){
+    alert("password and confirm password does not match");
+   }
+   else if (data === "email"){
+    alert("email alredy exists");
+   }
+   else if (data === "webmail"){
+    alert("webmail alredy exists");
+   }
+   else{
+   window.location.replace("Login.jsp");
+   }
+   }
+
+}
+if($(formData).attr('enctype') == "multipart/form-data"){
+ajaxConfig["contentType"] = false;
+ajaxConfig["processData"] = false;
+}
+$.ajax(ajaxConfig);
+return false;
+}
+
+</script>
