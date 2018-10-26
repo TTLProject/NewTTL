@@ -137,7 +137,7 @@ value="MM/DD/YYYY" onfocus="this.value = '';" onblur="if (this.value ==
 
 			
 			<div class="btn">
-					<button>submit</button>
+					<input type="submit" name="submit"  value="Submit"/>
 				</div>
 			
 			</div>
